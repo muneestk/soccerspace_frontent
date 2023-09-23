@@ -1,0 +1,10 @@
+.custom-image-size {
+  width: 100%; /* You can adjust the width as needed */
+  height: 90vh; /* You can adjust the height as needed */
+  object-fit: cover; /* This ensures the image covers the entire container */
+}
+
+
+
+
+

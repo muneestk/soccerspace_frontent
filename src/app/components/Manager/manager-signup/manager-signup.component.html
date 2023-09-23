@@ -1,0 +1,80 @@
+<div class="wrapper">
+    <div class="container main">
+        <div class="row">
+            <div class="col-md-6 side-image">
+                <!-- <div class="text">
+                    <p>Join the community of footballers</p>
+                </div> -->
+            </div>
+            
+            <div class="col-md-6 right">
+                <div class="input-box">
+                    <form [formGroup]="managerRegisterForm" (ngSubmit)="registerSubmit()">
+                        <header>Create Manager Account</header>
+                        <div class="input-field">
+                            <input type="text" class="input" id="name" formControlName="name" required="" autocomplete="off">
+                            <label for="name">Name</label> 
+                            <div class="form-text text-danger" *ngIf="name.errors?.['required'] && (name.touched || name.dirty || invalid)">
+                                Name is Required
+                            </div>
+                            <div class="form-text text-danger" *ngIf="name.errors?.['minlength'] && (name.touched || name.dirty)">
+                                Name is too short
+                            </div>
+                            <div class="form-text text-danger" *ngIf="name.errors?.['pattern'] && (name.touched || name.dirty) && !name.errors?.['minlength']">
+                                Name should be alphabet
+                            </div>
+                        </div> 
+                        <div class="input-field">
+                            <input type="text" class="input" id="email" formControlName="email" required="" autocomplete="off">
+                            <label for="email">Email</label> 
+                            <div class="form-text text-danger" *ngIf="email.errors?.['required'] && (email.touched || email.dirty || invalid)">
+                                Email is Required
+                            </div>
+                            <div class="form-text text-danger" *ngIf="email.errors?.['email'] && (email.touched || email.dirty)">
+                                Email is invalid
+                            </div>
+                        </div> 
+                        <div class="input-field">
+                            <input type="password" class="input" id="pass" formControlName="password" required="">
+                            <label for="pass">Password</label>
+                            <div class="form-text text-danger" *ngIf="password.errors?.['required'] && (password.touched || password.dirty || invalid)">
+                                Password is Required
+                            </div>
+                            <div class="form-text text-danger" *ngIf="password.errors?.['minlength'] && (password.touched || password.dirty)">
+                                Password is too short
+                            </div>
+                            <div class="form-text text-danger" *ngIf="password.errors?.['maxlength'] && (password.touched || password.dirty)">
+                                Password is too long
+                            </div>
+                        </div> 
+                        
+                        <div class="input-field mt-3">
+                            <input type="submit" class="submit" value="Sign Up">
+                        </div> 
+                    </form>   
+                    <div class="middle-text d-flex align-items-center">
+                        <hr class="flex-grow-1">
+                        <p class="or-text mx-2 mb-1">Or</p>
+                        <hr class="flex-grow-1">
+                    </div>
+                
+                    <div class="social-sign-in">
+                        <button class="d-flex align-items-center justify-content-center form-control">
+                            <img src="../../../../assets/image/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" alt="Google Logo">
+                            <p class="fs-5 m-0 ms-2">Sign Up with Google</p>
+                        </button>
+                    </div>
+
+                    <div class="signin">
+                        <span>Already have an account? <a routerLink="/login">Log in here</a></span>
+                    </div>
+
+                    <div class="manager-section m-3">
+                        <span class="fw-3">Are you a user?  </span>
+                        <button type="button" routerLink="/manager" class="p-1 btn btn-dark">Login</button>
+                    </div>
+                </div>  
+            </div>
+        </div>
+     </div>
+</div>
