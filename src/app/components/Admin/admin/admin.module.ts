@@ -12,6 +12,9 @@ import { ManagerListComponent } from '../manager-list/manager-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 
 
 
@@ -31,7 +34,9 @@ import {MatIconModule} from '@angular/material/icon';
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule,
+    MatSidenavModule
   ]
 })
 export class AdminModule { }

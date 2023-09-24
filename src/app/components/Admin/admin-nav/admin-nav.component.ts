@@ -14,7 +14,7 @@ export class AdminNavComponent implements OnInit {
     
   }
 
-  logout():void{
+  logOut():void{
     localStorage.removeItem('adminSecret')
     this.router.navigate(['/admin'])
   }

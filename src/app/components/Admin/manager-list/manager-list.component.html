@@ -1,1 +1,33 @@
-<p>manager-list works!</p>
+<app-admin-nav></app-admin-nav>
+        <div class="row">
+            <div class="col-md-3 col-12 sidebar" >
+                <app-admin-sidebar></app-admin-sidebar>
+            </div>
+            <div class="col-md-9 col-12 mt-3">
+                <h1 class="fs-5 fw-5">Manager List</h1>
+                <div class="container" style="overflow-x:auto;">
+                    <table class="table table-dark table-striped tablelist text-center">
+                        <thead>
+                          <tr>
+                            <th scope="col">SI</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Blocked</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="(managerList$ | async) as managerdata">
+                          <tr *ngFor="let manager of managerdata;let i = index">
+                            <td>{{i+1}}</td>
+                            <td>{{manager.name}}</td>
+                            <td>{{manager.email}}</td>
+                            <td *ngIf="!manager.is_blocked" class="text-success">Active</td>
+                            <td *ngIf="manager.is_blocked" class="text-danger">Blocked</td>
+                            <td *ngIf="!manager.is_blocked">  <button mat-raised-button  class="text-white bg-danger" (click)="blockManager(manager._id)">Block</button> </td>
+                            <td *ngIf="manager.is_blocked">  <button mat-raised-button  class="text-white bg-success"(click)="unBlockManager(manager._id)">Unblock</button> </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>  
+            </div>
+        </div>

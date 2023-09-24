@@ -3,32 +3,31 @@
             <div class="col-md-3 col-12 sidebar" >
                 <app-admin-sidebar></app-admin-sidebar>
             </div>
-            <div class="col-md-9 col-12">
-                <div class="container mx-auto" style="overflow-x:auto;">
-                    <table class="table table-striped tablelist">
+            <div class="col-md-9 col-12 mt-3">
+              <h1 class="fs-5 fw-5">Users List</h1>
+
+                <div class="container" style="overflow-x:auto;">
+                    <table class="table table-dark table-stripedtablelist">
                         <thead>
                           <tr>
                             <th scope="col">SI</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Mobile</th>
                             <th scope="col">Blocked</th>
                             <th scope="col">Action</th>
                           </tr>
                         </thead>
-                        <!-- <tbody *ngIf="(usersList$ | async) as userdata">
+                        <tbody *ngIf="(usersList$ | async) as userdata">
                           <tr *ngFor="let user of userdata;let i = index">
-                            <th scope="row">{{i+1}}</th>
+                            <td>{{i+1}}</td>
                             <td>{{user.name}}</td>
                             <td>{{user.email}}</td>
-                            <td>{{user.mobile}}</td>
-                            <td>{{user.is_blocked}}</td>
-                            <td>
-                                <button *ngIf="user.is_blocked == false" class="btn btn-danger pt-1 pb-1 pe-5 ps-5" (click)="blockUser(user._id)">Block</button>
-                                <button *ngIf="user.is_blocked == true" class="btn btn-warning pt-1 pb-1 pe-5 ps-5" (click)="unBlockUser(user._id)">Unblock</button>
-                            </td>
+                            <td *ngIf="!user.is_blocked" class="text-success">Active</td>
+                            <td *ngIf="user.is_blocked" class="text-danger">Blocked</td>
+                            <td *ngIf="!user.is_blocked">  <button mat-raised-button  class="text-white bg-danger" (click)="blockUser(user._id)">Block</button> </td>
+                            <td *ngIf="user.is_blocked">  <button mat-raised-button  class="text-white bg-success"(click)="unBlockUser(user._id)">Unblock</button> </td>
                           </tr>
-                        </tbody> -->
+                        </tbody>
                       </table>
                 </div>  
             </div>

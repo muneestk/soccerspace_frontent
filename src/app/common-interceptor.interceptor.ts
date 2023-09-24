@@ -18,7 +18,7 @@ export class CommonInterceptorInterceptor implements HttpInterceptor {
     let managerToken = localStorage.getItem("managerSecret")
     let adminToken = localStorage.getItem("adminSecret")
 
-    if(!userToken){
+    if(userToken){
       const newRequest = request.clone({
         headers: request.headers.set('Authorization','Bearer '+userToken)
       })
@@ -41,4 +41,5 @@ export class CommonInterceptorInterceptor implements HttpInterceptor {
 
     return next.handle(request);
   }
+  
 }
