@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.staging';
 
 const httpOptions = {
   headers : new HttpHeaders({
@@ -17,6 +18,7 @@ export class AdminService {
   constructor(private http : HttpClient) { }
 
   apiUrl : string = "http://localhost:3000/admin" ;
+  // apiUrl : string = environment.API_Key ;
 
   adminLogin(form:any):Observable<any>{
     console.log('login');

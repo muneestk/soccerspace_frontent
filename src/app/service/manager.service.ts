@@ -28,7 +28,10 @@ export class ManagerService {
 
   userVerification(id:any,otp:any):Observable<any>{
     return this.http.post(`${this.apiUrl}/verification?id=`+id,otp,httpOptions)
+  }
 
+  reSendOtp(id:any):Observable<any>{
+    return this.http.post(`${this.apiUrl}/resendOtp?id=`+id,httpOptions)
   }
   
   

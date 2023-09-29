@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "staging": "ng build --watch --configuration staging",
     "test": "ng test"
   },
   "private": true,
@@ -25,6 +26,7 @@
     "@ngrx/effects": "^16.2.0",
     "@ngrx/store": "^16.2.0",
     "angular-oauth2-oidc": "^15.0.1",
+    "ng-confirm-box": "^0.1.1",
     "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

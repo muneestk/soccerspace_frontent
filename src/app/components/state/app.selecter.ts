@@ -3,7 +3,7 @@ import { ManagerList, UserList } from "./app.state";
 import { Managers, Users } from "../modal/model";
 
 export const userRootSelector = (state :UserList) => state.allUsers ;
-export const uniqueUser = createSelector(
+export const allUser = createSelector(
     userRootSelector,
     (allUsers : Users[]) => {
         return [...allUsers]

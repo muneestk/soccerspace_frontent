@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./manager-home.component.css']
 })
 export class ManagerHomeComponent {
-
+  showFiller = false;
 }

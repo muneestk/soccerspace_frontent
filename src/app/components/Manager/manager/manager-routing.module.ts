@@ -4,12 +4,13 @@ import { ManagerHomeComponent } from '../manager-home/manager-home.component';
 import { ManagerSignupComponent } from '../manager-signup/manager-signup.component';
 import { ManagerLoginComponent } from '../manager-login/manager-login.component';
 import { VerifyManagerComponent } from '../verify-manager/verify-manager.component';
+import { ManagerGuardLog, ManagerGuardOut, ManagerGuardcon  } from '../../guard/manager.guard';
 
 const routes: Routes = [
-  { path: '', component:ManagerLoginComponent },
-  { path: 'home', component:ManagerHomeComponent },
-  { path: 'register', component:ManagerSignupComponent },
-  { path: 'manangerverify/:id', component:VerifyManagerComponent },
+  { path: '', component:ManagerLoginComponent ,canActivate:[ManagerGuardOut,ManagerGuardcon]},
+  { path: 'home', component:ManagerHomeComponent ,canActivate:[ManagerGuardLog]},
+  { path: 'register', component:ManagerSignupComponent ,canActivate:[ManagerGuardOut,ManagerGuardcon]},
+  { path: 'manangerverify/:id', component:VerifyManagerComponent,canActivate:[ManagerGuardOut,ManagerGuardcon] },
 ];
 
 @NgModule({

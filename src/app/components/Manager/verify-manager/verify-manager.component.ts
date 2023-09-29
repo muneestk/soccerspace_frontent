@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,Input,OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,6 +13,8 @@ export class VerifyManagerComponent implements OnInit{
 
   invalid: boolean = false;
   verificationForm!: FormGroup;
+  showResend : boolean = false;
+  counterSec : number = 10
 
   constructor(
     private router: Router,
@@ -29,6 +31,8 @@ export class VerifyManagerComponent implements OnInit{
         Validators.maxLength(4)
       ])
     })
+
+    this.timeout()
   }
 
   
@@ -60,4 +64,38 @@ export class VerifyManagerComponent implements OnInit{
       )
     }
   }
-}
+
+  resendOtp():void{
+    let id = this.route.snapshot.paramMap.get('id')
+    this.managerservice.reSendOtp(id).
+    subscribe((res) => {
+      this.toastr.success("please check your resend otp")
+      this.counterSec+=10
+      this.timeout()
+    },(err) =>{
+      this.showResend = true
+      if(err.error.message){
+        this.toastr.error(err.error.message);
+      }else{
+        this.toastr.error("Something went wrong")
+      }
+    })
+  }
+
+
+  timeout(): void {
+    const interval = setInterval(() => {
+      this.showResend = false
+      if (this.counterSec > 1) {
+        this.counterSec--;
+      } else {
+        this.showResend = true
+        clearInterval(interval); 
+      }
+    }, 1000);
+  }
+
+
+  }
+
+

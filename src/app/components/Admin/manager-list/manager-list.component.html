@@ -4,30 +4,53 @@
                 <app-admin-sidebar></app-admin-sidebar>
             </div>
             <div class="col-md-9 col-12 mt-3">
-                <h1 class="fs-5 fw-5">Manager List</h1>
-                <div class="container" style="overflow-x:auto;">
-                    <table class="table table-dark table-striped tablelist text-center">
-                        <thead>
-                          <tr>
-                            <th scope="col">SI</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Blocked</th>
-                            <th scope="col">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody *ngIf="(managerList$ | async) as managerdata">
-                          <tr *ngFor="let manager of managerdata;let i = index">
-                            <td>{{i+1}}</td>
-                            <td>{{manager.name}}</td>
-                            <td>{{manager.email}}</td>
-                            <td *ngIf="!manager.is_blocked" class="text-success">Active</td>
-                            <td *ngIf="manager.is_blocked" class="text-danger">Blocked</td>
-                            <td *ngIf="!manager.is_blocked">  <button mat-raised-button  class="text-white bg-danger" (click)="blockManager(manager._id)">Block</button> </td>
-                            <td *ngIf="manager.is_blocked">  <button mat-raised-button  class="text-white bg-success"(click)="unBlockManager(manager._id)">Unblock</button> </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>  
+               <h1 class="fs-5 fw-5 text-center">Manager List</h1>
+                <div class="mat-elevation-z8 dark-table">
+                  <table mat-table [dataSource]="dataSource">
+                
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="position">
+                      <th mat-header-cell *matHeaderCellDef> No. </th>
+                      <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+                    </ng-container>
+                    
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef> Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="weight">
+                      <th mat-header-cell *matHeaderCellDef> Email </th>
+                      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                    </ng-container>
+                
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="symbol">
+                      <th mat-header-cell *matHeaderCellDef> Status </th>
+                      <td mat-cell *matCellDef="let element"> {{element.is_blocked ? 'Blocked' : 'Active'}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                      <th mat-header-cell *matHeaderCellDef> Status </th>
+                      <td mat-cell *matCellDef="let element">
+                        <button mat-raised-button color="warn" *ngIf="!element.is_blocked" (click)="blockManager(element._id, element.name)">Block</button>
+                        <button mat-raised-button color="primary" *ngIf="element.is_blocked" (click)="unBlockManager(element._id)">Unblock</button>
+                      </td>
+                    </ng-container>
+                    
+                
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                
+                  <mat-paginator [pageSizeOptions]="[2, 4,6]"
+                                 showFirstLastButtons
+                                 aria-label="Select page of periodic elements">
+                  </mat-paginator>
+                </div>
+                
+
             </div>
         </div>

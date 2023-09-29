@@ -1,0 +1,26 @@
+.proimg{
+    background: url('../../../../assets/image/cristiano-ronaldo-kicking-football_1538786998.jpg.webp') no-repeat;
+    height: 90%;
+    width: 100%;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+}
+.proinside{
+    width: 80%;
+    height: 85%;
+    background: rgba(0, 0, 0, .6);
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;text-align: center;
+}
+.proinsidecontent{
+    width: 65%;
+}
+.proinsidecontent h1{
+    padding-bottom: 30px;
+}

@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./manager-sidebar.component.css']
 })
 export class ManagerSidebarComponent {
-
+  
 }

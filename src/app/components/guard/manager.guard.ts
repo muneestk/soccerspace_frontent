@@ -6,28 +6,25 @@ import { Observable } from 'rxjs';
   providedIn : 'root'
 })
 
-export class ManagerGuardLog {
+export class ManagerGuardOut implements CanActivate {
 
   constructor(public router : Router){}
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    const token = localStorage.getItem('managerSecret')
+    if (token) {
+      this.router.navigate(['/manager/home'])
+      return false
+    }else {
+      return true
+    }  }
   
-  CanActivate(route : ActivatedRouteSnapshot , state : RouterStateSnapshot) : boolean {
-
-  const token = localStorage.getItem('managerSecret')
-  if (token) {
-    this.router.navigate(['/manager/home'])
-    return false
-  }else {
-    return true
-  }
-  }
-
 }
 
 @Injectable({
   providedIn : 'root'
 })
 
-export class ManagerGuardOut {
+export class ManagerGuardLog {
   constructor(public router : Router)
   {}
 
@@ -35,7 +32,7 @@ export class ManagerGuardOut {
     
     const token = localStorage.getItem('managerSecret')
     if(!token){
-      this.router.navigate(['/manager/login'])
+      this.router.navigate(['/manager'])
       return false
     }else {
       return true
@@ -47,7 +44,7 @@ export class ManagerGuardOut {
   providedIn: 'root'
 })
 
-export class UserGuardcon implements CanActivate {
+export class ManagerGuardcon implements CanActivate {
 
   constructor(private router : Router){}
 

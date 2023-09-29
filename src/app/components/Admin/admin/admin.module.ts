@@ -14,7 +14,11 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
+import {MatDialogModule} from '@angular/material/dialog';
+import { PopupAdminComponent } from '../popup-admin/popup-admin.component';
+import {NgConfirmModule} from 'ng-confirm-box';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -27,7 +31,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     AdminSidebarComponent,
     DashboardComponent,
     UserListComponent,
-    ManagerListComponent
+    ManagerListComponent,
+    PopupAdminComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +41,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
-    MatSidenavModule
-  ]
+    MatSidenavModule,
+    MatDialogModule,
+    NgConfirmModule,
+    MatTableModule,
+    MatPaginatorModule
+    ]
 })
 export class AdminModule { }

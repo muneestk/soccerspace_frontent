@@ -6,37 +6,35 @@ import { Observable } from 'rxjs';
   providedIn : 'root'
 })
 
-export class AdminGuardLog {
+export class AdminGuardOut implements CanActivate{
 
   constructor(public router : Router){}
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
+    const token = localStorage.getItem('adminSecret')
+    if (token) {
+      this.router.navigate(['/admin/dashboard'])
+      return false
+    }else {
+      return true
+    }
+    }
   
-  CanActivate(route : ActivatedRouteSnapshot , state : RouterStateSnapshot) : boolean {
-
-  const token = localStorage.getItem('adminSecret')
-  if (token) {
-    this.router.navigate(['/admin/dashboard'])
-    return false
-  }else {
-    return true
   }
-  }
-
-}
 
 @Injectable({
   providedIn : 'root'
 })
 
-export class AdminGuardOut {
+export class AdminGuardLog implements CanActivate {
   constructor(public router : Router)
   {}
 
-  canActivate(route : ActivatedRouteSnapshot , state : RouterStateSnapshot) : boolean {
+  canActivate(route : ActivatedRouteSnapshot , state : RouterStateSnapshot) : Observable<boolean> | boolean {
     
     const token = localStorage.getItem('adminSecret')
     if(!token){
-      this.router.navigate(['/manager/login'])
-      return false
+      this.router.navigate(['/admin'])
+      return false  
     }else {
       return true
     }
@@ -47,7 +45,7 @@ export class AdminGuardOut {
   providedIn: 'root'
 })
 
-export class UserGuardcon implements CanActivate {
+export class AdminGuardcon implements CanActivate {
 
   constructor(private router : Router){}
 

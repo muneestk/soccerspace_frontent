@@ -4,13 +4,13 @@ import { AdminLoginComponent } from '../admin-login/admin-login.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { UserListComponent } from '../user-list/user-list.component';
 import { ManagerListComponent } from '../manager-list/manager-list.component';
+import { AdminGuardLog, AdminGuardOut, AdminGuardcon } from '../../guard/admin.guard';
 
 const routes: Routes = [
-  { path: '', component:AdminLoginComponent },
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'userList', component: UserListComponent},
-  {path: 'managerList', component: ManagerListComponent},
-  
+  { path: '', component:AdminLoginComponent,canActivate:[AdminGuardcon,AdminGuardOut]},
+  {path: 'dashboard', component: DashboardComponent,canActivate:[AdminGuardLog]},
+  {path: 'userList', component: UserListComponent,canActivate:[AdminGuardLog]},
+  {path: 'managerList', component: ManagerListComponent,canActivate:[AdminGuardLog]}, 
 ];
 
 @NgModule({

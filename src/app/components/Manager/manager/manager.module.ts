@@ -12,6 +12,10 @@ import { ManagerFooterComponent } from '../manager-footer/manager-footer.compone
 import { ManagerSidebarComponent } from '../manager-sidebar/manager-sidebar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatTableModule } from '@angular/material/table';
+
+
 
 
 @NgModule({
@@ -30,7 +34,9 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
     ManagerRoutingModule,
     MatIconModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSidenavModule,
+    MatTableModule
 
 
   ]
