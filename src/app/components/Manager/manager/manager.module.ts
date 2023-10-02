@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
+import { ManagerProfileComponent } from '../manager-profile/manager-profile.component';
 
 
 
@@ -28,6 +29,7 @@ import { MatTableModule } from '@angular/material/table';
     ManagerNavComponent,
     ManagerFooterComponent,
     ManagerSidebarComponent,
+    ManagerProfileComponent
   ],
   imports: [
     CommonModule,

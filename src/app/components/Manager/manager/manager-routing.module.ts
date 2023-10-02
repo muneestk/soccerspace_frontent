@@ -5,10 +5,12 @@ import { ManagerSignupComponent } from '../manager-signup/manager-signup.compone
 import { ManagerLoginComponent } from '../manager-login/manager-login.component';
 import { VerifyManagerComponent } from '../verify-manager/verify-manager.component';
 import { ManagerGuardLog, ManagerGuardOut, ManagerGuardcon  } from '../../guard/manager.guard';
+import { ManagerProfileComponent } from '../manager-profile/manager-profile.component';
 
 const routes: Routes = [
   { path: '', component:ManagerLoginComponent ,canActivate:[ManagerGuardOut,ManagerGuardcon]},
   { path: 'home', component:ManagerHomeComponent ,canActivate:[ManagerGuardLog]},
+  { path: 'managerProfile', component:ManagerProfileComponent ,canActivate:[ManagerGuardLog]},
   { path: 'register', component:ManagerSignupComponent ,canActivate:[ManagerGuardOut,ManagerGuardcon]},
   { path: 'manangerverify/:id', component:VerifyManagerComponent,canActivate:[ManagerGuardOut,ManagerGuardcon] },
 ];

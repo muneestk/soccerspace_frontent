@@ -33,6 +33,12 @@ export class ManagerService {
   reSendOtp(id:any):Observable<any>{
     return this.http.post(`${this.apiUrl}/resendOtp?id=`+id,httpOptions)
   }
+
+  managerDetails():Observable<any>{
+    return this.http.get(`${this.apiUrl}/managerDetails`,{
+      withCredentials : true
+    })
+  }
   
   
 

@@ -1,0 +1,53 @@
+<app-manager-nav></app-manager-nav>
+<div class="container">
+    <div class="row">
+        <div class="profile-nav col-md-3 ">
+            <div class="panel">
+                <div class="user-heading round">
+                    <a href="#">
+                        <img src="../../../../assets/image/1.jpg" alt="">
+                    </a>
+                    <h1>{{ name | uppercase }}</h1>
+                    <p class="text-success">Wallet : 00</p>
+                </div>
+                <div>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fa fa-user"></i> Profile
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <mat-icon class="icon" fontIcon="edit"></mat-icon> Edit Profile
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="profile-info col-md-9">
+
+                <div class="card ">
+                    <div class="card-body">
+                        <h1 class="card-title m-b-20 p-b-5 b-b-default f-w-600">User Details</h1>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="m-b-10 f-w-600">Name</p>
+                                <h3 class="text-muted f-w-400">{{ name }}</h3>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="m-b-10 f-w-600">Email</p>
+                                <h3 class="text-muted f-w-400">{{ email }}</h3>
+                            </div>
+                           
+                        </div>
+                       
+                    </div>
+                </div>
+            
+            <!-- Add the rest of your content here -->
+        </div>
+    </div>
+</div>
+<app-manager-footer></app-manager-footer>

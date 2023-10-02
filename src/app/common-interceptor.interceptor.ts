@@ -22,6 +22,7 @@ export class CommonInterceptorInterceptor implements HttpInterceptor {
       const newRequest = request.clone({
         headers: request.headers.set('Authorization','Bearer '+userToken)
       })
+      console.log(newRequest);
       return next.handle(newRequest);
     }
     if(managerToken){
@@ -35,9 +36,9 @@ export class CommonInterceptorInterceptor implements HttpInterceptor {
       const newRequest = request.clone({
         headers : request.headers.set('Authorisation' , 'Bearer ' + adminToken)
       })
+      console.log(newRequest);
       return next.handle(newRequest)
     }
-
     return next.handle(request);
   }
   

@@ -24,17 +24,15 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { appEffects } from './components/state/app.effects';
 import { ManagerListReducer, UserListReducer } from './components/state/app.reducer';
-import { PopupAdminComponent } from './components/Admin/popup-admin/popup-admin.component';
 import {MatButtonModule} from '@angular/material/button';
 import { NgConfirmModule } from 'ng-confirm-box';
 import { MatTableModule } from '@angular/material/table';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    
-
     
   ],
   imports: [

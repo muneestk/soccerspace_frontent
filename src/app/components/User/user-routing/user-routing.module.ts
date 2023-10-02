@@ -10,6 +10,7 @@ import { UsernavComponent } from '../usernav/usernav.component';
 import { FooterComponent } from '../footer/footer.component';
 import { VerifyComponent } from '../verify/verify.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 
 
@@ -23,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UserHomeComponent,
     UsernavComponent,
     FooterComponent,
-    VerifyComponent
+    VerifyComponent,
+    UserProfileComponent
   ],
   imports: [
     CommonModule,
