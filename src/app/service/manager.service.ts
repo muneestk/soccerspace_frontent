@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
 
 const httpOptions = {
   headers : new HttpHeaders({
@@ -16,7 +17,7 @@ export class ManagerService {
 
   constructor(private http : HttpClient) { }
 
-  apiUrl:string = "http://localhost:3000/manager" ;
+  apiUrl:string = environment.Manager_API_Key ;
 
   managerSignup(manager:any):Observable<any>{
     return this.http.post(`${this.apiUrl}/register`,manager,httpOptions)
@@ -38,6 +39,15 @@ export class ManagerService {
     return this.http.get(`${this.apiUrl}/managerDetails`,{
       withCredentials : true
     })
+  }
+
+  saveManager(form:any):Observable<any>{
+    return this.http.patch(`${this.apiUrl}/saveManager`,form,httpOptions)
+  }
+
+  addTournament(user:any):Observable<any>{
+    console.log(user,'klll');
+    return this.http.post(`${this.apiUrl}/addTournment`,user)
   }
   
   

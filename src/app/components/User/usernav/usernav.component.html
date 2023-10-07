@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
     <div class="container-fluid">
-        <a class="navbar-brand ms-3" href="#"><img src="../../../../assets/logo/SS WHITE.png" width="180px" height="80px" alt=""></a>
+        <a class="navbar-brand ms-3" href="#"><img src="assets/logo/SS WHITE.png" width="180px" height="80px" alt=""></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,7 +23,7 @@
                     </ul>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown" *ngIf="authenticated">
                         <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
-                        <li><a class="dropdown-item" routerLink="">My Account</a></li>
+                        <li><a class="dropdown-item" routerLink="/profile">My Account</a></li>
 
                     </ul>
                 </li>

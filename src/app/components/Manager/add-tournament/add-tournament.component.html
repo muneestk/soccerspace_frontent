@@ -1,0 +1,321 @@
+<app-manager-nav></app-manager-nav>
+
+<form
+  [formGroup]="TornamentDetails"
+  (ngSubmit)="tournamentSubmit()"
+  enctype="multipart/form-data"
+>
+  <div class="proimg">
+    <div class="proinside mt-5 mb-5">
+      <h1 class="text-center text-white p-3">ADD TOURNAMENT</h1>
+
+      <div class="row justify-content-center">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+          <div class="col p-3">
+            <div class="form-outline">
+              <label class="form-label" for="form6Example1"
+                >Tournament Name</label
+              >
+              <input
+                type="text"
+                id="form6Example1"
+                formControlName="tournamentname"
+                class="form-control inputclr"
+                placeholder="Enter Your Tournament Name"
+                style="width: 90%"
+              />
+
+              <div
+                class="form-text text-danger pt-1 fs-5  "
+                *ngIf="tournamentname.errors?.['required'] && (tournamentname.touched || tournamentname.dirty || invalid)"
+              >
+                Tournament Name is required
+              </div>
+              <div
+                class="form-text text-danger pt-1 fs-5 "
+                *ngIf="tournamentname.errors?.['minlength'] && (tournamentname.touched || tournamentname.dirty)"
+              >
+                Tournament Name is too short
+              </div>
+            </div>
+          </div>
+
+          <div class="col p-3">
+            <div class="form-outline">
+              <label class="form-label" for="form6Example1">Team Name</label>
+              <input
+                type="text"
+                id="form6Example1"
+                formControlName="TeamName"
+                class="form-control inputclr"
+                placeholder="Enter Your Team Name"
+                style="width: 90%"
+              />
+
+              <div
+                class="form-text text-danger pt-1 fs-5 "
+                *ngIf="TeamName.errors?.['required'] && (TeamName.touched || TeamName.dirty || invalid)"
+              >
+                Team Name Name is required
+              </div>
+            </div>
+          </div>
+
+          <div class="col p-3">
+            <div class="form-outline">
+              <label class="form-label" for="form6Example1"
+                >Tournament Location</label
+              >
+              <input
+                type="text"
+                id="form6Example1"
+                formControlName="location"
+                class="form-control inputclr"
+                placeholder="Enter Your Team Location"
+                style="width: 90%"
+              />
+
+              <div
+                class="form-text text-danger pt-1 fs-5 "
+                *ngIf="location.errors?.['required'] && (location.touched || location.dirty || invalid)"
+              >
+                Tournament Location is required
+              </div>
+            </div>
+          </div>
+
+          <div class="col p-3">
+            <div class="form-outline">
+              <label class="form-label" for="form6Example1"
+                >Registration Fee</label
+              >
+              <input
+                type="text"
+                id="form6Example1"
+                formControlName="registerFee"
+                class="form-control inputclr"
+                placeholder="Enter Your Registration Fee"
+                style="width: 90%"
+              />
+
+              <div
+                class="form-text text-danger pt-1 fs-5 "
+                *ngIf="registerFee.errors?.['pattern'] && (registerFee.touched || registerFee.dirty || invalid)"
+              >
+                Registration Fee Name is required
+              </div>
+              <div
+                class="form-text text-danger pt-1 fs-5 "
+                *ngIf="registerFee.errors?.['required'] && (registerFee.touched || registerFee.dirty || invalid)"
+              >
+                Registration Fee must be number
+              </div>
+            </div>
+          </div>
+
+          <div class="col p-3">
+            <div class="form-outline">
+              <label class="form-label" for="form6Example1">Mobile No.</label>
+              <input
+                type="text"
+                id="form6Example1"
+                formControlName="mobileNo"
+                class="form-control inputclr"
+                placeholder="Enter Your Mobile Number"
+                style="width: 90%"
+              />
+
+              <div
+                class="form-text text-danger pt-1 fs-5 "
+                *ngIf="mobileNo.errors?.['required'] && (mobileNo.touched || mobileNo.dirty || invalid)"
+              >
+                Mobile Number is required is required
+              </div>
+              <div
+                class="form-text text-danger pt-1 fs-5 "
+                *ngIf="(mobileNo.errors?.['minlength'] || mobileNo.errors?.['maxlength']) && (mobileNo.touched || mobileNo.dirty)"
+              >
+                Mobile Number must be 10 digits
+              </div>
+            </div>
+          </div>
+
+          <div class="col p-3">
+            <div class="form-outline">
+              <label class="form-label" for="form6Example1"
+                >Winner Price Money</label
+              >
+              <input
+                type="text"
+                id="form6Example1"
+                formControlName="winnersPriceMoney"
+                class="form-control inputclr"
+                placeholder="Enter Your Price money"
+                style="width: 90%"
+              />
+
+              <div
+                class="form-text text-danger pt-1 fs-5 "
+                *ngIf="winnersPriceMoney.errors?.['required'] && (winnersPriceMoney.touched || winnersPriceMoney.dirty || invalid)"
+              >
+                winner price money is required
+              </div>
+              <div
+                class="form-text text-danger pt-1 fs-5 "
+                *ngIf="winnersPriceMoney.errors?.['pattern'] && (winnersPriceMoney.touched || winnersPriceMoney.dirty)"
+              >
+                winner price money must be a digit
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-1"></div>
+
+        <div class="col-md-5">
+          <div class="col p-3">
+            <div class="form-outline">
+              <label class="form-label" for="form6Example1"
+                >Runners Price Money</label
+              >
+              <input
+                type="text"
+                id="form6Example1"
+                formControlName="runnersPriceMoney"
+                class="form-control inputclr"
+                placeholder="Enter Your Price money"
+                style="width: 90%"
+              />
+
+              <div
+                class="form-text text-danger pt-1 fs-5 "
+                *ngIf="runnersPriceMoney.errors?.['required'] && (runnersPriceMoney.touched || runnersPriceMoney.dirty || invalid)"
+              >
+                Runners price money is required
+              </div>
+              <div
+                class="form-text text-danger pt-1 fs-5 "
+                *ngIf="runnersPriceMoney.errors?.['pattern'] && (runnersPriceMoney.touched || runnersPriceMoney.dirty)"
+              >
+                Runners price money must be a digit
+              </div>
+            </div>
+          </div>
+
+          <div class="col p-3">
+            <div class="form-outline">
+              <label class="form-label" for="form6Example1"
+                >Tournament Date</label
+              >
+              <input
+                type="date"
+                id="form6Example1"
+                formControlName="tournamentDate"
+                class="form-control inputclr"
+                style="width: 90%"
+              />
+              <div
+                class="form-text text-danger pt-1 fs-5 "
+                *ngIf="tournamentDate.errors?.['required'] && (tournamentDate.touched || tournamentDate.dirty || invalid)"
+              >
+                Tournament Date is required
+              </div>
+              <div
+                class="form-text text-danger  pt-1 fs-5 "
+                *ngIf="tournamentDate.errors?.['invalidDate'] && (tournamentDate.touched || tournamentDate.dirty )"
+              >
+                Tournament Date must be between 5 days in the future and 30 days
+                in the past.
+              </div>
+            </div>
+          </div>
+
+          <div class="col p-3">
+            <label class="form-label" for="form6Example1"
+              >Tournament Slots</label
+            >
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              style="width: 90%"
+              formControlName="slots"
+            >
+              <option value="8" selected>8</option>
+              <option value="16">16</option>
+              <option value="32">32</option>
+            </select>
+          </div>
+
+          <div class="col p-3">
+            <label class="form-label" for="form6Example1"
+              >Tournament Age Limit</label
+            >
+            <select
+              class="form-select"
+              style="width: 90%"
+              formControlName="limit"
+            >
+              <option value="open" selected>open</option>
+              <option value="under 18">under 18</option>
+              <option value="under 17">under 17</option>
+              <option value="under 16">under 16</option>
+            </select>
+          </div>
+
+          <div class="p-3">
+            <div class="btn btn-primary btn-rounded">
+              <label class="form-label text-white m-1" for="logoFileInput"
+                >Upload Logo</label
+              >
+              <input
+                type="file"
+                class="form-control d-none"
+                id="logoFileInput"
+                (change)="uploadImage($event.target)"
+              />
+            </div>
+            <img
+              [src]="logoImages"
+              *ngIf="logoImages"
+              alt="Selected Logo"
+              class="ps-2"
+              width="100"
+              height="100"
+            />
+          </div>
+
+          <div class="p-3">
+            <div class="btn btn-primary btn-rounded">
+              <label class="form-label text-white m-1" for="posterFileInput"
+                >Upload Poster</label
+              >
+              <input
+                type="file"
+                class="form-control d-none"
+                id="posterFileInput"
+                (change)="uploadImage2($event.target)"
+              />
+            </div>
+            <img
+              [src]="posterImages"
+              *ngIf="posterImages"
+              alt="Selected Poster"
+              class="ps-2"
+              width="100"
+              height="100"
+            />
+          </div>
+
+          <div class="p-3 d-flex justify-content-center">
+            <button type="submit" class="btn btn-secondary px-5 btn-lg">
+              Register
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<app-manager-footer></app-manager-footer>

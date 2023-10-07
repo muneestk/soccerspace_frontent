@@ -59,6 +59,14 @@ export class AdminService {
     return this.http.patch(`${this.apiUrl}/blockManager`,requestBody,httpOptions)
   }
 
+  loadTournaments():Observable<any>{
+    console.log('enntered')
+   return this.http.get(`${this.apiUrl}/tournamentsList`,{
+    withCredentials : true
+   })
+  }
+
+
 
 
 }

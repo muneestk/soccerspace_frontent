@@ -6,7 +6,6 @@ import { allUser } from '../../state/app.selecter';
 import { retrieveUsers } from '../../state/app.action';
 import { UserList } from '../../state/app.state';
 import { MatDialog } from '@angular/material/dialog';
-import { PopupAdminComponent } from '../popup-admin/popup-admin.component';
 import { NgConfirmService } from 'ng-confirm-box';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -81,11 +80,5 @@ export class UserListComponent implements OnInit {
 
 
   }
-
-  // openDialog(id:string):void{
-  //   this.matDialog.open(PopupAdminComponent,{width:'30%',height:"200px",
-  //    enterAnimationDuration:'500ms'
-  // })
-  // }
 
 }

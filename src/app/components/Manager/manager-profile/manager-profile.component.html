@@ -18,7 +18,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" (click)="editProfile()">
                                 <mat-icon class="icon" fontIcon="edit"></mat-icon> Edit Profile
                             </a>
                         </li>
@@ -27,10 +27,9 @@
             </div>
         </div>
         <div class="profile-info col-md-9">
-
                 <div class="card ">
                     <div class="card-body">
-                        <h1 class="card-title m-b-20 p-b-5 b-b-default f-w-600">User Details</h1>
+                        <h1 class="card-title m-b-20 p-b-5 b-b-default f-w-600">Manager Details</h1>
                         <div class="row">
                             <div class="col-sm-6">
                                 <p class="m-b-10 f-w-600">Name</p>
@@ -39,14 +38,10 @@
                             <div class="col-sm-6">
                                 <p class="m-b-10 f-w-600">Email</p>
                                 <h3 class="text-muted f-w-400">{{ email }}</h3>
-                            </div>
-                           
-                        </div>
-                       
+                            </div> 
+                        </div>         
                     </div>
                 </div>
-            
-            <!-- Add the rest of your content here -->
         </div>
     </div>
 </div>

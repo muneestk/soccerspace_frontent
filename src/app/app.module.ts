@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
-// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './service/user.service';
 import { AdminService } from './service/admin.service';
 import { ManagerService } from './service/manager.service';
@@ -23,38 +23,51 @@ import { MatListModule } from '@angular/material/list';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { appEffects } from './components/state/app.effects';
-import { ManagerListReducer, UserListReducer } from './components/state/app.reducer';
+import { ManagerListReducer, UserListReducer, tournamentListReducer } from './components/state/app.reducer';
 import {MatButtonModule} from '@angular/material/button';
 import { NgConfirmModule } from 'ng-confirm-box';
 import { MatTableModule } from '@angular/material/table';
+import { PopupComponent } from './components/popup/popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
+import {CloudinaryModule} from '@cloudinary/ng';
+import { MatSelectModule } from '@angular/material/select';
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    PopupComponent,
+    
     
   ],
   imports: [
+    CloudinaryModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule, 
     ToastrModule.forRoot(),
     HttpClientModule,
-    // FormsModule,
-    // ReactiveFormsModule,
+    FormsModule,
+    ReactiveFormsModule,
     SocialLoginModule,
     MatIconModule,
+    MatInputModule,
     MatToolbarModule,
     MatDividerModule,
     MatMenuModule,
     MatListModule,
+    MatDialogModule,
     MatButtonModule,
     NgConfirmModule,
     MatTableModule,
+    MatSelectModule,
     StoreModule.forRoot({
       allUsers : UserListReducer,
-      allManagers : ManagerListReducer
+      allManagers : ManagerListReducer ,
+      allTournaments : tournamentListReducer
    
     }),
      EffectsModule.forRoot([appEffects])

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { ManagerService } from 'src/app/service/manager.service';
+import { PopupComponent } from '../../popup/popup.component';
 
 @Component({
   selector: 'app-manager-profile',
@@ -11,7 +13,12 @@ import { ManagerService } from 'src/app/service/manager.service';
 
 export class ManagerProfileComponent implements OnInit {
 
-  constructor(private managerService : ManagerService,private toastr : ToastrService){}
+  constructor(
+    private managerService : ManagerService,
+    private toastr : ToastrService,
+    private matDialog : MatDialog
+
+    ){}
 
   name !: string ;
   email !: string ;
@@ -26,5 +33,32 @@ export class ManagerProfileComponent implements OnInit {
       console.log(err);
     })
   }
+
+
+
+  editProfile():void{
+    const dialogRef = this.matDialog.open(PopupComponent,{
+      width : '40%',
+      height : '350px',
+      data:{
+        title: 'Manager Edit'
+      }
+
+    })
+
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result && result.updatedData) {
+        this.name = result.updatedData.name;
+        this.email = result.updatedData.email;
+        this.toastr.success('Profile updated successfully');
+      }
+    });
+  
+  }
+
+
+ 
+  
 
 }

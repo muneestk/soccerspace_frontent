@@ -15,6 +15,9 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { ManagerProfileComponent } from '../manager-profile/manager-profile.component';
+import { AddTournamentComponent } from '../add-tournament/add-tournament.component';
+import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -29,7 +32,9 @@ import { ManagerProfileComponent } from '../manager-profile/manager-profile.comp
     ManagerNavComponent,
     ManagerFooterComponent,
     ManagerSidebarComponent,
-    ManagerProfileComponent
+    ManagerProfileComponent,
+    AddTournamentComponent,
+
   ],
   imports: [
     CommonModule,
@@ -38,8 +43,9 @@ import { ManagerProfileComponent } from '../manager-profile/manager-profile.comp
     FormsModule,
     ReactiveFormsModule,
     MatSidenavModule,
-    MatTableModule
-
+    MatTableModule,
+    MatInputModule,
+    MatSelectModule
 
   ]
 })

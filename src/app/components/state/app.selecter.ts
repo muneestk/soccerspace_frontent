@@ -1,6 +1,6 @@
 import { createSelector } from "@ngrx/store";
-import { ManagerList, UserList } from "./app.state";
-import { Managers, Users } from "../modal/model";
+import { ManagerList, TournamentList, UserList } from "./app.state";
+import { Managers, Tournament, Users } from "../modal/model";
 
 export const userRootSelector = (state :UserList) => state.allUsers ;
 export const allUser = createSelector(
@@ -15,5 +15,15 @@ export const managerData = createSelector(
     managerRootSelector,
     (allManagers : Managers[]) => {
         return [...allManagers]
+    }
+)
+
+
+
+export const tournamentRootSelector = (state : TournamentList) => state.allTournaments
+export const TournamenysData = createSelector(
+    tournamentRootSelector,
+    (allTournaments : Tournament[]) => {
+        return [...allTournaments]
     }
 )

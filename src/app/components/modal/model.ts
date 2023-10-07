@@ -22,3 +22,25 @@ export interface Managers {
     is_blocked : boolean,
     __v : number
 }
+
+export interface Tournament {
+    _id: string;
+    tournamentName: string;
+    teamName: string;
+    location: string;
+    mobileNo: number;
+    winnersPriceMoney: number;
+    runnersPriceMoney: number; 
+    tournamentDate: string;
+    slots: number;
+    status: string;
+    registeredDate: string;
+    limit: string;
+    logoImage: string;
+    posterImage: string;
+    managerId: string;
+    is_approved: boolean; 
+    Teams: string[];
+    __v: number;
+  }
+  

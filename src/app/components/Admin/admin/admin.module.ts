@@ -15,10 +15,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatDialogModule} from '@angular/material/dialog';
-import { PopupAdminComponent } from '../popup-admin/popup-admin.component';
 import {NgConfirmModule} from 'ng-confirm-box';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ApprouvalsComponent } from '../approuvals/approuvals.component';
 
 
 
@@ -32,7 +32,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     DashboardComponent,
     UserListComponent,
     ManagerListComponent,
-    PopupAdminComponent
+    ApprouvalsComponent
   ],
   imports: [
     CommonModule,

@@ -2,9 +2,9 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { AdminService } from "src/app/service/admin.service";
 import { UserService } from "src/app/service/user.service";
-import { retrieveManagerSuccess, retrieveManagers, retrieveUserSuccess, retrieveUsers } from "./app.action";
+import { retrieveManagerSuccess, retrieveManagers, retrieveTournaments, retrieveTournamentsSuccess, retrieveUserSuccess, retrieveUsers } from "./app.action";
 import { map, switchMap } from "rxjs";
-import { Managers, Users } from "../modal/model";
+import { Managers, Tournament, Users } from "../modal/model";
 
 
 
@@ -37,6 +37,20 @@ export class appEffects {
         return  this.adminService.loadManagers().pipe(
             map((data) => {
                 return retrieveManagerSuccess({ allManagers : data as Managers[]})
+            })
+        )
+    })
+  ))
+
+
+  
+  loadAllTournaments$ = createEffect(() => 
+  this.actions$.pipe(
+    ofType(retrieveTournaments),
+    switchMap(() => {
+        return  this.adminService.loadTournaments().pipe(
+            map((data) => {
+                return retrieveTournamentsSuccess({ allTournaments : data as Tournament[]})
             })
         )
     })

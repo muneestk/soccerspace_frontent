@@ -12,7 +12,7 @@ import { ManagerService } from 'src/app/service/manager.service';
 export class VerifyManagerComponent implements OnInit{
 
   invalid: boolean = false;
-  verificationForm!: FormGroup;
+  verificationForm !: FormGroup;
   showResend : boolean = false;
   counterSec : number = 10
 
