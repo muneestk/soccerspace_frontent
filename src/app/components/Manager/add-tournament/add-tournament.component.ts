@@ -20,9 +20,9 @@ export class AddTournamentComponent implements OnInit {
   invalid: boolean = false;
 
   constructor(
-    private managerService: ManagerService,
-    private toastr: ToastrService,
-    private router: Router,
+    private _managerService: ManagerService,
+    private _toastr: ToastrService,
+    private _router: Router,
   ){}
 
   ngOnInit(): void {
@@ -53,6 +53,7 @@ export class AddTournamentComponent implements OnInit {
       ]), 
        slots: new FormControl("8", [Validators.required]),
       limit: new FormControl("open", [Validators.required]),
+      players: new FormControl("Levens", [Validators.required]),
       tournamentDate: new FormControl("", [
         Validators.required,
         this.validateDate(5, 30)
@@ -95,10 +96,7 @@ export class AddTournamentComponent implements OnInit {
     return this.TornamentDetails.get("winnersPriceMoney") as FormControl
   }
 
-  
-  get slots(): FormControl {
-    return this.TornamentDetails.get("slots") as FormControl
-  }
+
   
   get tournamentDate(): FormControl {
     return this.TornamentDetails.get("tournamentDate") as FormControl
@@ -116,7 +114,6 @@ export class AddTournamentComponent implements OnInit {
       if (selectedDate >= minDate && selectedDate <= maxDate) {
         return null;
       } else {
-        console.log("Validation Failed: invalidDate");
         return { invalidDate: true };
       }
     };
@@ -154,18 +151,20 @@ export class AddTournamentComponent implements OnInit {
       formdata.append('tournamentDate',formdetails.tournamentDate)
       formdata.append('slots',formdetails.slots)
       formdata.append('limit',formdetails.limit)
+      formdata.append('players',formdetails.players)
+      formdata.append('registerFee',formdetails.registerFee)
 
 
-    this.managerService.addTournament(formdata).subscribe(
+    this._managerService.addTournament(formdata).subscribe(
       (res) => {
-        this.router.navigate(['/manager/home'])
-        this.toastr.success(res.message);
+        this._router.navigate(['/manager/tournamentList'])
+        this._toastr.success(res.message);
       },
       (err) => {
         if (err.error.message) {
-          this.toastr.error(err.error.message);
+          this._toastr.error(err.error.message);
         } else {
-          this.toastr.error('something went wrong');
+          this._toastr.error('something went wrong');
         }
       }
     );

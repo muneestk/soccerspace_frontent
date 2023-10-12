@@ -1,0 +1,63 @@
+<app-usernav></app-usernav>
+<div class="h-100">
+ 
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="runnersPriceMoney">
+      <form [formGroup]="runnersPriceMoney">
+        <ng-template matStepLabel>Fill out your team name and manger name</ng-template>
+        <div class="col p-3 d-flex justify-content-center">
+            <div class="form-outline">
+              <label class="form-label" for="form6Example1"
+                >Runners Price Money</label
+              >
+              <input
+                type="text"
+                id="form6Example1"
+                formControlName="runnersPriceMoney"
+                class="form-control inputclr"
+                placeholder="Enter Your Price money"
+                style="width: 100%"
+              />
+
+              <div
+                class="form-text text-danger pt-1 fs-5 "
+                *ngIf="runnersPriceMoney.errors?.['required'] && (runnersPriceMoney.touched || runnersPriceMoney.dirty)"
+              >
+                Runners price money is required
+              </div>
+              <div
+                class="form-text text-danger pt-1 fs-5 "
+                *ngIf="runnersPriceMoney.errors?.['pattern'] && (runnersPriceMoney.touched || runnersPriceMoney.dirty)"
+              >
+                Runners price money must be a digit
+              </div>
+            </div> 
+          </div>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Fill out your location and mobile numbers">
+      <form [formGroup]="secondFormGroup">
+        <mat-form-field>
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>
+<app-footer></app-footer>

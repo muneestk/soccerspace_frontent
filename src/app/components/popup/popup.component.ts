@@ -2,6 +2,7 @@ import { Component,Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { AdminService } from 'src/app/service/admin.service';
 import { ManagerService } from 'src/app/service/manager.service';
 import { UserService } from 'src/app/service/user.service';
 
@@ -14,10 +15,14 @@ export class PopupComponent implements OnInit {
   inputData: any;
   editdata: any;
   useredit: boolean = false;
+  rejectTournament: boolean = false;
+  tournamentName : string = ''
+  tournamentId : string = ''
 
   formData = this.builder.group({
     name: this.builder.control(''),
     email: this.builder.control(''),
+    reason: this.builder.control(''),
   });
 
   constructor(
@@ -26,7 +31,8 @@ export class PopupComponent implements OnInit {
     private builder: FormBuilder,
     private managerService: ManagerService,
     private toastr: ToastrService,
-    private userService: UserService
+    private userService: UserService,
+    private adminService : AdminService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +46,12 @@ export class PopupComponent implements OnInit {
       this.setUserPopupdata();
       this.useredit = true;
     }
+
+    if (this.inputData.title == 'Reject Tournament') {
+      this.rejectTournament = true;
+      this.tournamentName = this.inputData.tournamentName
+      this.tournamentId = this.inputData.id
+    }
   }
 
   setManagerPopupdata() {
@@ -49,6 +61,7 @@ export class PopupComponent implements OnInit {
       this.formData.setValue({
         name: this.editdata.name,
         email: this.editdata.email,
+        reason:''
       });
     });
 
@@ -61,6 +74,7 @@ export class PopupComponent implements OnInit {
       this.formData.setValue({
         name: this.editdata.name,
         email: this.editdata.email,
+        reason:''
       });
     });
 
@@ -70,8 +84,24 @@ export class PopupComponent implements OnInit {
 
     const form = this.formData.getRawValue();
 
-    if (this.useredit) {
-      alert('hi')
+    if(this.rejectTournament){
+      var data = {
+        reason : form.reason,
+        id:this.tournamentId
+      }
+      this.adminService.rejectTournamnet(data).subscribe((res) => {
+        this.ref.close({ updatedData: form });
+      },
+      (err) => {
+        if (err.error.message) {
+          this.toastr.error(err.error.message);
+        } else {
+          this.toastr.error('internal server error');
+        }
+      })
+
+    }
+    else if (this.useredit) {
       this.userService.saveUser(form).subscribe(
         (res) => {
           this.ref.close({ updatedData: form });
@@ -80,7 +110,7 @@ export class PopupComponent implements OnInit {
           if (err.error.message) {
             this.toastr.error(err.error.message);
           } else {
-            this.toastr.error('something went wrong');
+            this.toastr.error('internal server error');
           }
         }
       );
@@ -95,7 +125,7 @@ export class PopupComponent implements OnInit {
           if (err.error.message) {
             this.toastr.error(err.error.message);
           } else {
-            this.toastr.error('something went wrong');
+            this.toastr.error('internal server error');
           }
         }
       );

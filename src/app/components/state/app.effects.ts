@@ -4,7 +4,7 @@ import { AdminService } from "src/app/service/admin.service";
 import { UserService } from "src/app/service/user.service";
 import { retrieveManagerSuccess, retrieveManagers, retrieveTournaments, retrieveTournamentsSuccess, retrieveUserSuccess, retrieveUsers } from "./app.action";
 import { map, switchMap } from "rxjs";
-import { Managers, Tournament, Users } from "../modal/model";
+import { Managers, Tournaments, Users } from "../modal/model";
 
 
 
@@ -50,7 +50,7 @@ export class appEffects {
     switchMap(() => {
         return  this.adminService.loadTournaments().pipe(
             map((data) => {
-                return retrieveTournamentsSuccess({ allTournaments : data as Tournament[]})
+                return retrieveTournamentsSuccess({ allTournaments : data as Tournaments[]})
             })
         )
     })

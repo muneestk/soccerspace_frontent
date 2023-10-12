@@ -28,7 +28,6 @@ export class ManagerProfileComponent implements OnInit {
     subscribe((res) => {
        this.name = res.name
        this.email = res.email
-       console.log(res);
     },(err) => {
       console.log(err);
     })
@@ -37,6 +36,7 @@ export class ManagerProfileComponent implements OnInit {
 
 
   editProfile():void{
+
     const dialogRef = this.matDialog.open(PopupComponent,{
       width : '40%',
       height : '350px',

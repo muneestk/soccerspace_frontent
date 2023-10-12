@@ -17,11 +17,9 @@ export class AdminService {
 
   constructor(private http : HttpClient) { }
 
-  // apiUrl : string = "http://localhost:3000/admin" ;
   apiUrl : string = environment.API_Key  ;
 
   adminLogin(form:any):Observable<any>{
-    console.log('login');
     return this.http.post(`${this.apiUrl}/login`,form,httpOptions)
   }
 
@@ -33,7 +31,6 @@ export class AdminService {
 
   
   loadManagers():Observable<any>{
-    console.log('enntered')
    return this.http.get(`${this.apiUrl}/managerList`,{
     withCredentials : true
    })
@@ -60,10 +57,19 @@ export class AdminService {
   }
 
   loadTournaments():Observable<any>{
-    console.log('enntered')
    return this.http.get(`${this.apiUrl}/tournamentsList`,{
     withCredentials : true
    })
+  }
+
+  ApproveAction(id : string):Observable<any>{
+    const requestBody = { id: id };
+   return this.http.patch(`${this.apiUrl}/approveTournament`,requestBody,httpOptions)
+  }
+
+
+  rejectTournamnet(data :any):Observable<any>{
+    return this.http.patch(`${this.apiUrl}/rejectTournament`,data,httpOptions)
   }
 
 

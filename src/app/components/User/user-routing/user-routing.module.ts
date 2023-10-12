@@ -11,6 +11,12 @@ import { FooterComponent } from '../footer/footer.component';
 import { VerifyComponent } from '../verify/verify.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { SigleTournamentDetailsComponent } from '../sigle-tournament-details/sigle-tournament-details.component';
+import { RegisterTournamentComponent } from '../register-tournament/register-tournament.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -25,13 +31,21 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
     UsernavComponent,
     FooterComponent,
     VerifyComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    SigleTournamentDetailsComponent,
+    RegisterTournamentComponent
   ],
   imports: [
     CommonModule,
     UserRoutingRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+
   ],
   
 })

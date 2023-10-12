@@ -32,7 +32,8 @@ import { ApprouvalsComponent } from '../approuvals/approuvals.component';
     DashboardComponent,
     UserListComponent,
     ManagerListComponent,
-    ApprouvalsComponent
+    ApprouvalsComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -45,7 +46,9 @@ import { ApprouvalsComponent } from '../approuvals/approuvals.component';
     MatDialogModule,
     NgConfirmModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+   
+
     ]
 })
 export class AdminModule { }

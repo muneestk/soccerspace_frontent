@@ -9,7 +9,6 @@ import { ManagerLoginComponent } from '../manager-login/manager-login.component'
 import { VerifyManagerComponent } from '../verify-manager/verify-manager.component';
 import { ManagerNavComponent } from '../manager-nav/manager-nav.component';
 import { ManagerFooterComponent } from '../manager-footer/manager-footer.component';
-import { ManagerSidebarComponent } from '../manager-sidebar/manager-sidebar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -18,6 +17,9 @@ import { ManagerProfileComponent } from '../manager-profile/manager-profile.comp
 import { AddTournamentComponent } from '../add-tournament/add-tournament.component';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { TournamentListComponent } from '../tournament-list/tournament-list.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { SingleTournamentListComponent } from '../single-tournament-list/single-tournament-list.component';
 
 
 
@@ -31,9 +33,10 @@ import {MatSelectModule} from '@angular/material/select';
     VerifyManagerComponent,
     ManagerNavComponent,
     ManagerFooterComponent,
-    ManagerSidebarComponent,
     ManagerProfileComponent,
     AddTournamentComponent,
+    TournamentListComponent,
+    SingleTournamentListComponent
 
   ],
   imports: [
@@ -45,8 +48,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatSidenavModule,
     MatTableModule,
     MatInputModule,
-    MatSelectModule
-
+    MatSelectModule,
+    MatPaginatorModule,
+    
   ]
 })
 export class ManagerModule { }

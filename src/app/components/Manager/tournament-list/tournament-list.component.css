@@ -1,0 +1,38 @@
+.main {
+    background: url('/assets/image/cristiano-ronaldo-kicking-football_1538786998.jpg.webp') no-repeat;
+    height: 90%;
+    width: 100%;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+  }
+  
+  .dark-table {
+    background-color: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+  }
+  
+  .table-container {
+    overflow-x: auto;
+    max-width: 100%;
+    padding: 1rem; 
+  }
+  
+
+
+.my-tournaments-heading {
+    font-size: 5.5rem; /* Adjust the font size as needed */
+    font-weight: bold;
+    text-align: center;
+    color: #c4c4c4; /* Change the color to your preferred color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a subtle text shadow */
+    margin: 20px 0; /* Adjust the margin as needed */
+  }
+  
+  .my-tournaments-heading:hover {
+    color: #000000; /* Change the color on hover */
+  }
+  

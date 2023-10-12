@@ -1,4 +1,4 @@
-import { Managers, Tournament, Users } from "../modal/model";
+import { Managers,Tournaments, Users } from "../modal/model";
 
 export interface UserList {
     allUsers : Users[]
@@ -9,5 +9,5 @@ export interface ManagerList {
 }
 
 export interface TournamentList {
-    allTournaments : Tournament[]
+    allTournaments : Tournaments[]
 }

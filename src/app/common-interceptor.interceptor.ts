@@ -34,7 +34,7 @@ export class CommonInterceptorInterceptor implements HttpInterceptor {
 
     if(adminToken){
       const newRequest = request.clone({
-        headers : request.headers.set('Authorisation' , 'Bearer ' + adminToken)
+        headers : request.headers.set('Authorization' , 'Bearer ' + adminToken)
       })
       return next.handle(newRequest)
     }

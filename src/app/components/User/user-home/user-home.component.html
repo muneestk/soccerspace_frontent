@@ -47,45 +47,26 @@
 <!-- tournaments list start -->
 <div class="container border-3 mt-5 pt-5">
   <h1 style="font-weight: 50px; ">Tournament List</h1>
-  <div class="row ">
-    <div class="col-md-3 col-sm-6">
-      <div class="card card-block">
-        <img src="../../../../assets/Tournaments/55efdc6ea34c2aace2494845c0cdd3eb.jpg" alt="Photo of sunset">
-        <h5 class="card-title ">Sevens football tournament</h5>
-        <p class="card-text">Manjeri sevens stadium</p>
+  <div class="row " *ngIf="approveTournament.length>0">
+    <div class="col-md-3 col-sm-6" *ngFor="let t of approveTournament">
+      <div class="card card-block" [routerLink]="['/singleTourDetails',t._id]">
+        <img [src]="getPosterImage(t.posterImage?t.posterImage:'')" alt="Photo of sunset">
+        <h3 class="card-title text-center fs-5 pt-5 text-uppercase">{{ t.tournamentName  }}</h3>
+        <div class="d-flex justify-content-center align-items-center">          
+       <span class="material-icons" style="color: rgb(0, 128, 55); font-size: 30px;">location_on</span> <span class="card-text fs-5 ms-1">{{ t.location }}</span>
+          <span class="card-text text-success ms-3 fs-5">{{ t.registerFee | currency:'INR':'symbol':'1.2-2'}}</span>
+        </div>
+        <div class="d-flex justify-content-center m-2"  [routerLink]="['/registerTournament',t._id]">
+          <button class="btn btn-outline-dark p-2 ">Register Now</button>
+        </div>
       </div>
     </div>
-    <div class="col-md-3 col-sm-6">
-      <div class="card card-block">
-        <img
-          src="../../../../assets/Tournaments/football-tournament-poster-design-template-63aae37beb3e70596d5e8771dd9c9f5c_screen.jpg"
-          alt="Photo of sunset">
-        <h5 class="card-title">Fives football tournament</h5>
-        <p class="card-text">Kannur arena turf</p>
-
-      </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-      <div class="card card-block">
-        <img
-          src="../../../../assets/Tournaments/futsal-football-tournament-poster-template-289ade08dc068db3c99df8e1a50cbbed_screen.jpg"
-          alt="Photo of sunset">
-        <h5 class="card-title ">Nines football tournament</h5>
-        <p class="card-text">Jawaharlal nehru stadium cochi</p>
-
-      </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-      <div class="card card-block">
-        <img src="../../../../assets/Tournaments/poster1.jpg" alt="Photo of sunset">
-        <h5 class="card-title  ">Levens football tournament</h5>
-        <p class="card-text">Kaloor stadium</p>
-      </div>
-    </div>
-  </div>
+    
+   
   <div class="d-flex justify-content-end mt-5">
     <button class="btn btn-outline-dark p-2 ">MoreTournament </button>
   </div>
+</div>
 </div>
 <!-- tournament list ended -->
 <!--advetaisement tournament start -->
@@ -94,7 +75,7 @@
     <h1 class="pt-4">Your Ultimate Tool for Stress-Free Tournament Management!</h1>
     <p class="lead">Elevate your tournament experience with our feature-packed platform.</p>
     <div class="d-flex justify-content-center mt-3">
-      <button class="btn btn-outline-dark py-2 ">Add Tournament</button>
+      <button class="btn btn-outline-dark py-2 " routerLink="/manager/register">Add Tournament</button>
     </div>
   </div>
 </div>
@@ -138,11 +119,10 @@
       </div>
     </div>
   </div>
-  <div class="d-flex justify-content-end mt-3">
+  <div class="d-flex justify-content-end mt-3 mb-3">
     <button class="btn btn-outline-dark p-2 ">MoreTournament </button>
   </div>
 </div>
 <!--Live tournament end -->
-<div class="pt-2">
-    <app-footer></app-footer>
-</div>
+
+<app-footer></app-footer>

@@ -7,6 +7,8 @@ import { VerifyManagerComponent } from '../verify-manager/verify-manager.compone
 import { ManagerGuardLog, ManagerGuardOut, ManagerGuardcon  } from '../../guard/manager.guard';
 import { ManagerProfileComponent } from '../manager-profile/manager-profile.component';
 import { AddTournamentComponent } from '../add-tournament/add-tournament.component';
+import { TournamentListComponent } from '../tournament-list/tournament-list.component';
+import { SingleTournamentListComponent } from '../single-tournament-list/single-tournament-list.component';
 
 const routes: Routes = [
   { path: '', component:ManagerLoginComponent ,canActivate:[ManagerGuardOut,ManagerGuardcon]},
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'home', component:ManagerHomeComponent ,canActivate:[ManagerGuardLog]},
   { path: 'managerProfile', component:ManagerProfileComponent ,canActivate:[ManagerGuardLog]},
   { path: 'addTournament', component:AddTournamentComponent ,canActivate:[ManagerGuardLog]},
+  { path: 'tournamentList', component:TournamentListComponent ,canActivate:[ManagerGuardLog]},
+  { path: 'singleTournament/:id', component:SingleTournamentListComponent ,canActivate:[ManagerGuardLog]},
   
 ];
 
@@ -22,6 +26,7 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
+
 
 
 export class ManagerRoutingModule {

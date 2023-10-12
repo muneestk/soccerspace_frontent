@@ -25,14 +25,12 @@ export class ManagerListComponent implements OnInit, AfterViewInit {
   ) {}
 
   managerList$!: Observable<Managers[]>;
-  jwt!: string | null;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','action'];
   dataSource = new MatTableDataSource<Managers>(); 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    const token = localStorage.getItem('adminSecret');
     this.store.dispatch(retrieveManagers());
 
     // Subscribe to the managerList$ observable

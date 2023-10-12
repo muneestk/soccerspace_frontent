@@ -32,7 +32,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {CloudinaryModule} from '@cloudinary/ng';
 import { MatSelectModule } from '@angular/material/select';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 
@@ -63,7 +65,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     NgConfirmModule,
     MatTableModule,
+    MatPaginatorModule,
     MatSelectModule,
+    // MatFormFieldModule,
+    // MatStepperModule,
     StoreModule.forRoot({
       allUsers : UserListReducer,
       allManagers : ManagerListReducer ,

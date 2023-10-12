@@ -5,7 +5,6 @@ import { AdminService } from 'src/app/service/admin.service';
 import { allUser } from '../../state/app.selecter';
 import { retrieveUsers } from '../../state/app.action';
 import { UserList } from '../../state/app.state';
-import { MatDialog } from '@angular/material/dialog';
 import { NgConfirmService } from 'ng-confirm-box';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -24,7 +23,6 @@ export class UserListComponent implements OnInit {
     private store : Store<UserList>,
     private adminService : AdminService,
     private toastr : ToastrService,
-    private matDialog : MatDialog,
     private cofirmService : NgConfirmService
   ){}
 

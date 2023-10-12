@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { Managers, Tournament, Users } from "../modal/model";
+import { Managers, Tournaments, Users } from "../modal/model";
 import { retrieveManagerSuccess, retrieveTournamentsSuccess, retrieveUserSuccess } from "./app.action";
 
 
@@ -35,7 +35,7 @@ export function ManagerListReducer(state : any ,action : any){
 
 
 
-export const initialStateTournament : Tournament[] = []
+export const initialStateTournament : Tournaments[] = []
 
 const _TournamentListReducer = createReducer(
     initialStateTournament,

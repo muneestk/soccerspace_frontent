@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Managers, Tournament, Users } from "../modal/model";
+import { Managers, Tournaments , Users } from "../modal/model";
 
 
 export const retrieveUsers = createAction('[Users Api] Retrieve Users');
@@ -11,4 +11,4 @@ export const retrieveManagerSuccess = createAction('[Managers Api] Retrieve Mana
 
 
 export const retrieveTournaments = createAction('[Tournaments Api] Retrieve Tournaments');
-export const retrieveTournamentsSuccess = createAction('[Tournaments Api] Retrieve Tournaments Success',props<{allTournaments:Tournament[]}>()) ;
+export const retrieveTournamentsSuccess = createAction('[Tournaments Api] Retrieve Tournaments Success',props<{allTournaments:Tournaments[]}>()) ;

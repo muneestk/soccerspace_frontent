@@ -10,8 +10,6 @@ export interface Users {
     __v : number
 }
 
-
-
 export interface Managers {
     _id : string,
     name : string ,
@@ -23,7 +21,7 @@ export interface Managers {
     __v : number
 }
 
-export interface Tournament {
+export interface Tournaments {
     _id: string;
     tournamentName: string;
     teamName: string;
@@ -31,15 +29,17 @@ export interface Tournament {
     mobileNo: number;
     winnersPriceMoney: number;
     runnersPriceMoney: number; 
+    registerFee : number; 
     tournamentDate: string;
     slots: number;
     status: string;
     registeredDate: string;
     limit: string;
+    players: string;
     logoImage: string;
     posterImage: string;
     managerId: string;
-    is_approved: boolean; 
+    is_approuve : string; 
     Teams: string[];
     __v: number;
   }

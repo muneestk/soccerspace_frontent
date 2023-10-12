@@ -53,7 +53,7 @@ div [class^="col-"]{
   transition:0.5s;
   cursor:pointer;
 }
-.card-title{  
+/* .card-title{  
   font-size:15px;
   transition:1s;
   cursor:pointer;
@@ -68,14 +68,14 @@ div [class^="col-"]{
   transform: scale(1.25) rotate(100deg); 
   color:#18d4ca;
   
-}
-.card:hover{
+} */
+/* .card:hover{
   transform: scale(1.05);
   box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
 }
 .card-text{
-  height:80px;  
-}
+  height:30px;  
+} */
 
 .card::before, .card::after {
   position: absolute;

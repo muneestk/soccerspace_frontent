@@ -1,17 +1,21 @@
-<form [formGroup]="formData" (ngSubmit)="Saveuser()" >
-<h1 mat-dialog-title>{{ inputData.title }}</h1>
-<div mat-dialog-content>
-    <mat-form-field>
+<form [formGroup]="formData" (ngSubmit)="Saveuser()">
+  <h1 mat-dialog-title>{{ inputData.title }}</h1>
+  <div mat-dialog-content>
+    <mat-form-field *ngIf="!rejectTournament">
       <mat-label>Name</mat-label>
       <input matInput formControlName="name">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" readonly>
+    <mat-form-field *ngIf="!rejectTournament">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" readonly>
     </mat-form-field>
-</div>
-<div mat-dialog-actions>
-   <button mat-dialog-close   mat-raised-button color="warn">Close</button>
-   <button mat-raised-button   color="primary">Save</button>
-</div>
+    <mat-form-field *ngIf="rejectTournament">
+      <mat-label>Reason for rejecting the {{ tournamentName }} tournament?</mat-label>
+      <input matInput formControlName="reason">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions fxLayout="row" fxLayoutAlign="center center">
+    <button mat-dialog-close mat-raised-button color="warn">Close</button>
+    <button mat-raised-button color="primary">{{ rejectTournament ? 'Reject' : 'Save' }}</button>
+  </div>
 </form>
