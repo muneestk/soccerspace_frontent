@@ -19,8 +19,7 @@ import {NgConfirmModule} from 'ng-confirm-box';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ApprouvalsComponent } from '../approuvals/approuvals.component';
-
-
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -47,7 +46,7 @@ import { ApprouvalsComponent } from '../approuvals/approuvals.component';
     NgConfirmModule,
     MatTableModule,
     MatPaginatorModule,
-   
+    NgxSkeletonLoaderModule
 
     ]
 })

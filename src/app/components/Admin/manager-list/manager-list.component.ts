@@ -18,10 +18,10 @@ import { Observable } from 'rxjs';
 })
 export class ManagerListComponent implements OnInit, AfterViewInit {
   constructor(
-    private store: Store<ManagerList>,
-    private adminService: AdminService,
-    private toastr: ToastrService,
-    private confirmService: NgConfirmService
+    private _store: Store<ManagerList>,
+    private _adminService: AdminService,
+    private _toastr: ToastrService,
+    private _confirmService: NgConfirmService
   ) {}
 
   managerList$!: Observable<Managers[]>;
@@ -31,10 +31,9 @@ export class ManagerListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.store.dispatch(retrieveManagers());
+    this._store.dispatch(retrieveManagers());
 
-    // Subscribe to the managerList$ observable
-    this.managerList$ = this.store.pipe(select(managerData));
+    this.managerList$ = this._store.pipe(select(managerData));
   }
 
   
@@ -46,17 +45,17 @@ export class ManagerListComponent implements OnInit, AfterViewInit {
   }
 
   blockManager(id: string, name: string): void {
-    this.confirmService.showConfirm(`are you sure want to block ${name} ?`,
+    this._confirmService.showConfirm(`are you sure want to block ${name} ?`,
     () => {
-      this.adminService.blockManager(id)
+      this._adminService.blockManager(id)
       .subscribe((res) => {
-        this.store.dispatch(retrieveManagers())
-        this.toastr.success('manager blocked successfully')
+        this._store.dispatch(retrieveManagers())
+        this._toastr.success('manager blocked successfully')
       },(err) =>{
         if(err.error.massage){
-          this.toastr.error(err.error.message)
+          this._toastr.error(err.error.message)
         }else{
-          this.toastr.error('something went wrong')
+          this._toastr.error('something went wrong')
         }
       })
     },()=>{
@@ -67,15 +66,15 @@ export class ManagerListComponent implements OnInit, AfterViewInit {
    }
 
   unBlockManager(id: string): void {
-    this.adminService.unBlockManager(id)
+    this._adminService.unBlockManager(id)
     .subscribe((res) => {
-      this.store.dispatch(retrieveManagers())
-      this.toastr.success('manager unblocked successfully')
+      this._store.dispatch(retrieveManagers())
+      this._toastr.success('manager unblocked successfully')
     },(err) =>{
       if(err.error.massage){
-        this.toastr.error(err.error.message)
+        this._toastr.error(err.error.message)
       }else{
-        this.toastr.error('something went wrong')
+        this._toastr.error('something went wrong')
       }
     })
     }

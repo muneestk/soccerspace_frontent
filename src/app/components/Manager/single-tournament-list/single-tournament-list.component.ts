@@ -17,13 +17,12 @@ import { environment } from 'src/environments/environment.development';
 export class SingleTournamentListComponent implements OnInit {
 
   constructor(
-    private toastr: ToastrService,
     private store: Store<TournamentList>,
     private route: ActivatedRoute
   ) {}
 
-  tournamentId!: any;
-  tournament$!: Observable<Tournaments | undefined>;
+  tournamentId !: any;
+  tournament$ !: Observable<Tournaments | undefined>;
 
   ngOnInit(): void {
     this.tournamentId = this.route.snapshot.paramMap.get('id');
@@ -34,7 +33,7 @@ export class SingleTournamentListComponent implements OnInit {
       select(TournamentsData),
       map(tournaments => tournaments.find(t => t._id === this.tournamentId))
     );
-    console.log(this.tournament$);
+
   }
 
   getLogoUrl(logoimage:string):string{

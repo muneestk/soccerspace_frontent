@@ -52,26 +52,24 @@
                             <input type="submit" class="submit" value="Sign Up">
                         </div> 
                     </form>   
-                    <!-- <div class="middle-text d-flex align-items-center">
+                    <div class="middle-text d-flex align-items-center">
                         <hr class="flex-grow-1">
                         <p class="or-text mx-2 mb-1">Or</p>
                         <hr class="flex-grow-1">
                     </div>
                 
-                    <div class="social-sign-in">
-                        <button class="d-flex align-items-center justify-content-center form-control">
-                            <img src="../../../../assets/image/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png" alt="Google Logo">
-                            <p class="fs-5 m-0 ms-2">Sign Up with Google</p>
-                        </button>
-                    </div> -->
-
+                    <div class="d-flex justify-content-center">
+                        <asl-google-signin-button type="standard"
+                        size="medium" shape="pill" text="signup_with"></asl-google-signin-button>    
+                    </div>
+                  
                     <div class="signin">
-                        <span>Already have an account? <a routerLink="/login">Log in here</a></span>
+                        <span>Already have an account? <a routerLink="/manager/login">Log in here</a></span>
                     </div>
 
                     <div class="manager-section m-3">
                         <span class="fw-3">Are you a user?  </span>
-                        <button type="button" routerLink="/manager" class="p-1 btn btn-dark">Login</button>
+                        <button type="button" routerLink="/login" class="p-1 btn btn-dark">Login</button>
                     </div>
                 </div>  
             </div>

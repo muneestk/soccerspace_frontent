@@ -24,13 +24,16 @@ export class UserService {
       return this.http.post(`${this.apiUrl}/register`,user,httpOptions)
     }
 
+    userGoogleSignin(user:any) : Observable<any>{
+      return this.http.post(`${this.apiUrl}/googleLogin`,user,httpOptions)
+    }
+
     userLogin(user:any) : Observable<any>{
       return this.http.post(`${this.apiUrl}/login`,user,httpOptions)
     }
 
     verifyUser(id:any) : Observable<any>{
       return this.http.post(`${this.apiUrl}/verifyUser?id=`+id,httpOptions)
-
     }
     
     userDetails() : Observable<any>{
@@ -39,9 +42,25 @@ export class UserService {
       })
     }
 
-
     saveUser(user:any) : Observable<any>{
       return this.http.post(`${this.apiUrl}/userSave`,user,httpOptions)
+    }
+
+    registerTournament(form:any) : Observable<any>{
+      return this.http.post(`${this.apiUrl}/registerTournament`,form)
+    }
+
+    verifypayment(form:any,id:any,teamId:any) : Observable<any>{
+      var data = {
+        response : form,
+        trnmntId : id,
+        teamId
+      }
+      return this.http.post(`${this.apiUrl}/verifyPayment`,data)
+    }
+
+    forgotPasswordSendMail(form:any) : Observable<any>{
+      return this.http.post(`${this.apiUrl}/forgotMailSent`,form)
     }
 
 

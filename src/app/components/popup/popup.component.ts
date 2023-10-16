@@ -1,5 +1,5 @@
 import { Component,Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from 'src/app/service/admin.service';
@@ -18,21 +18,22 @@ export class PopupComponent implements OnInit {
   rejectTournament: boolean = false;
   tournamentName : string = ''
   tournamentId : string = ''
+  invalid : boolean = false
 
-  formData = this.builder.group({
-    name: this.builder.control(''),
-    email: this.builder.control(''),
-    reason: this.builder.control(''),
+  formData = this._builder.group({
+    name: this._builder.control(''),
+    email: this._builder.control(''),
+    reason: this._builder.control('',[Validators.required,Validators.minLength(5)]),
   });
 
   constructor(
-    private ref: MatDialogRef<PopupComponent>,
+    private _ref: MatDialogRef<PopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private builder: FormBuilder,
-    private managerService: ManagerService,
-    private toastr: ToastrService,
-    private userService: UserService,
-    private adminService : AdminService
+    private _builder: FormBuilder,
+    private _managerService: ManagerService,
+    private _toastr: ToastrService,
+    private _userService: UserService,
+    private _adminService : AdminService
   ) {}
 
   ngOnInit(): void {
@@ -56,7 +57,7 @@ export class PopupComponent implements OnInit {
 
   setManagerPopupdata() {
 
-    this.managerService.managerDetails().subscribe((res) => {
+    this._managerService.managerDetails().subscribe((res) => {
       this.editdata = res;
       this.formData.setValue({
         name: this.editdata.name,
@@ -69,7 +70,7 @@ export class PopupComponent implements OnInit {
 
   setUserPopupdata() {
 
-    this.userService.userDetails().subscribe((res) => {
+    this._userService.userDetails().subscribe((res) => {
       this.editdata = res;
       this.formData.setValue({
         name: this.editdata.name,
@@ -85,47 +86,52 @@ export class PopupComponent implements OnInit {
     const form = this.formData.getRawValue();
 
     if(this.rejectTournament){
-      var data = {
-        reason : form.reason,
-        id:this.tournamentId
-      }
-      this.adminService.rejectTournamnet(data).subscribe((res) => {
-        this.ref.close({ updatedData: form });
-      },
-      (err) => {
-        if (err.error.message) {
-          this.toastr.error(err.error.message);
-        } else {
-          this.toastr.error('internal server error');
-        }
-      })
 
-    }
-    else if (this.useredit) {
-      this.userService.saveUser(form).subscribe(
-        (res) => {
-          this.ref.close({ updatedData: form });
+      if(this.formData.valid){
+         var data = {
+          reason : form.reason,
+          id:this.tournamentId
+        }
+        this._adminService.rejectTournamnet(data).subscribe((res) => {
+          this._ref.close({ updatedData: form });
         },
         (err) => {
           if (err.error.message) {
-            this.toastr.error(err.error.message);
+            this._toastr.error(err.error.message);
           } else {
-            this.toastr.error('internal server error');
+            this._toastr.error('internal server error');
+          }
+        })
+      }else{
+        this.invalid = true
+    }
+
+    }
+    else if (this.useredit) {
+      this._userService.saveUser(form).subscribe(
+        (res) => {
+          this._ref.close({ updatedData: form });
+        },
+        (err) => {
+          if (err.error.message) {
+            this._toastr.error(err.error.message);
+          } else {
+            this._toastr.error('internal server error');
           }
         }
       );
 
     } else {
 
-      this.managerService.saveManager(form).subscribe(
+      this._managerService.saveManager(form).subscribe(
         (res) => {
-          this.ref.close({ updatedData: form });
+          this._ref.close({ updatedData: form });
         },
         (err) => {
           if (err.error.message) {
-            this.toastr.error(err.error.message);
+            this._toastr.error(err.error.message);
           } else {
-            this.toastr.error('internal server error');
+            this._toastr.error('internal server error');
           }
         }
       );

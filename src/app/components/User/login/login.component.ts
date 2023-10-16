@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/service/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -13,18 +14,22 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   invalid: boolean = false;
   id: any;
+  user !: SocialUser;
+  loggedIn : any ;
+
 
   constructor(
-    private userService: UserService,
-    private toastr: ToastrService,
-    private router: Router,
-    private route: ActivatedRoute
+    private _userService: UserService,
+    private _tostr: ToastrService,
+    private _router: Router,
+    private _route: ActivatedRoute,
+    private _socialAuthService : SocialAuthService,
   ) {}
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
 
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(5),
@@ -32,11 +37,30 @@ export class LoginComponent implements OnInit {
       ]),
     });
 
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = this._route.snapshot.paramMap.get('id');
     if (this.id) {
       this.verifyUser();
     }
+
+    this._socialAuthService.authState.subscribe((user) => {
+      this.user = user;
+      if(!this.user){
+        this._userService.userGoogleSignin(user).subscribe((res) =>{
+          localStorage.setItem('userSecret', res.toString());
+          this._router.navigate(['/']);
+        },(err) =>{
+            if(err.error.message){
+            this._tostr.error(err.error.message);
+           }else{
+            this._tostr.error("internal server error");
+           }
+        })
+      }
+     
+    });
+    
   }
+
 
   get email(): FormControl {
     return this.loginForm.get('email') as FormControl;
@@ -48,20 +72,19 @@ export class LoginComponent implements OnInit {
 
   loginSubmit() {
     const user = this.loginForm.getRawValue();
-    console.log(user);
     if (!this.loginForm.valid) {
       this.invalid = true;
     } else {
-      this.userService.userLogin(user).subscribe(
+      this._userService.userLogin(user).subscribe(
         (res) => {
           localStorage.setItem('userSecret', res.toString());
-          this.router.navigate(['/']);
+          this._router.navigate(['/']);
         },
         (err) => {
           if (err.error.message) {
-            this.toastr.error(err.error.message);
+            this._tostr.error(err.error.message);
           } else {
-            this.toastr.error('Something went wrong');
+            this._tostr.error('Something went wrong');
           }
         }
       );
@@ -70,18 +93,20 @@ export class LoginComponent implements OnInit {
 
   //verifying the user
   verifyUser() {
-    this.userService.verifyUser(this.id).subscribe(
+    this._userService.verifyUser(this.id).subscribe(
       (result) => {
         localStorage.setItem('userSecret', result.toString());
-        this.router.navigate(['/']);
+        this._router.navigate(['/']);
       },
       (err) => {
         if (err.error.message) {
-          this.toastr.error(err.error.message);
+          this._tostr.error(err.error.message);
         } else {
-          this.toastr.error('something went wrong');
+          this._tostr.error('something went wrong');
         }
       }
     );
   }
+
+  
 }

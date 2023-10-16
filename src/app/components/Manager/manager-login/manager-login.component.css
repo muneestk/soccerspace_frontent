@@ -6,7 +6,8 @@
 }
 .wrapper{
     background: #000000;
-    /* background-image: url('../../../../assets/image/stylish-football-tournament-background-with-green-wave_1017-13302.avif'); */
+    background-image: url('../../../../assets/BANNER/243303-monochrome-black-and-white-and-football-hd.jpg');
+    background-size: cover;
     padding: 0 20px 0 20px;
     background-position: center;
 }

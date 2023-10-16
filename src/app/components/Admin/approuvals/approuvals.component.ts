@@ -21,23 +21,26 @@ export class ApprouvalsComponent implements OnInit {
 
 
   constructor(
-    private store : Store<TournamentList>,
-    private adminService : AdminService,
-    private toastr : ToastrService,
-    private cofirmService : NgConfirmService,
-    private matDialog : MatDialog
+    private _store : Store<TournamentList>,
+    private _adminService : AdminService,
+    private _toastr : ToastrService,
+    private _cofirmService : NgConfirmService,
+    private _matDialog : MatDialog
   ){}
 
   tournamentsList$ !: Observable<Tournaments[]>;
   filteredTournaments: Tournaments[] = [];
+  isLoading:boolean = true;
+
   
   ngOnInit(): void {
-    this.store.dispatch(retrieveTournaments())
-    this.tournamentsList$ = this.store.pipe(select(TournamentsData));
+    this._store.dispatch(retrieveTournaments())
+    this.tournamentsList$ = this._store.pipe(select(TournamentsData));
 
     this.tournamentsList$.subscribe(tournaments => {
       this.filteredTournaments = this.filterWaitingTournaments(tournaments);
-    });  
+    }); 
+     
   }
 
   getLogoUrl(logoimage:string){
@@ -54,16 +57,16 @@ export class ApprouvalsComponent implements OnInit {
   
   approveTournament(id:string,tournamentName:string):void{
     
-    this.cofirmService.showConfirm(`Are you sure want to approve this ${tournamentName} `,
+    this._cofirmService.showConfirm(`Are you sure want to approve this ${tournamentName} `,
     ()=>{
-      this.adminService.ApproveAction(id).subscribe((res) =>{
-          this.toastr.success("succesfull approved tournament")
+      this._adminService.ApproveAction(id).subscribe((res) =>{
+          this._toastr.success("succesfull approved tournament")
           this.ngOnInit()
       },(err) => {
         if(err.error.massage){
-          this.toastr.error(err.error.message)
+          this._toastr.error(err.error.message)
         }else{
-          this.toastr.error('something went wrong')
+          this._toastr.error('something went wrong')
         }
       })
 
@@ -75,7 +78,7 @@ export class ApprouvalsComponent implements OnInit {
 
   rejectTournament(id:string , tournamentName:string):void{
 
-    const dialogRef = this.matDialog.open(PopupComponent,{
+    const dialogRef = this._matDialog.open(PopupComponent,{
       width:'40%',
       height:'250px',
       data:{
@@ -88,7 +91,7 @@ export class ApprouvalsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.ngOnInit()
-        this.toastr.success("rejected tournament successfully")
+        this._toastr.success("rejected tournament successfully")
       }
     })
   }

@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 
 export class AdminGuardOut implements CanActivate{
 
-  constructor(public router : Router){}
+  constructor(public _router : Router){}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     const token = localStorage.getItem('adminSecret')
     if (token) {
-      this.router.navigate(['/admin/dashboard'])
+      this._router.navigate(['/admin/dashboard'])
       return false
     }else {
       return true
@@ -26,14 +26,14 @@ export class AdminGuardOut implements CanActivate{
 })
 
 export class AdminGuardLog implements CanActivate {
-  constructor(public router : Router)
+  constructor(public _router : Router)
   {}
 
   canActivate(route : ActivatedRouteSnapshot , state : RouterStateSnapshot) : Observable<boolean> | boolean {
     
     const token = localStorage.getItem('adminSecret')
     if(!token){
-      this.router.navigate(['/admin'])
+      this._router.navigate(['/admin'])
       return false  
     }else {
       return true
@@ -47,17 +47,17 @@ export class AdminGuardLog implements CanActivate {
 
 export class AdminGuardcon implements CanActivate {
 
-  constructor(private router : Router){}
+  constructor(private _router : Router){}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     const managerToken = localStorage.getItem('managarSecret')
     const userToken = localStorage.getItem('userSecret')
 
     if(managerToken){
-      this.router.navigate(['/manager/home'])
+      this._router.navigate(['/manager/home'])
       return false
     }else if(userToken){
-      this.router.navigate(['/'])
+      this._router.navigate(['/'])
       return false
     }else{
       return true

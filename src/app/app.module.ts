@@ -12,6 +12,7 @@ import { ManagerService } from './service/manager.service';
 import {
   SocialLoginModule,
   SocialAuthServiceConfig,
+  GoogleSigninButtonModule,
 } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { CommonInterceptorInterceptor } from './common-interceptor.interceptor';
@@ -36,6 +37,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
+
 
 
 @NgModule({
@@ -46,6 +50,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     
   ],
   imports: [
+    NgxSkeletonLoaderModule,
     CloudinaryModule,
     BrowserModule,
     AppRoutingModule,
@@ -67,6 +72,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatTableModule,
     MatPaginatorModule,
     MatSelectModule,
+    // GoogleSigninButtonModule,
     // MatFormFieldModule,
     // MatStepperModule,
     StoreModule.forRoot({

@@ -20,10 +20,10 @@ import { Users } from '../../modal/model';
 export class UserListComponent implements OnInit {
    
   constructor(
-    private store : Store<UserList>,
-    private adminService : AdminService,
-    private toastr : ToastrService,
-    private cofirmService : NgConfirmService
+    private _store : Store<UserList>,
+    private _adminService : AdminService,
+    private _toastr : ToastrService,
+    private _cofirmService : NgConfirmService
   ){}
 
   usersList$ !: Observable<Users[]>;
@@ -42,37 +42,37 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.jwt = localStorage.getItem('adminSecret')
-      this.store.dispatch(retrieveUsers())
-      this.usersList$ = this.store.pipe(select(allUser));
+      this._store.dispatch(retrieveUsers())
+      this.usersList$ = this._store.pipe(select(allUser));
       console.log(this.usersList$,'ngrx');
   }
 
   unBlockUser(id:string):void{
-    this.adminService.unBlockUser(id)
+    this._adminService.unBlockUser(id)
     .subscribe((res) =>{
-      this.store.dispatch(retrieveUsers())
-      this.toastr.success("user unblocked successfully")
+      this._store.dispatch(retrieveUsers())
+      this._toastr.success("user unblocked successfully")
     },
     (err) =>{
-       this.toastr.error("something went wrong")
+       this._toastr.error("something went wrong")
     })
   }
 
 
   blockUser(id:string,name:string):void{
 
-    this.cofirmService.showConfirm(`are You sure want to block ${name} ?`,
+    this._cofirmService.showConfirm(`are You sure want to block ${name} ?`,
       ()=>{
-        this.adminService.blockUser(id)
+        this._adminService.blockUser(id)
         .subscribe((res) =>{
-          this.store.dispatch(retrieveUsers())
-          this.toastr.success("user blocked successfully")
+          this._store.dispatch(retrieveUsers())
+          this._toastr.success("user blocked successfully")
         },
         (err) =>{
-           this.toastr.error("something went wrong")
+           this._toastr.error("something went wrong")
         })
       },()=>{
-        this.cofirmService.closeConfirm()
+        this._cofirmService.closeConfirm()
       }
     )
 

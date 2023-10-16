@@ -3,8 +3,6 @@ import { Observable } from 'rxjs';
 import { Tournaments } from '../../modal/model';
 import { Store, select } from '@ngrx/store';
 import { TournamentList } from '../../state/app.state';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { retrieveTournaments } from '../../state/app.action';
 import { TournamentsData } from '../../state/app.selecter';
 import { environment } from 'src/environments/environment.development';
@@ -18,23 +16,23 @@ export class UserHomeComponent implements OnInit {
 
   tournamentList$ !: Observable<Tournaments[]>
   approveTournament !: Tournaments[]
+  tournamentDetail !: Tournaments
 
   constructor(
-    private store : Store<TournamentList>,
-    private router : Router,
-    private toastr : ToastrService,
+    private _store : Store<TournamentList>,
   ){}
 
 
 
   ngOnInit(): void {
-    this.store.dispatch(retrieveTournaments())
+    this._store.dispatch(retrieveTournaments())
 
-    this.tournamentList$ = this.store.pipe(select(TournamentsData))
+    this.tournamentList$ = this._store.pipe(select(TournamentsData))
 
     this.tournamentList$.subscribe((tournments => {
       this.approveTournament = this.filterapproveTournaments(tournments).slice(0,4)
     }))
+
   }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
 })
 export class AdminNavComponent implements OnInit {
 
-  constructor(private router : Router){}
+  constructor(private _router : Router){}
+
+  @Input() item = 0
 
   ngOnInit(): void {
     
@@ -16,6 +18,6 @@ export class AdminNavComponent implements OnInit {
 
   logOut():void{
     localStorage.removeItem('adminSecret')
-    this.router.navigate(['/admin'])
+    this._router.navigate(['/admin'])
   }
 }

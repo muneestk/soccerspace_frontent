@@ -17,9 +17,9 @@ export class AdminLoginComponent implements OnInit{
 
 
   constructor(
-    private adminService : AdminService,
-    private router : Router,
-    private toastr : ToastrService
+    private _adminService : AdminService,
+    private _router : Router,
+    private _toastr : ToastrService
     ){}
 
 
@@ -51,21 +51,20 @@ export class AdminLoginComponent implements OnInit{
 
   loginSubmit(){
     const form = this.loginForm.getRawValue();
-    console.log(form);
-    
+   
     if(!this.loginForm.valid){
       this.invalid = true;
     }else{
-      this.adminService.adminLogin(form)
+      this._adminService.adminLogin(form)
       .subscribe((res) =>{
            localStorage.setItem('adminSecret',res.toString())
-           this.router.navigate(['/admin/dashboard'])
+           this._router.navigate(['/admin/dashboard'])
       },
       (err) => {
         if(err.error.message){
-          this.toastr.error(err.error.message)
+          this._toastr.error(err.error.message)
         }else{
-          this.toastr.error("something went wrong")
+          this._toastr.error("something went wrong")
         }
       })
 

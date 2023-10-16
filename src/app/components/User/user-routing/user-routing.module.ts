@@ -17,6 +17,10 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -33,7 +37,8 @@ import { MatButtonModule } from '@angular/material/button';
     VerifyComponent,
     UserProfileComponent,
     SigleTournamentDetailsComponent,
-    RegisterTournamentComponent
+    RegisterTournamentComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -45,6 +50,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
+    NgxSkeletonLoaderModule,
+    GoogleSigninButtonModule,
+    MatIconModule
 
   ],
   

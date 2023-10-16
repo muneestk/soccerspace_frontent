@@ -3,11 +3,7 @@ import {  FormGroup ,FormControl,Validators } from '@angular/forms';
 import {  Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/service/user.service';
-import {
-  SocialAuthService,
-  GoogleLoginProvider,
-  SocialUser,
-} from '@abacritt/angularx-social-login';
+
 
 @Component({
   selector: 'app-signup',
@@ -18,14 +14,12 @@ export class SignupComponent implements OnInit {
   
   registerForm !: FormGroup ;
   invalid : boolean = false ;
-  socialUser!: SocialUser;
   isLoggedin?: boolean;
 
   constructor(
-    private router : Router,
-    private tostr : ToastrService,
-    private userService : UserService,
-    private socialAuthService: SocialAuthService,
+    private _router : Router,
+    private _tostr : ToastrService,
+    private _userService : UserService,
   ){} 
 
   ngOnInit(): void {
@@ -53,12 +47,7 @@ export class SignupComponent implements OnInit {
 
    
 
-   this.socialAuthService.authState.subscribe((user) => {
-    this.socialUser = user;
-    this.isLoggedin = user != null;
-    console.log(this.socialUser);
 
-  });
 
 
   
@@ -78,9 +67,11 @@ export class SignupComponent implements OnInit {
     return this.registerForm.get("password") as FormControl
   }
 
-  loginWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
-  }
+
+
+  
+
+ 
 
   registerSubmit(){
     const user = this.registerForm.getRawValue();
@@ -88,16 +79,16 @@ export class SignupComponent implements OnInit {
     if(!this.registerForm.valid){
       this.invalid=true;  
     }else{
-      this.userService.userRegister(user)
+      this._userService.userRegister(user)
       .subscribe((result) => {
-        this.router.navigate(['/verify']);
-        this.tostr.success("successfully registered,verify your email to continue login")
+        this._router.navigate(['/verify']);
+        this._tostr.success("successfully registered,verify your email to continue login")
       },
       (err) => {
        if(err.error.message){
-        this.tostr.error(err.error.message);
+        this._tostr.error(err.error.message);
        }else{
-        this.tostr.error("something went wrong");
+        this._tostr.error("something went wrong");
        }
       }
       )

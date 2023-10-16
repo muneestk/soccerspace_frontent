@@ -20,6 +20,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { TournamentListComponent } from '../tournament-list/tournament-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SingleTournamentListComponent } from '../single-tournament-list/single-tournament-list.component';
+import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 
 
 
@@ -50,7 +51,8 @@ import { SingleTournamentListComponent } from '../single-tournament-list/single-
     MatInputModule,
     MatSelectModule,
     MatPaginatorModule,
-    
-  ]
+    GoogleSigninButtonModule
+  ],
+  
 })
 export class ManagerModule { }

@@ -1,63 +1,157 @@
 <app-usernav></app-usernav>
-<div class="h-100">
- 
-  <mat-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="runnersPriceMoney">
-      <form [formGroup]="runnersPriceMoney">
-        <ng-template matStepLabel>Fill out your team name and manger name</ng-template>
-        <div class="col p-3 d-flex justify-content-center">
+<div class="container">
+  <div class="h-100 d-flex flex-column align-items-center">
+    <mat-stepper  #stepper class="w-100">
+      <mat-step [stepControl]="TeamRegister">
+        <form [formGroup]="TeamRegister" (ngSubmit)="register()"  class="d-flex flex-column align-items-center mt-5 border shadow p-3">
+          <!-- <ng-template matStepLabel>Fill out your team details</ng-template> -->
+          <div class="col-md-6 p-3">
             <div class="form-outline">
-              <label class="form-label" for="form6Example1"
-                >Runners Price Money</label
+              <label class="form-label" for="teamName">Enter Your Team Name</label>
+              <input type="text" id="teamName" formControlName="teamName" class="form-control inputclr" placeholder="Enter Your Team Name" />
+              <div class="form-text text-danger pt-2" *ngIf="TeamRegister.controls['teamName'].errors?.['required'] && (TeamRegister.controls['teamName'].touched || TeamRegister.controls['teamName'].dirty || invalid)">
+                Team Name is required
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 p-3">
+            <div class="form-outline">
+              <label class="form-label" for="managerName">Enter Team Manager Name</label>
+              <input type="text" id="managerName" formControlName="managerName" class="form-control inputclr" placeholder="Enter Your Manager Name" />
+              <div class="form-text text-danger pt-2" *ngIf="TeamRegister.controls['managerName'].errors?.['required'] && (TeamRegister.controls['managerName'].touched || TeamRegister.controls['managerName'].dirty || invalid)">
+                Manager Name is required
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 p-3">
+            <div class="form-outline">
+              <label class="form-label" for="location">Enter The Team Location</label>
+              <input type="text" id="location" formControlName="location" class="form-control inputclr" placeholder="Enter Your Location" />
+              <div class="form-text text-danger pt-2" *ngIf="TeamRegister.get('location')?.errors?.['required'] && (TeamRegister.get('location')?.touched || TeamRegister.get('location')?.dirty || invalid)">
+                Location is required
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-end p-3 w-100">
+            <button mat-button matStepperPrevious class="btn btn-secondary">Back</button>
+            <button mat-button matStepperNext class="btn btn-primary" type="submit">Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+
+      <mat-step [stepControl]="secondTeamRegister"  *ngIf="invalid" >
+        <form [formGroup]="secondTeamRegister" (ngSubmit)="register2()" class="d-flex flex-column align-items-center mt-5 border shadow p-3">
+
+          <div class="col-md-6 p-3">
+            <div class="form-outline">
+              <label class="form-label" for="teamName">Enter Your Phone Number</label>
+              <input type="text" id="teamName" formControlName="mobno" class="form-control inputclr" placeholder="Enter Your Number" />
+              <div class="form-text text-danger pt-2" *ngIf="secondTeamRegister.controls['mobno'].errors?.['required'] && (secondTeamRegister.controls['mobno'].touched || secondTeamRegister.controls['mobno'].dirty)">
+                Phone Number is required
+              </div>
+              <div class="form-text text-danger pt-2" *ngIf="secondTeamRegister.controls['mobno'].errors?.['pattern'] && (secondTeamRegister.controls['mobno'].touched || secondTeamRegister.controls['mobno'].dirty)">
+                Phone Number is only digit
+              </div>
+              <div class="form-text text-danger pt-2" *ngIf="secondTeamRegister.controls['mobno'].errors?.['minlength'] || secondTeamRegister.controls['mobno'].errors?.['maxlength'] && (secondTeamRegister.controls['mobno'].touched || secondTeamRegister.controls['mobno'].dirty)">
+                Phone Number is need 10 digit
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 p-3">
+            <div class="form-outline">
+              <label class="form-label" for="teamName">Enter Your Alternative Phone Number</label>
+              <input type="text" id="teamName" formControlName="mobno2" class="form-control inputclr" placeholder="Enter Your Second Number" />
+              <div class="form-text text-danger pt-2" *ngIf="secondTeamRegister.controls['mobno2'].errors?.['required'] && (secondTeamRegister.controls['mobno2'].touched || secondTeamRegister.controls['mobno2'].dirty)">
+                Alternative Phone Number is required
+              </div>
+              <div class="form-text text-danger pt-2" *ngIf="secondTeamRegister.controls['mobno2'].errors?.['pattern'] && (secondTeamRegister.controls['mobno2'].touched || secondTeamRegister.controls['mobno2'].dirty)">
+                Alternative Phone Number is only digit
+              </div>
+              <div class="form-text text-danger pt-2" *ngIf="secondTeamRegister.controls['mobno2'].errors?.['minlength'] || secondTeamRegister.controls['mobno2'].errors?.['maxlength'] && (secondTeamRegister.controls['mobno2'].touched || secondTeamRegister.controls['mobno2'].dirty)">
+                Alternative Phone Number is need 10 digit
+              </div>
+              <div class="form-text text-danger pt-2" *ngIf="secondTeamRegister.hasError('sameNumber') && (secondTeamRegister.controls['mobno2'].touched || secondTeamRegister.controls['mobno2'].dirty)">
+                Alternative Phone Number cannot be the same as the first number
+              </div>
+              
+            </div>
+          </div>
+
+          <div class="col-md-6 p-5">
+            <div class="btn btn-primary btn-rounded">
+              <label class="form-label text-white m-1" for="logoFileInput"
+                >Upload Logo</label
               >
               <input
-                type="text"
-                id="form6Example1"
-                formControlName="runnersPriceMoney"
-                class="form-control inputclr"
-                placeholder="Enter Your Price money"
-                style="width: 100%"
+                type="file"
+                class="form-control d-none"
+                id="logoFileInput"
+                (change)="uploadImage($event.target)"
               />
-
-              <div
-                class="form-text text-danger pt-1 fs-5 "
-                *ngIf="runnersPriceMoney.errors?.['required'] && (runnersPriceMoney.touched || runnersPriceMoney.dirty)"
-              >
-                Runners price money is required
+              <div class="form-text text-danger pt-2" *ngIf="invalidLogo">
+                Team logo is required
               </div>
-              <div
-                class="form-text text-danger pt-1 fs-5 "
-                *ngIf="runnersPriceMoney.errors?.['pattern'] && (runnersPriceMoney.touched || runnersPriceMoney.dirty)"
-              >
-                Runners price money must be a digit
-              </div>
-            </div> 
+            </div>
+            <img
+              [src]="logoImages"
+              *ngIf="logoImages"
+              alt="Selected Logo"
+              class="ps-2"
+              width="100"
+              height="100"
+            />
           </div>
-        <div>
-          <button mat-button matStepperNext>Next</button>
+        
+
+          <div class="d-flex justify-content-between align-items-end p-3 w-100">
+            <button mat-button matStepperPrevious class="btn btn-secondary">Back</button>
+            <button mat-button matStepperNext class="btn btn-primary" type="submit">Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+
+      <mat-step *ngIf="invalid2">
+        <div class="container border shadow p-3" *ngIf="tournamentDetail$ | async as t">
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-5 d-flex justify-content-center align-items-center">
+              <img [src]="getPosterImage(t.posterImage ? t.posterImage.toString() : '')" class="img-fluid" width="70%" height="50%" alt="posterImage">
+            </div>
+            <div class="col-md-5">
+              <div class="d-flex align-items-center justify-content-center">
+                <img [src]="getLogoUrl(t.logoImage ? t.logoImage.toString() : '')" class="rounded-circle shadow-lg" width="50px" height="50px" alt="teamlogo">
+                <div class="ms-3">
+                  <h2 class="mb-0">{{ t.teamName | uppercase }}</h2>
+                  <p class="text-muted">Team Logo</p>
+                </div>
+              </div>
+              <h3 class="fw-600"><span class="text-muted">Tournament Name:</span> {{ t.tournamentName }}</h3>
+              <h3 class="fw-600"><span class="text-muted">Location:</span> {{ t.location }}</h3>
+              <h3 class="fw-600"><span class="text-muted">Contact Number:</span> {{ t.mobileNo }}</h3>
+              <h3 class="fw-600"><span class="text-muted">Register Fee:</span> {{ t.registerFee }}</h3>
+              <h3 class="fw-600"><span class="text-muted">Winner Prize Money:</span> {{ t.winnersPriceMoney }}</h3>
+              <h3 class="fw-600"><span class="text-muted">Runners Up Prize Money:</span> {{ t.runnersPriceMoney }}</h3>
+              <h3 class="fw-600"><span class="text-muted">Tournament Date:</span> {{ t.tournamentDate | date:'dd-MMMM-yyyy' }}</h3>
+              <h3 class="fw-600"><span class="text-muted">Max Slots:</span> {{ t.slots }}</h3>
+              <h3 class="fw-600"><span class="text-muted">Max Limit</span> {{ t.limit }}</h3>
+              <h3 class="fw-600"><span class="text-muted">Max Players:</span> {{ t.players }}</h3>
+              <div class="d-flex justify-content-between align-items-end p-3 w-100">
+                <button mat-button matStepperPrevious class="btn btn-secondary">Back</button>
+                <button class="btn btn-outline-success p-2 " (click)="submit(t.registerFee)">Register Tournament</button>
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
         </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup" label="Fill out your location and mobile numbers">
-      <form [formGroup]="secondFormGroup">
-        <mat-form-field>
-          <mat-label>Address</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
-    </mat-step>
-  </mat-stepper>
+           
+      </mat-step>
+    </mat-stepper>
+  </div>
 </div>
-<app-footer></app-footer>
+  <app-footer></app-footer>

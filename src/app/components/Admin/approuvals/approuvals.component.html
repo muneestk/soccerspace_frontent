@@ -1,22 +1,24 @@
-<app-admin-nav class="fixed-top"></app-admin-nav>
-<div class="container-fluid mt-5">
+<app-admin-nav></app-admin-nav>
     <div class="row">
         <div class="col-md-3 col-12 sidebar">
             <app-admin-sidebar></app-admin-sidebar>
         </div>
 
-        <div class="col-md-9 col-12 mt-5 ">
+        <div class="col-md-9 col-12">
             <div class="row">
-                <div class="col-md-12" *ngIf="filteredTournaments.length > 0">
+                <div class="col-md-12">
                     <div class="row">
                         <!-- Loop through tournaments using *ngFor -->
                         <div class="col-md-12 mt-5" *ngFor="let t of filteredTournaments; let i = index">
-                            <div class="row">
-                                <div class="col-md-5 d-flex justify-content-center align-items-center rounded shadow p-3">
+                            <div class="row" >
+                                <div class="col-md-1">
+                                    <!-- Add any content you want here -->
+                                </div>
+                                <div class="col-md-5 d-flex justify-content-center align-items-center rounded shadow p-3" >
                                     <img [src]="getPosterImage(t.posterImage ? t.posterImage.toString() : '')" width="80%" height="80%" alt="">
                                 </div>
 
-                                <div class="col-md-5 h-100  rounded shadow p-3 ">
+                                <div class="col-md-5 h-100 rounded shadow p-3 ">
                                     <div>
                                         <div class="d-flex align-items-center justify-content-center ">
                                             <img [src]="getLogoUrl(t.logoImage ? t.logoImage.toString() : '')" width="50px" height="50px" alt="teamlogo" class="rounded-circle shadow-lg">
@@ -27,15 +29,15 @@
                                         </div>
                                         <div class="">
                                             <h3 class="ms-3 f-w-600"><span class="text-muted"> Tournament Name </span> : {{ t.tournamentName}}</h3>
-                                        <h3 class="ms-3 f-w-600"><span class="text-muted">Location </span>: {{ t.location }} </h3>
-                                        <h3 class="ms-3 f-w-600"><span class="text-muted">Contact Number </span>: {{ t.mobileNo }}</h3>
-                                        <h3 class="ms-3 f-w-600"><span class="text-muted">Register Fee </span>: {{ t.registerFee }}</h3>
-                                        <h3 class="ms-3 f-w-600"><span class="text-muted">Winner Prize Money </span>: {{ t.winnersPriceMoney }}</h3>
-                                        <h3 class="ms-3 f-w-600"><span class="text-muted">Runners Up Prize Money </span>: {{ t.runnersPriceMoney }}</h3>
-                                        <h3 class="ms-3 f-w-600"><span class="text-muted">Tournament Date</span>: {{ t.tournamentDate | date:'dd-MMMM-yyyy' }}</h3>
-                                        <h3 class="ms-3 f-w-600"><span class="text-muted">Max Limit </span>: {{ t.slots }}</h3>
-                                        <h3 class="ms-3 f-w-600"><span class="text-muted">Max Slots </span>: {{ t.limit }}</h3>
-                                        <h3 class="ms-3 f-w-600"><span class="text-muted">Max Players </span>: {{ t.players }}</h3>
+                                            <h3 class="ms-3 f-w-600"><span class="text-muted">Location </span>: {{ t.location }} </h3>
+                                            <h3 class="ms-3 f-w-600"><span class="text-muted">Contact Number </span>: {{ t.mobileNo }}</h3>
+                                            <h3 class="ms-3 f-w-600"><span class="text-muted">Register Fee </span>: {{ t.registerFee }}</h3>
+                                            <h3 class="ms-3 f-w-600"><span class="text-muted">Winner Prize Money </span>: {{ t.winnersPriceMoney }}</h3>
+                                            <h3 class="ms-3 f-w-600"><span class="text-muted">Runners Up Prize Money </span>: {{ t.runnersPriceMoney }}</h3>
+                                            <h3 class="ms-3 f-w-600"><span class="text-muted">Tournament Date</span>: {{ t.tournamentDate | date:'dd-MMMM-yyyy' }}</h3>
+                                            <h3 class="ms-3 f-w-600"><span class="text-muted">Max Limit </span>: {{ t.slots }}</h3>
+                                            <h3 class="ms-3 f-w-600"><span class="text-muted">Max Slots </span>: {{ t.limit }}</h3>
+                                            <h3 class="ms-3 f-w-600"><span class="text-muted">Max Players </span>: {{ t.players }}</h3>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-center mt-3">
@@ -43,7 +45,7 @@
                                         <button class="btn btn-primary ms-2"(click)="approveTournament(t._id,t.tournamentName)">Approve</button>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <!-- Add any content you want here -->
                                 </div>
                             </div>
@@ -54,4 +56,3 @@
             </div>
         </div>
     </div>
-</div>
