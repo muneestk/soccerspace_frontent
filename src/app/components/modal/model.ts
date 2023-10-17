@@ -43,4 +43,16 @@ export interface Tournaments {
     Teams: string[];
     __v: number;
   }
+
+
+  export interface Iteams {
+    _id : string,
+    name : string ,
+    email : string,
+    password : string,
+    is_verified : boolean,
+    otp : string,
+    is_blocked : boolean,
+    __v : number
+}
   

@@ -38,6 +38,9 @@
                         <div class="input-field mt-3">
                             <input type="submit" class="submit" value="Sign Up">
                         </div> 
+                        <div class="input-field mt-3" *ngIf="reverify">
+                            <input type="button" class="submit" (click) = "verifyAccount()" value="verify">
+                        </div> 
                     </form>   
                     <div class="middle-text d-flex align-items-center">
                         <hr class="flex-grow-1">

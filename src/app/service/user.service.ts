@@ -32,8 +32,12 @@ export class UserService {
       return this.http.post(`${this.apiUrl}/login`,user,httpOptions)
     }
 
-    verifyUser(id:any) : Observable<any>{
-      return this.http.post(`${this.apiUrl}/verifyUser?id=`+id,httpOptions)
+    verifyUser(id:any,token:any) : Observable<any>{
+      var data ={
+        id:id,
+        token:token
+      }
+      return this.http.post(`${this.apiUrl}/verifyUser`,data,httpOptions)
     }
     
     userDetails() : Observable<any>{
@@ -61,6 +65,14 @@ export class UserService {
 
     forgotPasswordSendMail(form:any) : Observable<any>{
       return this.http.post(`${this.apiUrl}/forgotMailSent`,form)
+    }
+
+    forgotPassword(form:any) : Observable<any>{
+      return this.http.patch(`${this.apiUrl}/forgotPassword`,form)
+    }
+
+    reVerify(form:any) : Observable<any>{
+      return this.http.post(`${this.apiUrl}/reVerifyAccount`,form)
     }
 
 

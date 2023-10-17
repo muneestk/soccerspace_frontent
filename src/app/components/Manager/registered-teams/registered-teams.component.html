@@ -1,0 +1,32 @@
+<app-manager-nav></app-manager-nav>
+
+<div class="main">
+  <div class="col-md-9 col-12 mt-3">
+        <h1 class="fs-5 fw-5 text-center my-tournaments-heading">
+          Registered Teams
+        </h1>
+        <ng-container *ngIf="!teams.length">
+          <p class="text-center mt-5 fs-1 text-light">Teams not yet registered</p>
+        </ng-container>
+        <div class="container ">
+           
+            <div class="row people d-flex justify-content-around" *ngIf="teams.length">
+                <div class="row people d-flex justify-content-around" *ngIf="teams.length">
+                    <div class="col-md-6 col-lg-3 p-3 item bg-light m-1 rounded border shadow custom-card" *ngFor="let t of teams">
+                      <h3 class="name text-center">{{t.teamName | uppercase }}</h3>
+                      <div class="box">
+                        <img class="rounded-circle team-logo" [src]="logoImage(t.teamLogo ? t.teamLogo:'')">
+                        <h3 class="name pt-2">{{t.managerName | uppercase }}</h3>
+                        <p class="location"><span class="material-icons location-icon">location_on</span>{{t.teamLocation}}</p>
+                        <p class="contact">{{t.mobNo}}</p>
+                        <p class="contact">{{t.altMobNo}}</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+<app-manager-footer></app-manager-footer>

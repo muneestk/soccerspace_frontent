@@ -46,8 +46,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
   declarations: [
     AppComponent,
     PopupComponent,
-    
-    
+       
   ],
   imports: [
     NgxSkeletonLoaderModule,

@@ -9,20 +9,16 @@
     min-height: 100vh;
   }
   
-  .dark-table {
-    background-color: #fff;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
-  }
-  
-  .table-container {
-    overflow-x: auto;
-    max-width: 100%;
-    padding: 1rem; 
-  }
-  
 
+   .name {
+    font-size: 25px;
+    color:inherit;
+  }
+
+
+  
+  
+  
 
 .my-tournaments-heading {
     font-size: 5.5rem; /* Adjust the font size as needed */
@@ -36,4 +32,30 @@
   .my-tournaments-heading:hover {
     color: #000000; /* Change the color on hover */
   }
+
+  .custom-card {
+    background-color: #2e455d;
+  }
+  
+  .team-logo {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .location {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #201E20;
+    font-size: 20px;
+  }
+  
+  .location-icon {
+    margin-right: 5px;
+  }
+  
+  .contact {
+    margin-top: 10px;
+  }
+  
   

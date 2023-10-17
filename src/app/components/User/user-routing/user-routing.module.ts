@@ -21,6 +21,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ExploretournamentComponent } from '../exploretournament/exploretournament.component';
 
 
 
@@ -38,7 +39,10 @@ import { MatIconModule } from '@angular/material/icon';
     UserProfileComponent,
     SigleTournamentDetailsComponent,
     RegisterTournamentComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ExploretournamentComponent
+
+
   ],
   imports: [
     CommonModule,

@@ -49,7 +49,22 @@ export class ManagerService {
     console.log(user,'klll');
     return this.http.post(`${this.apiUrl}/addTournment`,user)
   }
+
+  forgotPasswordSendMail(form:any) : Observable<any>{
+    return this.http.post(`${this.apiUrl}/forgotMailSent`,form)
+  }
+
+  forgotPassword(form:any) : Observable<any>{
+    return this.http.patch(`${this.apiUrl}/forgotPassword`,form)
+  }
   
+  findManger():Observable<any>{
+    return this.http.get(`${this.apiUrl}/findManger`)
+  }
+  
+  registeredTeams(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/registeredTeams?id=${id}`);
+  }
   
 
 }

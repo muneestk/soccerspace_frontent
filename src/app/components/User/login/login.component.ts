@@ -12,8 +12,10 @@ import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  invalid: boolean = false;
-  id: any;
+  invalid : boolean = false;
+  reverify : boolean = false;
+  id : any;
+  token : any;
   user !: SocialUser;
   loggedIn : any ;
 
@@ -38,7 +40,8 @@ export class LoginComponent implements OnInit {
     });
 
     this.id = this._route.snapshot.paramMap.get('id');
-    if (this.id) {
+    this.token = this._route.snapshot.paramMap.get('token');
+    if (this.id && this.token) {
       this.verifyUser();
     }
 
@@ -81,11 +84,14 @@ export class LoginComponent implements OnInit {
           this._router.navigate(['/']);
         },
         (err) => {
-          if (err.error.message) {
-            this._tostr.error(err.error.message);
-          } else {
-            this._tostr.error('Something went wrong');
-          }
+          if(err.error.message == 'email not verified'){
+            this._tostr.warning("email not verified ! verify your account")
+            this.reverify = true
+          }else if(err.error.message){
+          this._tostr.error(err.error.message);
+         }else{
+          this._tostr.error("internal server error");
+         }
         }
       );
     }
@@ -93,7 +99,7 @@ export class LoginComponent implements OnInit {
 
   //verifying the user
   verifyUser() {
-    this._userService.verifyUser(this.id).subscribe(
+    this._userService.verifyUser(this.id,this.token).subscribe(
       (result) => {
         localStorage.setItem('userSecret', result.toString());
         this._router.navigate(['/']);
@@ -108,5 +114,24 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  
+  //reverification
+
+  verifyAccount():void{
+    if(this.loginForm.valid){
+      const form = this.loginForm.getRawValue()
+      this._userService.reVerify(form).subscribe(
+        (res) =>{
+          this._router.navigate(['/verify'])
+          this._tostr.success("Check your email and verify your email to continue with the login.")
+        },
+        (err) =>{
+          this._tostr.error(err.error.message)
+        }
+      )
+    }
+    else{
+      this.invalid = true;
+    }
+   
+}
 }

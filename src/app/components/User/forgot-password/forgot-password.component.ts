@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -12,26 +13,86 @@ export class ForgotPasswordComponent implements OnInit{
 
   constructor(
    private _userService : UserService,
-   private _toastr : ToastrModule
+   private _toastr : ToastrService,
+   private _route : ActivatedRoute,
+   private _router : Router
   ){}
 
   sendMailForm !: FormGroup ;
-  invalid : boolean = false
+  passwordSubmitForm !: FormGroup ;
+  invalid : boolean = false ;
+  invalid2 : boolean = false ;
+  id !: any
+  token !: any
+  resubmitPassword : boolean = false
+  samePassword : boolean = false
 
   ngOnInit(): void {
     this.sendMailForm = new FormGroup({
       email : new FormControl("",[Validators.required,Validators.email])
     })
+
+    this.passwordSubmitForm = new FormGroup({
+      password : new FormControl("",[Validators.required,Validators.minLength(5)]),
+      confirmPassword : new FormControl("",[Validators.required,Validators.minLength(5)])
+    })
+
+    this.id = this._route.snapshot.paramMap.get('id')
+    this.token = this._route.snapshot.paramMap.get('token')
+    if(this.id){
+      this.resubmitPassword = true
+    }
   }
 
   get email() : FormControl{
     return this.sendMailForm.get('email') as FormControl
   }
 
+  get password() : FormControl{
+    return this.passwordSubmitForm.get('password') as FormControl
+  }
+
+  get confirmPassword() : FormControl{
+    return this.passwordSubmitForm.get('confirmPassword') as FormControl
+  }
+
   forgotSubmit():void{
     const user = this.sendMailForm.getRawValue()
 
-    this._userService
+    this._userService.forgotPasswordSendMail(user).subscribe(
+      (res) =>{
+        this._toastr.warning("Check your email for verification")
+        this.ngOnInit()
+      },
+      (err) => {
+        this._toastr.error("something went wrong")
+      }
+    )
+  }
+
+  passwordSubmit():void{
+    if(!this.passwordSubmitForm.valid){
+      this.invalid2 = true
+    }else{
+      const form = this.passwordSubmitForm.getRawValue()
+      if(form.password != form.confirmPassword){
+        this.samePassword = true
+      }else{
+        this.samePassword = false
+        form.id = this.id
+        form.token = this.token
+        this._userService.forgotPassword(form).subscribe(
+          (res) => {
+            this._router.navigate(['/login'])
+            this._toastr.success(res.message)
+          },
+          (err) => {
+            this._toastr.error(err.error.message)
+          }
+        )        
+
+      }
+    }
   }
 
 }

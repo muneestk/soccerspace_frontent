@@ -21,6 +21,8 @@ import { TournamentListComponent } from '../tournament-list/tournament-list.comp
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { SingleTournamentListComponent } from '../single-tournament-list/single-tournament-list.component';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { ForgotPasswordManagerComponent } from '../forgot-password-manager/forgot-password-manager.component';
+import { RegisteredTeamsComponent } from '../registered-teams/registered-teams.component';
 
 
 
@@ -37,7 +39,10 @@ import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
     ManagerProfileComponent,
     AddTournamentComponent,
     TournamentListComponent,
-    SingleTournamentListComponent
+    SingleTournamentListComponent,
+    ForgotPasswordManagerComponent,
+    RegisteredTeamsComponent,
+
 
   ],
   imports: [
@@ -51,7 +56,7 @@ import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
     MatInputModule,
     MatSelectModule,
     MatPaginatorModule,
-    GoogleSigninButtonModule
+    GoogleSigninButtonModule,
   ],
   
 })

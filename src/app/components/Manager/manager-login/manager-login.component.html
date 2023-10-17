@@ -19,6 +19,9 @@
                         <div class="input-field">
                             <input type="password" class="input" id="pass" formControlName="password" required="">
                             <label for="pass">Password</label>
+                            <div class="d-flex justify-content-end">
+                                <a class="text-decoration-none text-dark text-end" [routerLink]="['/manager/forgotPassword']">Forgot password?</a>
+                            </div>
                             <div class="form-text text-danger" *ngIf="password.errors?.['required'] && (password.touched || password.dirty || invalid)">
                                 Password is Required
                             </div>
