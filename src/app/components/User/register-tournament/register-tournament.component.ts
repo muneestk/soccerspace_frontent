@@ -95,7 +95,7 @@ export class RegisterTournamentComponent implements OnInit {
   submit(regFee:number){
     const form = this.TeamRegister.getRawValue()
     const form2 = this.secondTeamRegister.getRawValue()
-
+    this.invalidLogo = false
     const formdata = new FormData()
 
     formdata.append("teamName",form.teamName)
@@ -155,7 +155,7 @@ export class RegisterTournamentComponent implements OnInit {
     this._userService.verifypayment(response,this.id,teamId)
     .subscribe((res)=>{
       this._toastr.success("Payment success");
-      this._router.navigate(['/']);
+      this._router.navigate(['/myTournaments']);
     },(err)=>{
       this._toastr.error(err.error.message)
     })

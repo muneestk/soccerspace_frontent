@@ -22,6 +22,11 @@ import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ExploretournamentComponent } from '../exploretournament/exploretournament.component';
+import { MytournamentsComponent } from '../mytournaments/mytournaments.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MyTournamentSingleDetailsComponent } from '../my-tournament-single-details/my-tournament-single-details.component';
+import { MyTournamentRgisterdTeamsComponent } from '../my-tournament-rgisterd-teams/my-tournament-rgisterd-teams.component';
 
 
 
@@ -40,7 +45,10 @@ import { ExploretournamentComponent } from '../exploretournament/exploretourname
     SigleTournamentDetailsComponent,
     RegisterTournamentComponent,
     ForgotPasswordComponent,
-    ExploretournamentComponent
+    ExploretournamentComponent,
+    MytournamentsComponent,
+    MyTournamentSingleDetailsComponent,
+    MyTournamentRgisterdTeamsComponent,
 
 
   ],
@@ -56,7 +64,9 @@ import { ExploretournamentComponent } from '../exploretournament/exploretourname
     MatButtonModule,
     NgxSkeletonLoaderModule,
     GoogleSigninButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatPaginatorModule,
+    MatTableModule
 
   ],
   

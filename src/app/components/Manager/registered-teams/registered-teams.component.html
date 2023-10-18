@@ -8,22 +8,24 @@
         <ng-container *ngIf="!teams.length">
           <p class="text-center mt-5 fs-1 text-light">Teams not yet registered</p>
         </ng-container>
-        <div class="container ">
+        <div class="container-fluid ">
            
-            <div class="row people d-flex justify-content-around" *ngIf="teams.length">
                 <div class="row people d-flex justify-content-around" *ngIf="teams.length">
                     <div class="col-md-6 col-lg-3 p-3 item bg-light m-1 rounded border shadow custom-card" *ngFor="let t of teams">
                       <h3 class="name text-center">{{t.teamName | uppercase }}</h3>
                       <div class="box">
+                        <div class="d-flex justify-content-center">
                         <img class="rounded-circle team-logo" [src]="logoImage(t.teamLogo ? t.teamLogo:'')">
-                        <h3 class="name pt-2">{{t.managerName | uppercase }}</h3>
-                        <p class="location"><span class="material-icons location-icon">location_on</span>{{t.teamLocation}}</p>
-                        <p class="contact">{{t.mobNo}}</p>
-                        <p class="contact">{{t.altMobNo}}</p>
+                        </div>
+                        <h3 class="location fs-5 pt-2">{{t.managerName | uppercase }}</h3>
+                        <p class="location"><span class="material-icons location-icon me-2">location_on</span>{{t.teamLocation}}</p>
+                        <p class="location"><span class="material-icons location-icon me-2">call</span>{{t.mobNo}}</p>
+                        <p class="location"><span class="material-icons location-icon me-2">call</span>{{t.altMobNo}}</p>
+                     
                       </div>
                     </div>
                   </div>
-            </div>
+
         </div>
     </div>
    

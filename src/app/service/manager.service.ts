@@ -9,9 +9,7 @@ const httpOptions = {
   })
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class ManagerService {
 

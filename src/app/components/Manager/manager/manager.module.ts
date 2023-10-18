@@ -23,6 +23,7 @@ import { SingleTournamentListComponent } from '../single-tournament-list/single-
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { ForgotPasswordManagerComponent } from '../forgot-password-manager/forgot-password-manager.component';
 import { RegisteredTeamsComponent } from '../registered-teams/registered-teams.component';
+import { ManagerService } from 'src/app/service/manager.service';
 
 
 
@@ -58,6 +59,9 @@ import { RegisteredTeamsComponent } from '../registered-teams/registered-teams.c
     MatPaginatorModule,
     GoogleSigninButtonModule,
   ],
+  providers:[
+    ManagerService
+  ]
   
 })
 export class ManagerModule { }

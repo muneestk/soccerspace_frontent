@@ -93,9 +93,7 @@
                 id="logoFileInput"
                 (change)="uploadImage($event.target)"
               />
-              <div class="form-text text-danger pt-2" *ngIf="invalidLogo">
-                Team logo is required
-              </div>
+             
             </div>
             <img
               [src]="logoImages"
@@ -105,6 +103,9 @@
               width="100"
               height="100"
             />
+          </div>
+          <div class="form-text text-danger pt-2" *ngIf="invalidLogo">
+            Team logo is required
           </div>
         
 

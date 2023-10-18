@@ -21,7 +21,7 @@
   
 
 .my-tournaments-heading {
-    font-size: 5.5rem; /* Adjust the font size as needed */
+    font-size: 10.5rem; /* Adjust the font size as needed */
     font-weight: bold;
     text-align: center;
     color: #c4c4c4; /* Change the color to your preferred color */
@@ -38,8 +38,8 @@
   }
   
   .team-logo {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
   }
   
   .location {

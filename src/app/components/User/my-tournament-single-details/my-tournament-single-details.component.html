@@ -1,0 +1,35 @@
+<app-usernav></app-usernav>
+
+    <div class="container border shadow p-5 m-5" *ngIf="tournamentList$ | async as t">
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-5 d-flex justify-content-center align-items-center">
+            <img [src]="getPosterImage(t.posterImage ? t.posterImage.toString() : '')" class="img-fluid" width="70%" height="50%" alt="posterImage">
+          </div>
+          <div class="col-md-5">
+            <div class="d-flex align-items-center justify-content-center">
+              <img [src]="getLogoUrl(t.logoImage ? t.logoImage.toString() : '')" class="rounded-circle shadow-lg" width="50px" height="50px" alt="teamlogo">
+              <div class="ms-3">
+                <h2 class="mb-0">{{ t.teamName | uppercase }}</h2>
+                <p class="text-muted">Team Logo</p>
+              </div>
+            </div>
+            <h3 class="fw-600"><span class="text-muted">Tournament Name:</span> {{ t.tournamentName }}</h3>
+            <h3 class="fw-600"><span class="text-muted">Location:</span> {{ t.location }}</h3>
+            <h3 class="fw-600"><span class="text-muted">Contact Number:</span> {{ t.mobileNo }}</h3>
+            <h3 class="fw-600"><span class="text-muted">Register Fee:</span> {{ t.registerFee }}</h3>
+            <h3 class="fw-600"><span class="text-muted">Winner Prize Money:</span> {{ t.winnersPriceMoney }}</h3>
+            <h3 class="fw-600"><span class="text-muted">Runners Up Prize Money:</span> {{ t.runnersPriceMoney }}</h3>
+            <h3 class="fw-600"><span class="text-muted">Tournament Date:</span> {{ t.tournamentDate | date:'dd-MMMM-yyyy' }}</h3>
+            <h3 class="fw-600"><span class="text-muted">Max Slots:</span> {{ t.slots }}</h3>
+            <h3 class="fw-600"><span class="text-muted">Max Limit</span> {{ t.limit }}</h3>
+            <h3 class="fw-600"><span class="text-muted">Max Players:</span> {{ t.players }}</h3>
+            <h3 class="fw-600" *ngIf="!validDate"><span class="text-muted me-2">Days Left:</span> {{ getDaysLeft(t.tournamentDate) }} </h3>
+           
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+      </div>
+
+
+<app-footer></app-footer>

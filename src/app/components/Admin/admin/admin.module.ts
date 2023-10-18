@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
@@ -20,6 +20,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ApprouvalsComponent } from '../approuvals/approuvals.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { TournamentListComponent } from '../tournament-list/tournament-list.component';
+import { AdminSidebarnavComponent } from '../admin-sidebarnav/admin-sidebarnav.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     UserListComponent,
     ManagerListComponent,
     ApprouvalsComponent,
-    
+    TournamentListComponent,
+    AdminSidebarnavComponent,
+
   ],
   imports: [
     CommonModule,
@@ -48,6 +52,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     MatPaginatorModule,
     NgxSkeletonLoaderModule
 
-    ]
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class AdminModule { }

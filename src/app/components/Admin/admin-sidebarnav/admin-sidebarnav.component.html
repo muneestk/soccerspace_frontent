@@ -1,0 +1,40 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a class="list-group-item text-center d-flex justify-content-center align-items-center" style="height: 40px;" [routerLink]="['/admin/dashboard/userList']">
+        <span class="material-icons me-2" style="vertical-align: middle;">people_alt</span>User List
+      </a>
+      <a class="list-group-item text-center d-flex justify-content-center align-items-center" style="height: 40px;" [routerLink]="['/admin/dashboard/managerList']">
+        <span class="material-icons me-2" style="vertical-align: middle;">manage_accounts</span>Manger List
+      </a>
+      <a class="list-group-item text-center d-flex justify-content-center align-items-center" style="height: 40px;" [routerLink]="['/admin/dashboard/approvals']">
+        <span class="material-icons me-2" style="vertical-align: middle;">done_outline</span>Approvals
+      </a>
+      <a class="list-group-item text-center d-flex justify-content-center align-items-center" style="height: 40px;" >
+        <span class="material-icons me-2" style="vertical-align: middle;">sports_soccer</span>Tournaments
+      </a>
+      
+     
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span><img src="assets/logo/SS WHITE.png" width="180px" height="80px" alt=""></span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

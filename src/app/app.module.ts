@@ -38,15 +38,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-
-
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PopupComponent,
-       
+   
+    
   ],
   imports: [
     NgxSkeletonLoaderModule,
@@ -71,6 +71,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     MatTableModule,
     MatPaginatorModule,
     MatSelectModule,
+    
     // GoogleSigninButtonModule,
     // MatFormFieldModule,
     // MatStepperModule,
@@ -80,7 +81,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
       allTournaments : tournamentListReducer
    
     }),
-     EffectsModule.forRoot([appEffects])
+     EffectsModule.forRoot([appEffects]),
+     MatSidenavModule
 
   ],
   providers: [

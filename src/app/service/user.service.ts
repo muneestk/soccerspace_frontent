@@ -75,5 +75,9 @@ export class UserService {
       return this.http.post(`${this.apiUrl}/reVerifyAccount`,form)
     }
 
+    myTournaments() : Observable<any>{
+      return this.http.get(`${this.apiUrl}/myTournaments`)
+    }
+
 
 }
