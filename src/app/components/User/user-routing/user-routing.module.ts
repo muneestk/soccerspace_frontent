@@ -27,8 +27,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MyTournamentSingleDetailsComponent } from '../my-tournament-single-details/my-tournament-single-details.component';
 import { MyTournamentRgisterdTeamsComponent } from '../my-tournament-rgisterd-teams/my-tournament-rgisterd-teams.component';
-
-
+import { ButtonModule } from 'primeng/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OrganizationChartModule } from 'primeng/organizationchart';
 
 
 
@@ -51,6 +52,7 @@ import { MyTournamentRgisterdTeamsComponent } from '../my-tournament-rgisterd-te
     MyTournamentRgisterdTeamsComponent,
 
 
+
   ],
   imports: [
     CommonModule,
@@ -66,7 +68,11 @@ import { MyTournamentRgisterdTeamsComponent } from '../my-tournament-rgisterd-te
     GoogleSigninButtonModule,
     MatIconModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    ButtonModule,
+    OrganizationChartModule
+    
+    // BrowserAnimationsModule
 
   ],
   

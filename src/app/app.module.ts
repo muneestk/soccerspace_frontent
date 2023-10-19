@@ -39,6 +39,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatTableModule,
     MatPaginatorModule,
     MatSelectModule,
+    ButtonModule,
     
     // GoogleSigninButtonModule,
     // MatFormFieldModule,

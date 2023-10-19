@@ -36,6 +36,7 @@ export class RegisterTournamentComponent implements OnInit {
   invalid: boolean = false;
   invalid2 : boolean = false;
   invalidLogo : boolean = false;
+  invalidLogo2 : boolean = false;
   TeamRegister !: FormGroup
   secondTeamRegister !: FormGroup
   
@@ -67,6 +68,14 @@ export class RegisterTournamentComponent implements OnInit {
   uploadImage(files: any) {
     this.logoSelectedFile = files.files[0];
     this.logoImages = URL.createObjectURL(this.logoSelectedFile);
+
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']; 
+
+    if (!allowedTypes.includes(this.logoSelectedFile.type)) {
+      this.invalidLogo2 = true
+      this.logoImages=''
+    }
+
   }
 
   getLogoUrl(logoimage: string): string {
@@ -93,6 +102,11 @@ export class RegisterTournamentComponent implements OnInit {
   }
 
   submit(regFee:number){
+
+    if(this.invalidLogo2){
+      this._toastr.error(' Team logo must be image as png,jpeg or webp')
+    }else{
+
     const form = this.TeamRegister.getRawValue()
     const form2 = this.secondTeamRegister.getRawValue()
     this.invalidLogo = false
@@ -108,7 +122,6 @@ export class RegisterTournamentComponent implements OnInit {
 
     const fee = regFee * 100
     
-
     this._userService.registerTournament(formdata).subscribe(
       (res) => {
         this._toastr.warning("verify your payment")
@@ -149,6 +162,8 @@ export class RegisterTournamentComponent implements OnInit {
         this._toastr.error(err.error.message)
       }
     )
+
+    }
   }
 
   verifypayment(response: any,teamId:any) {

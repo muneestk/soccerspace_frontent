@@ -18,6 +18,8 @@ export class AddTournamentComponent implements OnInit {
   posterImages!: any;
   TornamentDetails!: FormGroup;
   invalid: boolean = false;
+  invalidLogo : boolean = false;
+  invalidPoster : boolean = false;
 
   constructor(
     private _managerService: ManagerService,
@@ -124,11 +126,25 @@ export class AddTournamentComponent implements OnInit {
   uploadImage(files: any) {
     this.logoSelectedFile = <File>files.files[0];
     this.logoImages = URL.createObjectURL(this.logoSelectedFile);
+
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']; 
+
+    if (!allowedTypes.includes(this.logoSelectedFile.type)) {
+      this.invalidLogo = true
+      this.logoImages=''
+    }
+
   }
   
   uploadImage2(files: any) {
     this.posterSelectedFile = <File>files.files[0];
     this.posterImages = URL.createObjectURL(this.posterSelectedFile);
+
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']; 
+    if (!allowedTypes.includes(this.logoSelectedFile.type)) {
+      this.invalidPoster = true
+      this.posterImages=''
+    }
   }
 
 
@@ -136,6 +152,10 @@ export class AddTournamentComponent implements OnInit {
  tournamentSubmit() {
   if (!this.TornamentDetails.valid) {
     this.invalid = true;
+  }else if(this.invalidPoster){
+    this._toastr.error('Tournament poster must be png,jpeg or webp')
+  }else if(this.invalidLogo){
+    this._toastr.error('logo must be png,jpeg or webp');
   }else{
     const formdetails = this.TornamentDetails.getRawValue();
     const formdata = new FormData();

@@ -79,5 +79,9 @@ export class UserService {
       return this.http.get(`${this.apiUrl}/myTournaments`)
     }
 
+    myTournamentsTeams(id:any) : Observable<any>{
+      return this.http.get(`${this.apiUrl}/myTournamentsTeams?id=${id}`)
+    }
+
 
 }
