@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { ManagerService } from 'src/app/service/manager.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { ManagerService } from 'src/app/service/manager.service';
   templateUrl: './forgot-password-manager.component.html',
   styleUrls: ['./forgot-password-manager.component.css']
 })
-export class ForgotPasswordManagerComponent implements OnInit {
+export class ForgotPasswordManagerComponent implements OnInit,OnDestroy {
 
   constructor(
     private _mangerService : ManagerService,
@@ -17,6 +18,8 @@ export class ForgotPasswordManagerComponent implements OnInit {
     private _route : ActivatedRoute,
     private _router : Router
    ){}
+
+   private subscription:Subscription = new Subscription()
  
    sendMailForm !: FormGroup ;
    passwordSubmitForm !: FormGroup ;
@@ -58,7 +61,7 @@ export class ForgotPasswordManagerComponent implements OnInit {
  
    forgotSubmit():void{
      const user = this.sendMailForm.getRawValue()
- 
+    this.subscription.add(
      this._mangerService.forgotPasswordSendMail(user).subscribe(
        (res) =>{
          this._toastr.warning("Check your email for verification")
@@ -68,6 +71,7 @@ export class ForgotPasswordManagerComponent implements OnInit {
          this._toastr.error("something went wrong")
        }
      )
+    )
    }
  
    passwordSubmit(): void {
@@ -78,6 +82,7 @@ export class ForgotPasswordManagerComponent implements OnInit {
     } else if (form.password !== form.confirmPassword) {
       this.samePassword = true;
     } else {
+      this.subscription.add(
       this._mangerService.forgotPassword({ ...form, id: this.id, token: this.token }).subscribe(
         (res) => {
           this._router.navigate(['/login']);
@@ -86,8 +91,14 @@ export class ForgotPasswordManagerComponent implements OnInit {
         (err) => {
           this._toastr.error(err.error.message);
         }
-      );
+      )
+      )
+      
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
   }
 
 }

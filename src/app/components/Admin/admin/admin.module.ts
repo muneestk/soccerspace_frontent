@@ -3,10 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
-import { AdminFooterComponent } from '../admin-footer/admin-footer.component';
 import { AdminLoginComponent } from '../admin-login/admin-login.component';
-import { AdminNavComponent } from '../admin-nav/admin-nav.component';
-import { AdminSidebarComponent } from '../admin-sidebar/admin-sidebar.component';
 import { UserListComponent } from '../user-list/user-list.component';
 import { ManagerListComponent } from '../manager-list/manager-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,14 +19,14 @@ import { ApprouvalsComponent } from '../approuvals/approuvals.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TournamentListComponent } from '../tournament-list/tournament-list.component';
 import { AdminSidebarnavComponent } from '../admin-sidebarnav/admin-sidebarnav.component';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
     AdminComponent,
-    AdminFooterComponent,
     AdminLoginComponent,
-    AdminNavComponent,
-    AdminSidebarComponent,
     DashboardComponent,
     UserListComponent,
     ManagerListComponent,
@@ -50,7 +47,9 @@ import { AdminSidebarnavComponent } from '../admin-sidebarnav/admin-sidebarnav.c
     NgConfirmModule,
     MatTableModule,
     MatPaginatorModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    CanvasJSAngularChartsModule,
+    MatSelectModule
 
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

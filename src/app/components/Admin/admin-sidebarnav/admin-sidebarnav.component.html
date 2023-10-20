@@ -2,6 +2,9 @@
   <mat-sidenav #drawer class="sidenav " fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-nav-list>
       <h1 class="text-center fs-3 p-3 fw-600">Admin</h1>
+      <a class="list-group-item text-center d-flex justify-content-center align-items-center sidenav-link p-5 mt-2 " style="height: 40px;" [routerLink]="['/admin/dashboard/charts']">
+        <span class="material-icons me-2" style="vertical-align: middle;">dashboard</span>Dashboard
+      </a>
       <a class="list-group-item text-center d-flex justify-content-center align-items-center sidenav-link p-5 mt-2 " style="height: 40px;" [routerLink]="['/admin/dashboard/userList']">
         <span class="material-icons me-2" style="vertical-align: middle;">people_alt</span>User List
       </a>
@@ -9,7 +12,7 @@
         <span class="material-icons me-2" style="vertical-align: middle;">manage_accounts</span>Manager List
       </a>
       <a class="list-group-item text-center d-flex justify-content-center align-items-center sidenav-link p-5" style="height: 40px;" [routerLink]="['/admin/dashboard/approvals']">
-        <span class="material-icons me-2" style="vertical-align: middle;">done_outline</span>Approvals
+        <span class="material-icons me-2" style="vertical-align: middle;">done_outline</span>Approvals <span class="badge bg-primary p-2 w-50 ms-2">{{ approvalLength }}</span> 
       </a>
       <a class="list-group-item text-center d-flex justify-content-center align-items-center sidenav-link p-5" style="height: 40px;">
         <span class="material-icons me-2" style="vertical-align: middle;">sports_soccer</span>Tournaments

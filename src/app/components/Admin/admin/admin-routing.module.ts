@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLoginComponent } from '../admin-login/admin-login.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
 import { UserListComponent } from '../user-list/user-list.component';
 import { ManagerListComponent } from '../manager-list/manager-list.component';
 import {
@@ -11,6 +10,7 @@ import {
 } from '../../guard/admin.guard';
 import { ApprouvalsComponent } from '../approuvals/approuvals.component';
 import { AdminSidebarnavComponent } from '../admin-sidebarnav/admin-sidebarnav.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -36,6 +36,11 @@ const routes: Routes = [
       {
         path: 'approvals',
         component: ApprouvalsComponent,
+        canActivate: [AdminGuardLog],
+      },
+      {
+        path: 'charts',
+        component: DashboardComponent,
         canActivate: [AdminGuardLog],
       },
     ],

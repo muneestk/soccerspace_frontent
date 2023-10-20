@@ -49,7 +49,7 @@
 <div class="border-3 mt-5 p-3 rounded-3 trnmnt container" >
   <h1 style="font-weight: 500;">Tournament List</h1>
   <div class="row" *ngIf="approveTournament.length>0">
-    <div class="col-md-3 col-sm-6 border rounded shadow mb-3" *ngFor="let t of approveTournament">
+    <div class="col-md-3 col-sm-6  rounded shadow mb-3" *ngFor="let t of approveTournament">
       <div class="card card-block" [routerLink]="['/singleTourDetails',t._id]">
         <img [src]="getPosterImage(t.posterImage?t.posterImage:'')" alt="Photo of sunset">
         <p class="card-title text-center pt-2 text-uppercase fs-5" >{{ t.tournamentName }}</p>
@@ -78,9 +78,6 @@
   <div class="add">
     <h1 class="pt-4">Your Ultimate Tool for Stress-Free Tournament Management!</h1>
     <p class="lead">Elevate your tournament experience with our feature-packed platform.</p>
-    <div class="d-flex justify-content-center mt-3">
-      <button class="btn btn-outline-dark py-2 " routerLink="/manager/register">Add Tournament</button>
-    </div>
   </div>
 </div>
 <!--advetaisement tournament end -->

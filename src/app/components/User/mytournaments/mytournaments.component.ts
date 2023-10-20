@@ -15,6 +15,8 @@ export class MytournamentsComponent implements AfterViewInit, OnInit, OnDestroy 
   displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'Actions', 'details'];
   dataSource: MatTableDataSource<any>;
 
+  selectedValue:string | undefined
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -24,6 +26,8 @@ export class MytournamentsComponent implements AfterViewInit, OnInit, OnDestroy 
     this.dataSource = new MatTableDataSource<any>();
   }
 
+
+  
   ngOnInit(): void {
     this.subscription.add(
       this._userService.myTournaments().subscribe(
@@ -53,5 +57,13 @@ export class MytournamentsComponent implements AfterViewInit, OnInit, OnDestroy 
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  
+  applyFilterSatatus(value: string) {
+    this.dataSource.filter = value.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

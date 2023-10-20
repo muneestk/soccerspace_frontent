@@ -30,10 +30,10 @@ export interface Tournaments {
     winnersPriceMoney: number;
     runnersPriceMoney: number; 
     registerFee : number; 
-    tournamentDate: string;
+    tournamentDate: Date;
     slots: number;
     status: string;
-    registeredDate: string;
+    registeredDate: Date;
     limit: string;
     players: string;
     logoImage: string;

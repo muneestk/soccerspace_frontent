@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { ManagerService } from 'src/app/service/manager.service';
 
 
@@ -10,7 +11,7 @@ import { ManagerService } from 'src/app/service/manager.service';
   templateUrl: './add-tournament.component.html',
   styleUrls: ['./add-tournament.component.css']
 })
-export class AddTournamentComponent implements OnInit {
+export class AddTournamentComponent implements OnInit,OnDestroy {
   
   logoSelectedFile!: File;
   posterSelectedFile!: File;
@@ -20,6 +21,8 @@ export class AddTournamentComponent implements OnInit {
   invalid: boolean = false;
   invalidLogo : boolean = false;
   invalidPoster : boolean = false;
+
+  private subsciption : Subscription = new Subscription()
 
   constructor(
     private _managerService: ManagerService,
@@ -134,6 +137,11 @@ export class AddTournamentComponent implements OnInit {
       this.logoImages=''
     }
 
+    
+    if (allowedTypes.includes(this.logoSelectedFile.type)) {
+      this.invalidLogo = false
+    }
+
   }
   
   uploadImage2(files: any) {
@@ -141,9 +149,13 @@ export class AddTournamentComponent implements OnInit {
     this.posterImages = URL.createObjectURL(this.posterSelectedFile);
 
     const allowedTypes = ['image/jpeg', 'image/png', 'image/webp']; 
-    if (!allowedTypes.includes(this.logoSelectedFile.type)) {
+    if (!allowedTypes.includes(this.posterSelectedFile.type)) {
       this.invalidPoster = true
       this.posterImages=''
+    }
+
+    if (allowedTypes.includes(this.posterSelectedFile.type)) {
+      this.invalidPoster = false
     }
   }
 
@@ -152,11 +164,7 @@ export class AddTournamentComponent implements OnInit {
  tournamentSubmit() {
   if (!this.TornamentDetails.valid) {
     this.invalid = true;
-  }else if(this.invalidPoster){
-    this._toastr.error('Tournament poster must be png,jpeg or webp')
-  }else if(this.invalidLogo){
-    this._toastr.error('logo must be png,jpeg or webp');
-  }else{
+  }else if(!this.invalidLogo && !this.invalidPoster){
     const formdetails = this.TornamentDetails.getRawValue();
     const formdata = new FormData();
     formdata.append('logoImage', this.logoSelectedFile, this.logoSelectedFile.name);
@@ -174,7 +182,7 @@ export class AddTournamentComponent implements OnInit {
       formdata.append('players',formdetails.players)
       formdata.append('registerFee',formdetails.registerFee)
 
-
+this.subsciption.add(
     this._managerService.addTournament(formdata).subscribe(
       (res) => {
         this._router.navigate(['/manager/tournamentList'])
@@ -187,13 +195,18 @@ export class AddTournamentComponent implements OnInit {
           this._toastr.error('something went wrong');
         }
       }
-    );
+    )
+)
 
+  }else{
+    this._toastr.error('something went wrong');
   }
   
 }
 
-  
+  ngOnDestroy(): void {
+    this.subsciption.unsubscribe()
+  }
 
 
 

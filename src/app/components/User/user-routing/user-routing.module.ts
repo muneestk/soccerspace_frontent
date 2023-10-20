@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserRoutingRoutingModule } from './user-routing-routing.module';
-import { UserRoutingComponent } from './user-routing.component';
 import { LoginComponent } from '../login/login.component';
 import { SignupComponent } from '../signup/signup.component';
 import { UserHomeComponent } from '../user-home/user-home.component';
@@ -28,14 +27,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MyTournamentSingleDetailsComponent } from '../my-tournament-single-details/my-tournament-single-details.component';
 import { MyTournamentRgisterdTeamsComponent } from '../my-tournament-rgisterd-teams/my-tournament-rgisterd-teams.component';
 import { ButtonModule } from 'primeng/button';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OrganizationChartModule } from 'primeng/organizationchart';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
 @NgModule({
   declarations: [
-    UserRoutingComponent,
     LoginComponent,
     SignupComponent,
     UserHomeComponent,
@@ -70,7 +68,8 @@ import { OrganizationChartModule } from 'primeng/organizationchart';
     MatPaginatorModule,
     MatTableModule,
     ButtonModule,
-    OrganizationChartModule
+    OrganizationChartModule,
+    MatSelectModule
     
     // BrowserAnimationsModule
 

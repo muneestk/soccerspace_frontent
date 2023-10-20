@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ManagerRoutingModule } from './manager-routing.module';
-import { ManagerComponent } from './manager.component';
 import { ManagerHomeComponent } from '../manager-home/manager-home.component';
 import { ManagerSignupComponent } from '../manager-signup/manager-signup.component';
 import { ManagerLoginComponent } from '../manager-login/manager-login.component';
@@ -30,7 +29,6 @@ import { ManagerService } from 'src/app/service/manager.service';
 
 @NgModule({
   declarations: [
-    ManagerComponent,
     ManagerHomeComponent,
     ManagerSignupComponent,
     ManagerLoginComponent,

@@ -58,7 +58,7 @@ export class AdminLoginComponent implements OnInit{
       this._adminService.adminLogin(form)
       .subscribe((res) =>{
            localStorage.setItem('adminSecret',res.toString())
-           this._router.navigate(['/admin/dashboard'])
+           this._router.navigate(['/admin/dashboard/charts'])
       },
       (err) => {
         if(err.error.message){

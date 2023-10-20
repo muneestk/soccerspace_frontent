@@ -28,17 +28,18 @@ export class UserHomeComponent implements OnInit {
     this._store.dispatch(retrieveTournaments())
 
     this.tournamentList$ = this._store.pipe(select(TournamentsData))
-
+    
     this.tournamentList$.subscribe((tournments => {
-      this.approveTournament = this.filterapproveTournaments(tournments).slice(0,4)
+      this.approveTournament = this.filterApproveTournaments(tournments).slice(0,4)
     }))
 
   }
 
-
-  
-  filterapproveTournaments(tournaments: Tournaments[]): Tournaments[] {
-    return tournaments.filter(tournament => tournament.is_approuve === 'approved');
+  filterApproveTournaments(tournaments: Tournaments[]): Tournaments[] {
+    const today = new Date().getTime();
+    return tournaments.filter(
+      (tournament) => tournament.is_approuve === 'approved' && new Date(tournament.tournamentDate).getTime() <= today
+    );
   }
 
   getPosterImage(posterImage:string):string{

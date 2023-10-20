@@ -2,6 +2,8 @@
   <div class="container">
     <h1 class="fs-5 fw-5 text-center">User List</h1>
     <div class="mat-elevation-z8 dark-table">
+      <div class="table-responsive" >
+
       <table mat-table [dataSource]="dataSource">
         <!-- Position Column -->
         <ng-container matColumnDef="position">
@@ -61,6 +63,7 @@
         aria-label="Select page of periodic elements"
       >
       </mat-paginator>
+    </div>
     </div>
   </div>
 
