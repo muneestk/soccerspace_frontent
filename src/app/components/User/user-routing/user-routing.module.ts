@@ -20,7 +20,6 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { MatIconModule } from '@angular/material/icon';
-import { ExploretournamentComponent } from '../exploretournament/exploretournament.component';
 import { MytournamentsComponent } from '../mytournaments/mytournaments.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
@@ -29,6 +28,13 @@ import { MyTournamentRgisterdTeamsComponent } from '../my-tournament-rgisterd-te
 import { ButtonModule } from 'primeng/button';
 import { OrganizationChartModule } from 'primeng/organizationchart';
 import { MatSelectModule } from '@angular/material/select';
+import { ExploreSideNavComponent } from '../explore-side-nav/explore-side-nav.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSliderModule} from '@angular/material/slider';
+import {MatListModule} from '@angular/material/list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 
@@ -44,11 +50,10 @@ import { MatSelectModule } from '@angular/material/select';
     SigleTournamentDetailsComponent,
     RegisterTournamentComponent,
     ForgotPasswordComponent,
-    ExploretournamentComponent,
     MytournamentsComponent,
     MyTournamentSingleDetailsComponent,
     MyTournamentRgisterdTeamsComponent,
-
+    ExploreSideNavComponent
 
 
   ],
@@ -69,8 +74,14 @@ import { MatSelectModule } from '@angular/material/select';
     MatTableModule,
     ButtonModule,
     OrganizationChartModule,
-    MatSelectModule
-    
+    MatSelectModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatSliderModule,
+    MatAutocompleteModule,
+    NgxLoadingModule
+
     // BrowserAnimationsModule
 
   ],

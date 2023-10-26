@@ -54,10 +54,11 @@
                 <th mat-header-cell *matHeaderCellDef> Actions </th>
                 <td mat-cell *matCellDef="let element">  
                     <button class="btn btn-outline-dark"(click)="viewDetails(element._id)">Details</button>
-                    <button class="ms-2 btn btn-outline-primary" [routerLink]="['/manager/registerdTeams',element._id]"
+                    <button class="ms-2 btn btn-outline-success" *ngIf="element.Teams.length === element.slots" [routerLink]="['/manager/fixture', element._id,element.slots]">Fixture</button>
+                    <button  class="ms-2 btn btn-outline-primary" [routerLink]="['/manager/registerdTeams',element._id]"
                     *ngIf="!element.resonReject">Teams Registered</button>
                 </td>
-              </ng-container>
+              </ng-container>        
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

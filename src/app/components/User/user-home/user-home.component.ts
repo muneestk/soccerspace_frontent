@@ -14,9 +14,13 @@ import { environment } from 'src/environments/environment.development';
 })
 export class UserHomeComponent implements OnInit {
 
+   loading : boolean = true;
+
+
   tournamentList$ !: Observable<Tournaments[]>
   approveTournament !: Tournaments[]
   tournamentDetail !: Tournaments
+  ngxLoadingAnimationTypes: any;
 
   constructor(
     private _store : Store<TournamentList>,

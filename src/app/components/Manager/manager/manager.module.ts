@@ -23,6 +23,7 @@ import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { ForgotPasswordManagerComponent } from '../forgot-password-manager/forgot-password-manager.component';
 import { RegisteredTeamsComponent } from '../registered-teams/registered-teams.component';
 import { ManagerService } from 'src/app/service/manager.service';
+import { FxtureComponent } from '../fxture/fxture.component';
 
 
 
@@ -41,7 +42,7 @@ import { ManagerService } from 'src/app/service/manager.service';
     SingleTournamentListComponent,
     ForgotPasswordManagerComponent,
     RegisteredTeamsComponent,
-
+    FxtureComponent
 
   ],
   imports: [

@@ -11,6 +11,7 @@ import { TournamentListComponent } from '../tournament-list/tournament-list.comp
 import { SingleTournamentListComponent } from '../single-tournament-list/single-tournament-list.component';
 import { ForgotPasswordComponent } from '../../User/forgot-password/forgot-password.component';
 import { RegisteredTeamsComponent } from '../registered-teams/registered-teams.component';
+import { FxtureComponent } from '../fxture/fxture.component';
 
 const routes: Routes = [
   { path: '', component:ManagerLoginComponent ,canActivate:[ManagerGuardOut,ManagerGuardcon]},
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'tournamentList', component:TournamentListComponent ,canActivate:[ManagerGuardLog]},
   { path: 'singleTournament/:id', component:SingleTournamentListComponent ,canActivate:[ManagerGuardLog]},
   { path: 'registerdTeams/:id', component:RegisteredTeamsComponent ,canActivate:[ManagerGuardLog]},
+  { path: 'fixture/:id/:slot', component:FxtureComponent ,canActivate:[ManagerGuardLog]},
   
 ];
 

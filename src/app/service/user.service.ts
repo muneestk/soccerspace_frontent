@@ -83,5 +83,17 @@ export class UserService {
       return this.http.get(`${this.apiUrl}/myTournamentsTeams?id=${id}`)
     }
 
+    tournamentsData(currentPage:number, limit:number):Observable<any>{
+      return this.http.get(`${this.apiUrl}/allTournaments?currentPage=${currentPage}&limit=${limit}`)
+    }
+
+    searchTournament(search:string,currentPage:number, limit:number):Observable<any>{
+      return this.http.get(`${this.apiUrl}/searchTournaments?search=${search}&currentPage=${currentPage}&limit=${limit}`)
+    }
+
+    filterTournaments(players:string,catogory:string,currentPage:number, limit:number, startValue:number ,endValue:number):Observable<any>{
+      return this.http.get(`${this.apiUrl}/filterPlayers?value=${players}&currentPage=${currentPage}&limit=${limit}&catogory=${catogory}&startValue=${startValue}&endValue=${endValue}`)
+    }
+
 
 }

@@ -22,6 +22,7 @@ export interface Managers {
 }
 
 export interface Tournaments {
+teamLogo: any;
     _id: string;
     tournamentName: string;
     teamName: string;

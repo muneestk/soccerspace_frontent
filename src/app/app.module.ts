@@ -34,12 +34,13 @@ import {MatInputModule} from '@angular/material/input';
 import {CloudinaryModule} from '@cloudinary/ng';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatStepperModule} from '@angular/material/stepper';
+import { NgxLoadingModule } from "ngx-loading";
+
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ButtonModule } from 'primeng/button';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 
@@ -74,8 +75,9 @@ import { ButtonModule } from 'primeng/button';
     MatPaginatorModule,
     MatSelectModule,
     ButtonModule,
-    
-    
+    MatSliderModule,
+    NgxLoadingModule.forRoot({}),
+
     // GoogleSigninButtonModule,
     // MatFormFieldModule,
     // MatStepperModule,

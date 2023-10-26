@@ -1,7 +1,20 @@
 <app-usernav></app-usernav>
+<div >
+  <!-- <div class="loading-container">
+    <ngx-loading
+      [show]="loading"
+      [config]="{
+        animationType: ngxLoadingAnimationTypes.rotatingPlane,
+        backdropBorderRadius: '3px'
+      }"
+      [template]="loadingTemplate"
+    ></ngx-loading>
+  </div>
+   -->
+
 
 <!-- banners start -->
-<div id="carouselExampleCaptions" class="carousel slide carousel-fade p-3 rounded-3" data-bs-ride="carousel"
+<div  id="carouselExampleCaptions" class="carousel slide carousel-fade p-3 rounded-3" data-bs-ride="carousel"
   style="border-radius:20px;">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -67,7 +80,7 @@
       </div>
     </div>
   </div>
-  <div class="d-flex justify-content-end mt-5">
+  <div class="d-flex justify-content-end mt-5 " [routerLink]="['/explore']">
     <button class="btn btn-outline-dark p-2">More Tournaments</button>
   </div>
 </div>
@@ -125,5 +138,8 @@
   </div>
 </div>
 <!--Live tournament end -->
+
+
+</div>
 
 <app-footer></app-footer>

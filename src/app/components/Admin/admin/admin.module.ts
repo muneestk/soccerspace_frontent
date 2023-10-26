@@ -49,7 +49,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatPaginatorModule,
     NgxSkeletonLoaderModule,
     CanvasJSAngularChartsModule,
-    MatSelectModule
+    MatSelectModule,
 
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

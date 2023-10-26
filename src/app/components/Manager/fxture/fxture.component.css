@@ -1,0 +1,18 @@
+.main {
+    background: url('/assets/image/cristiano-ronaldo-kicking-football_1538786998.jpg.webp') no-repeat;
+    width: 100%;
+    background-size: cover;
+    padding: 10px;
+    font-family: sans-serif;
+    font-size: small;
+    line-height: 1.4em;
+  }
+  
+.head{
+  font-size: 1.8rem; /* Adjust the font size as needed */
+    font-weight: bold;
+    text-align: center;
+    color: #c4c4c4; /* Change the color to your preferred color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a subtle text shadow */
+    margin: 20px 0; 
+}

@@ -63,6 +63,10 @@ export class ManagerService {
   registeredTeams(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/registeredTeams?id=${id}`);
   }
+
+  getFixture(id: string , round:number ): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getFixture?id=${id}&round=${round}`);
+  }
   
 
 }

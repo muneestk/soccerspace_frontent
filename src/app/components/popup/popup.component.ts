@@ -11,7 +11,8 @@ import { UserService } from 'src/app/service/user.service';
   templateUrl: './popup.component.html',
   styleUrls: ['./popup.component.css'],
 })
-export class PopupComponent implements OnInit {
+export class PopupComponent implements OnInit
+ {
   inputData: any;
   editdata: any;
   useredit: boolean = false;

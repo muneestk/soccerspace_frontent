@@ -60,13 +60,13 @@ export class TournamentListComponent implements OnInit,AfterViewInit{
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort; 
   
-    this.tournamentList$.subscribe((data: Tournaments[]) => {
-      data.sort((a, b) => new Date(b.registeredDate).getTime() - new Date(a.registeredDate).getTime()); 
-      this.dataSource.data = data;
-    });
+    // this.tournamentList$.subscribe((data: Tournaments[]) => {
+    //   data.sort((a, b) => new Date(b.registeredDate).getTime() - new Date(a.registeredDate).getTime()); 
+    //   this.dataSource.data = data;
+    // });
   }
 
-  
+    
 
 
   viewDetails(id: string): void {

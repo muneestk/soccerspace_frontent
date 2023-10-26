@@ -73,6 +73,7 @@ export class RegisterTournamentComponent implements OnInit {
 
     if (!allowedTypes.includes(this.logoSelectedFile.type)) {
       this.invalidLogo2 = true
+      this._toastr.error(' Team logo must be image as png,jpeg or webp')
       this.logoImages=''
     }
 
@@ -93,9 +94,9 @@ export class RegisterTournamentComponent implements OnInit {
   }
 
   register2() {
-
     if(!this.logoImages){
-      this.invalidLogo = true
+      this.invalidLogo2 = true
+      this._toastr.error(' Team logo must be image as png,jpeg or webp')
     }else if (this.secondTeamRegister.valid) {
       this.invalid2 = true;
     }

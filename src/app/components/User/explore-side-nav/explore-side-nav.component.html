@@ -1,0 +1,206 @@
+<div style="position: relative; z-index: 0">
+  <div style="position: relative; z-index: 10">
+    <app-usernav class="mb-5 " style="z-index: 10"></app-usernav>
+  </div>
+  <div class="row" style="position: relative; z-index: 1">
+    <mat-sidenav-container class="sidenav-container mt-5" style="z-index: 1">
+      <mat-sidenav
+        #drawer
+        class="sidenav"
+        fixedInViewport
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false"
+      >
+        <div style="margin-top: 100px">
+          <mat-toolbar>Category</mat-toolbar>
+          <mat-select placeholder="Select Category" class="p-3" [(ngModel)]="selectionCategory" (selectionChange)="selectionCategoryChange($event.value)">
+            <mat-option value="">All</mat-option>
+            <mat-option value="open">Open</mat-option>
+            <mat-option value="under 18">Under 18</mat-option>
+            <mat-option value="under 17">Under 17</mat-option>
+            <mat-option value="under 16">Under 16</mat-option>
+          </mat-select>
+
+          <mat-toolbar class="mt-2">Price Filter</mat-toolbar>
+          <div class="slider-container p-3">
+            <div class="slider-values">
+
+              <div class="slider-value">{{ startValue | currency:'INR':'symbol':'1.2-2' }}</div>
+              <div class="slider-value">{{ endValue | currency:'INR':'symbol':'1.2-2' }}</div>
+            </div>
+            <mat-slider style="width: 100%" min="200" max="5000" (input)="priceFilter()" [(ngModel)]="sliderValues">
+              <input [(ngModel)]="sliderValues[0]" matSliderStartThumb />
+              <input [(ngModel)]="sliderValues[1]" matSliderEndThumb />
+            </mat-slider>
+          </div>
+          
+
+          <mat-toolbar>Players</mat-toolbar>
+
+          <mat-select class="p-3 h-100" placeholder="Select Players" [(ngModel)]="selectionPlayers" (selectionChange)="selectionPlayersChange($event.value)">
+            <mat-option value="">All</mat-option>
+            <mat-option value="Levens">Levens</mat-option>
+            <mat-option value="Nines">Nines</mat-option>
+            <mat-option value="Sevens">Sevens</mat-option>
+            <mat-option value="Sixes">Sixes</mat-option>
+            <mat-option value="Fives">Fives</mat-option>
+          </mat-select>
+        </div>
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <!-- Add Content Here -->
+        <div class="container">
+          <div class="d-flex justify-content-end mt-5">
+            <mat-form-field>
+              <mat-icon matPrefix>search</mat-icon>
+              <input
+                matInput
+                type="text"
+                placeholder="Search"
+                [(ngModel)]="searchQuery"
+                (input)="onSearch()"
+                [matAutocomplete]="auto"
+              />
+            </mat-form-field>
+          </div>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let item of searchResult"
+              (click)="onSuggestion(item.tournamentName)"
+              [value]="item.tournamentName"
+            >
+              {{ item.tournamentName }}
+            </mat-option>
+          </mat-autocomplete>
+
+          <div class="row justify-content-center px-5 gy-5">
+            <div *ngIf="!allTournaments">
+              <h1>no any tournament</h1>
+            </div>
+            <div class="card col-md-12 mt-90" *ngFor="let t of allTournaments">
+              <div class="card-content">
+                <div class="card-body p-0">
+                  <div class="profile">
+                    <img [src]="getLogo(t.logoImage ? t.logoImage : '')" />
+                    <span
+                      class="text-muted p-2 fs-5 d-flex align-items-center"
+                      >{{ t.teamName | uppercase }}</span
+                    >
+                  </div>
+                  <div class="text-center p-2 fs-2 mb-5">
+                    {{ t.tournamentName | uppercase }}
+                  </div>
+                  <div class="row h-100 justify-content-around">
+                    <div class="col-md-3 h-100 p-5">
+                      <img
+                        [src]="getPoster(t.posterImage ? t.posterImage : '')"
+                        class="rounded-lg w-100 h-100 border-rounded"
+                        alt=""
+                      />
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <div>
+                        <h3 class="f-w-600">
+                          <span class="text-muted">Location:</span>
+                          {{ t.location }}
+                        </h3>
+                        <h3 class="f-w-600">
+                          <span class="text-muted">Contact Number:</span>
+                          {{ t.mobileNo }}
+                        </h3>
+                        <h3 class="f-w-600">
+                          <span class="text-muted">Register Fee:</span>
+                          {{ t.registerFee }}
+                        </h3>
+                        <h3 class="f-w-600">
+                          <span class="text-muted">Winner Prize Money:</span>
+                          {{ t.winnersPriceMoney }}
+                        </h3>
+                        <h3 class="f-w-600">
+                          <span class="text-muted"
+                            >Runners Up Prize Money:</span
+                          >
+                          {{ t.runnersPriceMoney }}
+                        </h3>
+                        <h3 class="f-w-600">
+                          <span class="text-muted">Tournament Date:</span>
+                          {{ t.tournamentDate | date : "dd-MMMM-yyyy" }}
+                        </h3>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                      <h3 class="f-w-600">
+                        <span class="text-muted">Max Slots:</span> {{ t.slots }}
+                      </h3>
+                      <h3 class="f-w-600">
+                        <span class="text-muted">Max Limit:</span> {{ t.limit }}
+                      </h3>
+                      <h3 class="f-w-600">
+                        <span class="text-muted">Max Players:</span>
+                        {{ t.players }}
+                      </h3>
+                      <div
+                        class="p-2 rounded"
+                        style="background-color: #ffffff"
+                      >
+                        <ng-container
+                          *ngIf="t.slots - t.Teams.length > 0; else zeroSlots"
+                        >
+                          <h3 class="fs-3 text-dark m-0">
+                            <span class="badge bg-dark me-2">{{
+                              t.slots - t.Teams.length
+                            }}</span>
+                            Slots left
+                          </h3>
+                        </ng-container>
+                        <ng-template #zeroSlots>
+                          <h3 class="fs-3 text-dark m-0">No Slots left</h3>
+                        </ng-template>
+                      </div>
+                      <div
+                        [routerLink]="['/registerTournament', t._id]"
+                        class="d-flex justify-content-end"
+                      >
+                        <button mat-fab extended color="primary" class="mt-5">
+                          <mat-icon>file_download_done</mat-icon>
+                          Register Now
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-5">
+            <ul id="pagination">
+              <li>
+                <a (click)="prevPage()">«</a>
+              </li>
+              <li *ngFor="let page of totalPagesArray">
+                <a
+                  (click)="goToPage(page)"
+                  [class.active]="currentPage === page"
+                  >{{ page }}</a
+                >
+              </li>
+              <li>
+                <a (click)="nextPage()">»</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</div>

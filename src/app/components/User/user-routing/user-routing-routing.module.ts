@@ -12,6 +12,7 @@ import { ForgotPasswordComponent } from '../forgot-password/forgot-password.comp
 import { MytournamentsComponent } from '../mytournaments/mytournaments.component';
 import { MyTournamentSingleDetailsComponent } from '../my-tournament-single-details/my-tournament-single-details.component';
 import { MyTournamentRgisterdTeamsComponent } from '../my-tournament-rgisterd-teams/my-tournament-rgisterd-teams.component';
+import { ExploreSideNavComponent } from '../explore-side-nav/explore-side-nav.component';
 
 const routes: Routes = [
   { path: '', component: UserHomeComponent, canActivate : [UserGuardOut] },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'myTournaments', component: MytournamentsComponent, canActivate : [UserGuardOut,UserGuardcon] },
   { path: 'myTournamentsSingleDetails/:id', component: MyTournamentSingleDetailsComponent, canActivate : [UserGuardOut,UserGuardcon] },
   { path: 'myTournamentsTeams/:id', component: MyTournamentRgisterdTeamsComponent, canActivate : [UserGuardOut,UserGuardcon] },
+  { path: 'explore', component: ExploreSideNavComponent, canActivate : [UserGuardOut,UserGuardcon] },
   
 ];
 
