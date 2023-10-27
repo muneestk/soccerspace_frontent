@@ -16,3 +16,14 @@
 button{
     margin: 2px;
 }
+
+.head{
+    font-size: 1.8rem; /* Adjust the font size as needed */
+    font-weight: bold;
+    text-align: center;
+    color: #080808; /* Change the color to your preferred color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a subtle text shadow */
+    margin: 20px 0; 
+}
+
+

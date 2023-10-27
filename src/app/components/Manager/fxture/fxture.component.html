@@ -1,78 +1,153 @@
 <app-manager-nav></app-manager-nav>
-<div class="main">
-  <div class="container ">
+<div class="main d-flex justify-content-center" style="overflow-y: auto; max-height: 100vh;overflow-x: auto; max-width: 100vw;">
+  <div class=" ">
     <div>
         <div class=" text-center head fs-1">{{ firstRound.tournamentId.tournamentName }}</div>
-    </div>
-    <div class="row gap-5 align-items-center justify-content-center">
-      <div class="col-2" style="width: 30%;">
-        <div class=" text-center head">Quarter Final</div>
-        <div class="bg-white m-4 border shadow" style="border-radius: 10px;" *ngFor="let item of firstRound.matches,let l=index">
-            <h1 class="text-center fs-3 mt-2">Match {{l+1}}</h1>
+        <div class="d-flex justify-content-end">
+
+          <button mat-raised-button  class="w-50 text-end bg-success text-white" (click)="updateRound(firstRound.tournamentId._id)" >Update Round</button>
+        </div>
+
+      </div>
+    <div class="row  align-items-center justify-content-center">
+      <div class="col-1" style="width: 350px;">
+        <div class="bg-white m-4 border shadow scrollable-content" style="border-radius: 10px;" *ngFor="let item of firstRound.matches,let l=index">
+          <h1 class="text-center fs-5 mt-2">Match {{l+1}}</h1>
           <div class="d-flex justify-content-around align-items-center">
-            <div class="h-25">
-              <div class="fs-3 ms-3 mt-1 text-muted ">{{ item.team1Id.teamName | uppercase}}</div>
-              <div ><img [src]="getLogo(item.team1Id.teamLogo?item.team1Id.teamLogo:'')" alt="" width="100px" height="100px"></div>
-              
+            <div>
+              <div class="text-muted text-center fs-5">{{ item.team1Id.teamName | uppercase}}</div>
+              <div class="d-flex justify-content-center position-relative">
+                <span *ngIf="item.team1Id._id == item.winner._id" class="badge rounded-pill bg-success position-absolute top-50 start-0 " style="z-index: 1;transform: translateY(-115%)!important">
+                  <span class="material-icons" style="font-size: 20px;">military_tech</span>
+                </span>
+                <img [src]="getLogo(item.team1Id.teamLogo ? item.team1Id.teamLogo : '')" alt="" width="100em" class="rounded-circle p-1" height="100em">
+              </div>
               <h1 class="text-center fs-1">{{ item.team1Score}}</h1>
             </div>
-          
+      
             <div style="position: relative;">
-                <img src="assets/Tournaments/vs.png" alt="" width="70px" height="70px" style="position: absolute; bottom: -35px; left: 50%; transform: translateX(-50%);">
-                <span class="material-icons" style="position: absolute; bottom: -70px; left: 50%; transform: translateX(-50%);">edit_note</span>
+              <img src="assets/Tournaments/vs.png" alt="" width="50px">
+              <span *ngIf="item.matchStatus != 'completed'" (click)="updateScore(item,firstRound.tournamentId._id)" class="material-icons" style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%);font-size: 40px;">edit_note</span>
             </div>
-
-            <div >
-                <div class="fs-3  mt-1 text-muted">{{ item.team2Id.teamName | uppercase}}</div>
-                <div class="rounded-circle" ><img [src]="getLogo(item.team1Id.teamLogo?item.team1Id.teamLogo:'')" alt="" width="100px" height="100px"></div>
-              <h1 class="text-center fs-1">{{ item.team2Score}}</h1>
-              
-                
+      
+            <div>
+              <div class="text-muted text-center fs-5">{{ item.team2Id.teamName | uppercase}}</div>
+              <div class="d-flex justify-content-center position-relative">
+                <span *ngIf="item.team2Id._id == item.winner._id" class="badge rounded-pill bg-success position-absolute top-50 start-0 " style="z-index: 1;transform: translateY(-115%)!important">
+                  <span class="material-icons" style="font-size: 20px;">military_tech</span>
+                </span>
+                <img [src]="getLogo(item.team2Id.teamLogo ? item.team2Id.teamLogo : '')" alt="" width="100em" class="rounded-circle p-1" height="100em">
+              </div>
+              <h1 class="text-center fs-1">{{ item.team2Score }}</h1>
             </div>
-            
           </div>
         </div>
         <!-- More similar divs with similar adjustments -->
       </div>
-      <div class="col-2" style="width: 30%;">
-        <div class=" text-center head">Semi Final</div>
+      
+
+
+      <div class="col-1" style="width:  350px;" *ngIf="!secondRound">
+        <!-- <div class=" text-center head">Semi Final</div> -->
        <!-- First Round Winners -->
-       <div class="bg-white m-4 border shadow" style="border-radius: 10px; height: 30vh" *ngFor="let item of firstRound.matches | slice:0:(firstRound.matches.length/2); let i = index">
-        <h1 class="text-center fs-3 mt-2">Match {{i+1}}</h1>
-        <div class="d-flex justify-content-around align-items-center" style="width: 100%;">
-            
-            <div class="h-25 text-center" style="flex: 1;">
-                <div class="fs-5 text-muted " style="line-height: 1.5;">Winner of Quarter final {{ i * 2 + 1 }}</div>
+          <div class="bg-white m-4 border shadow" style="border-radius: 10px; height: 30vh" *ngFor="let item of firstRound.matches | slice:0:(firstRound.matches.length/2); let i = index">
+            <h1 class="text-center fs-3 mt-2">Match {{i+1}}</h1>
+            <div class="d-flex justify-content-around align-items-center" style="width: 100%;">
+                
+                <div class="h-20 text-center" style="flex: 1;">
+                    <div class="fs-5 text-muted " style="line-height: 1.5;">Winner of Match {{ i * 2 + 1 }}</div>
+                </div>
+                <h1><img src="assets/Tournaments/vs.png" alt="" width="50px" height="50px"></h1>
+                <div class="h-50" style="flex: 1;">
+                    <div class="fs-5 text-muted " style="line-height: 1.5;">Winner of Match {{ i * 2 + 2 }}</div>
+                </div>
             </div>
-            <h1><img src="assets/Tournaments/vs.png" alt="" width="50px" height="50px"></h1>
-            <div class="h-50" style="flex: 1;">
-                <div class="fs-5 text-muted " style="line-height: 1.5;">Winner of Quarter final {{ i * 2 + 2 }}</div>
+        </div>    
+      </div>
+
+
+      <div class="col-1" style="width: 350px;" *ngIf="secondRound">
+        <div class="bg-white m-4 border shadow scrollable-content" style="border-radius: 10px;" *ngFor="let j of secondRound?.matches,let l=index">
+          <h1 class="text-center fs-5 mt-2">Match {{l+1}}</h1>
+          <div class="d-flex justify-content-around align-items-center">
+            <div>
+              <div class="text-muted text-center fs-5">{{ j.team1Id.teamName | uppercase}}</div>
+              <div class="d-flex justify-content-center position-relative">
+                <span *ngIf="j.team1Id._id == j.winner._id" class="badge rounded-pill bg-success position-absolute top-50 start-0 " style="z-index: 1;transform: translateY(-115%)!important">
+                  <span class="material-icons" style="font-size: 20px;">military_tech</span>
+                </span>
+                <img [src]="getLogo(j.team1Id.teamLogo ? j.team1Id.teamLogo : '')" alt="" width="100em" class="rounded-circle p-1" height="100em">
+              </div>
+              <h1 class="text-center fs-1">{{ j.team1Score}}</h1>
             </div>
+      
+            <div style="position: relative;">
+              <img src="assets/Tournaments/vs.png" alt="" width="50px">
+              <span *ngIf="j.matchStatus != 'completed'" (click)="updateScore(j,firstRound.tournamentId._id)" class="material-icons" style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%);font-size: 40px;">edit_note</span>
+            </div>
+      
+            <div>
+              <div class="text-muted text-center fs-5">{{ j.team2Id.teamName | uppercase}}</div>
+              <div class="d-flex justify-content-center position-relative">
+                <span *ngIf="j.team2Id._id == j.winner._id" class="badge rounded-pill bg-success position-absolute top-50 start-0 " style="z-index: 1;transform: translateY(-115%)!important">
+                  <span class="material-icons" style="font-size: 20px;">military_tech</span>
+                </span>
+                <img [src]="getLogo(j.team2Id.teamLogo ? j.team2Id.teamLogo : '')" alt="" width="100em" class="rounded-circle p-1" height="100em">
+              </div>
+              <h1 class="text-center fs-1">{{ j.team2Score }}</h1>
+            </div>
+          </div>
         </div>
-    </div>
-        
         <!-- More similar divs with similar adjustments -->
       </div>
-      <div class="col-2" style="width: 30%;">
-        <div class=" text-center head">Final</div>
-       <!-- First Round Winners -->
+
+
+
+
+      <div class="col-1" style="width:350px;">
+        <!-- <div class=" text-center head">Final</div> -->
        <div class="bg-white m-4 border shadow d-flex align-items-center justify-content-center" style="border-radius: 10px; height: 30vh" *ngFor="let item of firstRound.matches | slice:0:(firstRound.matches.length/4); let i = index">
         <div class="d-flex justify-content-around align-items-center" style="width: 100%;">
-            <div class="h-25 text-center">
-                <div class="fs-5 text-muted p-1">Winner of Semi final {{ i * 2 + 1 }}</div>
+            <div class="h-20 text-center">
+                <div class="fs-5 text-muted p-1">Winner of Match {{ i * 2 + 1 }}</div>
             </div>
             <h1><img src="assets/Tournaments/vs.png" alt="" width="50px" height="50px"></h1>
             <div class="h-50 ">
-                <div class="fs-4 text-muted p-1">Winner of Semi final {{ i * 2 + 2 }}</div>
+                <div class="fs-5 text-muted p-1">Winner of Match {{ i * 2 + 2 }}</div>
             </div>
         </div>
     </div>
-    
-  
-          
-        
-        <!-- More similar divs with similar adjustments -->
+  </div>
+  <div class="col-1" style="width:350px;" *ngIf="shouldRenderSection(8)">
+    <!-- <div class=" text-center head">Final</div> -->
+   <div class="bg-white m-4 border shadow d-flex align-items-center justify-content-center" style="border-radius: 10px; height: 30vh" *ngFor="let item of firstRound.matches | slice:0:(firstRound.matches.length/8); let i = index">
+    <div class="d-flex justify-content-around align-items-center" style="width: 100%;">
+        <div class="h-20 text-center">
+            <div class="fs-5 text-muted p-1">Winner of Match {{ i * 2 + 1 }}</div>
+        </div>
+        <h1><img src="assets/Tournaments/vs.png" alt="" width="50px" height="50px"></h1>
+        <div class="h-50 ">
+            <div class="fs-5 text-muted p-1">Winner of Match {{ i * 2 + 2 }}</div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="col-1" style="width: 350px;"  *ngIf="shouldRenderSection(16)">
+  <!-- <div class=" text-center head">Final</div> -->
+ <div class="bg-white m-4 border shadow d-flex align-items-center justify-content-center" style="border-radius: 10px; height: 30vh" *ngFor="let item of firstRound.matches | slice:0:(firstRound.matches.length/16); let i = index">
+  <div class="d-flex justify-content-around align-items-center" style="width: 100%;">
+      <div class="h-20 text-center">
+          <div class="fs-5 text-muted p-1">Winner of Match {{ i * 2 + 1 }}</div>
       </div>
+      <h1><img src="assets/Tournaments/vs.png" alt="" width="50px" height="50px"></h1>
+      <div class="h-50 ">
+          <div class="fs-5 text-muted p-1">Winner of Match {{ i * 2 + 2 }}</div>
+      </div>
+  </div>
+</div>
+</div>
+
     </div>
   </div>
 </div>

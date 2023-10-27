@@ -95,18 +95,15 @@ export class RegisterTournamentComponent implements OnInit {
 
   register2() {
     if(!this.logoImages){
-      this.invalidLogo2 = true
-      this._toastr.error(' Team logo must be image as png,jpeg or webp')
+      this._toastr.error(' Team logo must be required and image as png,jpeg or webp')
     }else if (this.secondTeamRegister.valid) {
-      this.invalid2 = true;
+      this.invalid2 = true; 
     }
   }
 
   submit(regFee:number){
 
-    if(this.invalidLogo2){
-      this._toastr.error(' Team logo must be image as png,jpeg or webp')
-    }else{
+   
 
     const form = this.TeamRegister.getRawValue()
     const form2 = this.secondTeamRegister.getRawValue()
@@ -164,7 +161,7 @@ export class RegisterTournamentComponent implements OnInit {
       }
     )
 
-    }
+    
   }
 
   verifypayment(response: any,teamId:any) {

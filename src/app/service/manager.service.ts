@@ -44,7 +44,6 @@ export class ManagerService {
   }
 
   addTournament(user:any):Observable<any>{
-    console.log(user,'klll');
     return this.http.post(`${this.apiUrl}/addTournment`,user)
   }
 
@@ -68,5 +67,12 @@ export class ManagerService {
     return this.http.get(`${this.apiUrl}/getFixture?id=${id}&round=${round}`);
   }
   
+  updateScore(form:any):Observable<any>{
+    return this.http.patch(`${this.apiUrl}/updateScore`,form,httpOptions)
+  }
+
+  updateRound(form:any):Observable<any>{
+    return this.http.post(`${this.apiUrl}/updateRound`,form,httpOptions)
+  }
 
 }

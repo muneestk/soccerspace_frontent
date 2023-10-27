@@ -6,6 +6,7 @@
     font-family: sans-serif;
     font-size: small;
     line-height: 1.4em;
+    
   }
   
 .head{
@@ -15,4 +16,26 @@
     color: #c4c4c4; /* Change the color to your preferred color */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a subtle text shadow */
     margin: 20px 0; 
+}
+
+
+.scrollable-content {
+  width: 100%;
+  padding-right: 15px; /* Increase/decrease as needed to align with scrollbar */
+}
+
+.scrollable-content::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the track */
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar handle */
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar handle on hover */
 }
