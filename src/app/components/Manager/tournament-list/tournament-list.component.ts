@@ -49,8 +49,8 @@ export class TournamentListComponent implements OnInit,AfterViewInit{
       this.managerId = managerData.id;
       const filteredTournaments = tournaments.filter(t => t.managerId === this.managerId);
       this.dataSource.data = filteredTournaments;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      // this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort;
     })
   ).subscribe();
     
@@ -60,10 +60,6 @@ export class TournamentListComponent implements OnInit,AfterViewInit{
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort; 
   
-    // this.tournamentList$.subscribe((data: Tournaments[]) => {
-    //   data.sort((a, b) => new Date(b.registeredDate).getTime() - new Date(a.registeredDate).getTime()); 
-    //   this.dataSource.data = data;
-    // });
   }
 
     

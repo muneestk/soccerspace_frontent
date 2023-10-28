@@ -72,7 +72,11 @@ export class AdminService {
     return this.http.patch(`${this.apiUrl}/rejectTournament`,data,httpOptions)
   }
 
-
+  loadDashboard():Observable<any>{
+    return this.http.get(`${this.apiUrl}/loadDashBoard`,{
+     withCredentials : true
+    })
+   }
 
 
 }

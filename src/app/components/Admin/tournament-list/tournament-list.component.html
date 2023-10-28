@@ -1,1 +1,84 @@
-<p>tournament-list works!</p>
+<div class="cotainer row d-flex justify-content-center pt-5">
+    <div class="col-10 fs-3 fw-5">
+        <h1 class="text-center">My Tournaments</h1>
+      <div class="Search d-flex">      
+      <mat-form-field class="w-75" >
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search here..." #input>
+      </mat-form-field>
+        <mat-form-field class="ms-5">
+          <mat-label>Filter by Status</mat-label>
+          <mat-select [(ngModel)]="selectedValue" name="status" (selectionChange)="applyFilterSatatus($event.value)">
+            <mat-option value="completed">Completed</mat-option>
+            <mat-option value="upcoming">Upcoming</mat-option>
+            <mat-option value="today">Today</mat-option>
+            <mat-option value="pending">Pending</mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+
+      
+      <div *ngIf="!dataSource" class="d-flex justify-content-center align-items-center h-50">
+        <h1 class="h1">No any tourments registered yet.</h1>
+      </div>
+      
+      <div class="table-responsive" *ngIf="dataSource">
+        <table mat-table [dataSource]="dataSource" matSort>
+      
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+            <td mat-cell *matCellDef="let row ;let i = index"> {{ i+1 }} </td>
+          </ng-container>
+      
+      
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Tournament Date </th>
+            <td mat-cell *matCellDef="let row"> {{ row.tournamentDate | date:'dd-MMMM-yyyy' }} </td>
+          </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="progress">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Tournament Name </th>
+                <td mat-cell *matCellDef="let row"> {{ row.tournamentName | uppercase }} </td>
+              </ng-container>
+      
+          <!-- Fruit Column -->
+          <ng-container matColumnDef="fruit">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let row"> {{ row.status }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="SLOTS">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Registered Teams </th>
+            <td mat-cell *matCellDef="let row"> {{ row.Teams.length }} teams </td>
+          </ng-container>
+
+          <!-- Fruit Column -->
+          <ng-container matColumnDef="Actions">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+            <td mat-cell *matCellDef="let row" class="w-50"> 
+                <button mat-raised-button color="primary" [routerLink]="['/myTournamentsSingleDetails',row._id]"  >Details</button>
+          </ng-container>
+
+            
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *ngIf="input.value && !dataSource.data.length">
+            <td class="mat-cell" colspan="4">No data matching the filter "{{ input.value }}"</td>
+          </tr>
+          <tr class="mat-row" *ngIf="selectedValue && !dataSource.data.length">
+            <td class="mat-cell" colspan="4">No data matching the filter "{{ selectedValue }}"</td>
+          </tr>
+          
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      </div>
+    </div>
+      
+</div>

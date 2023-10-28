@@ -30,6 +30,7 @@ export class FxtureComponent implements OnInit, OnDestroy {
   fourthRound:any
   fifthRound:any
   round!:number
+  button:boolean = false
 
   ngOnInit(): void {
     const id = this._activeRouter.snapshot.paramMap.get('id');
@@ -50,8 +51,6 @@ export class FxtureComponent implements OnInit, OnDestroy {
       this.thirdRound = res.fixtureData.find((tournament: { matchRound: number }) => tournament.matchRound === round - 2);
       this.fourthRound = res.fixtureData.find((tournament: { matchRound: number }) => tournament.matchRound === round - 3);
       this.fifthRound = res.fixtureData.find((tournament: { matchRound: number }) => tournament.matchRound === round - 4);
-
-      console.log(this.secondRound);
      }
     )
   )
@@ -64,7 +63,8 @@ export class FxtureComponent implements OnInit, OnDestroy {
 
   //update team score
 
-  updateScore(match:string ,tournamentId:string){
+  updateScore(match:any ,tournamentId:string){
+    console.log(match,tournamentId);
     const tournamentDate = new Date(this.firstRound.tournamentId.tournamentDate);
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0); 
@@ -90,8 +90,8 @@ export class FxtureComponent implements OnInit, OnDestroy {
 
       dilaog.afterClosed().subscribe((result) => {
         if (result && result.updatedData) {
-          this.ngOnInit()
           this._toastr.success('Score updated successfully');
+          this.ngOnInit()
         }
       });
 
@@ -107,21 +107,41 @@ export class FxtureComponent implements OnInit, OnDestroy {
   }
 
   updateRound(tournamentId: string) {
-    const notUpdatedMatches = this.firstRound.matches.filter(
+    
+    let round!:number
+    let checkData:any
+    if(this.fifthRound){
+      round = this.round - 4
+      checkData = this.fifthRound
+    }else if(this.fourthRound){
+      round = this.round - 3
+      checkData = this.fourthRound
+    }else if(this.thirdRound){
+      round = this.round - 2
+      checkData = this.thirdRound
+    }else if(this.secondRound){
+      round = this.round - 1
+      checkData = this.secondRound
+    }else{
+      round = this.round
+      checkData = this.firstRound
+    }
+    if(round == 2){
+      this.button = true
+    }
+
+    const notUpdatedMatches = checkData.matches.filter(
       (tournament: { matchStatus: string }) => tournament.matchStatus !== 'updated' && tournament.matchStatus !== 'updated'
     );
   
-    const completedMatches = this.firstRound.matches.filter(
-      (tournament: { matchStatus: string }) => tournament.matchStatus !== 'completed'
-    );
   
     if (notUpdatedMatches.length > 0) {
       this._toastr.warning('Every round must be updated');
-    } else if (completedMatches.length === 0) {
-      this._toastr.warning('Already updated');
+    }else if(checkData.matches.length <= 1){
+      this._toastr.warning('Every round updated');
     } else {
       this.subscription.add(
-        this._managerService.updateRound({ round: this.round, tournamentId }).subscribe({
+        this._managerService.updateRound({ round , tournamentId }).subscribe({
           next: () => {
             this.ngOnInit()
           },
@@ -136,5 +156,7 @@ export class FxtureComponent implements OnInit, OnDestroy {
       );
     }
   }
+
+
   
 }

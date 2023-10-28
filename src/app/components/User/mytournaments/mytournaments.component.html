@@ -22,6 +22,7 @@
         <div *ngIf="!dataSource" class="d-flex justify-content-center align-items-center h-50">
           <h1 class="h1">No any tourments registered yet.</h1>
         </div>
+        
         <div class="table-responsive" *ngIf="dataSource">
           <table mat-table [dataSource]="dataSource" matSort>
         

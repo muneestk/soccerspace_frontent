@@ -1,0 +1,18 @@
+.cotainer{
+    min-height: 100vh;
+}
+
+table {
+    width: 100%;
+  }
+  
+  .Search {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 20%;
+  }
+
+  

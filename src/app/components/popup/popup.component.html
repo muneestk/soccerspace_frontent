@@ -26,23 +26,23 @@
   <div class="d-flex justify-content-center">
     <h1 class="head">{{inputData.title}}</h1>
   </div>
-  <div class="row h-100 justify-content-around " *ngIf="matchData as m">
-    <div class=" col-4 h-50 d-flex flex-column justify-content-around border shadow rounded">
+  <div class="row justify-content-around align-items-center" *ngIf="matchData as m">
+    <div class=" col-4 h-50 d-flex flex-column justify-content-around border shadow rounded p-2">
       <div class="pt-5  text-center fs-1 text-muted">{{m.team1Id.teamName | uppercase}}</div>
       <div class="pt-3 d-flex justify-content-center ">
         <img [src]="getLogo(m.team1Id.teamLogo?m.team1Id.teamLogo:'')" class="rounded-circle" alt="" width="120px" height="120px" >
       </div>
-      <div class="p-1 h-25 d-flex align-items-center justify-content-center">
+      <div class="p-1 h-25 d-flex  align-items-center justify-content-center">
         <span class="btn material-icons text-muted" (click)="decrement('team1')" style="font-size: 30px; line-height: 0; vertical-align: middle;">remove_circle</span>
     <div style="font-size: 60px;">{{ team1Score }}</div>
         <span class="btn material-icons text-muted" (click)="increment('team1')" style="font-size: 30px; ">add_circle</span>
 </div>
     </div>
-    <div class=" col-2 h-50 d-flex justify-content-center align-items-center">
-      <img src="assets/Tournaments/vs.png" alt="" width="100px" height="100px" >
+    <div class=" col-2 h-50  ">
+      <img src="assets/Tournaments/vs.png" alt="vs" width="150px" height="150px" >
 
     </div>
-    <div class=" col-4 h-50 d-flex flex-column justify-content-around border shadow rounded">
+    <div class=" col-4 h-50 d-flex flex-column justify-content-around border shadow rounded p-2">
       <div class="pt-5 text-center fs-1 text-muted">{{m.team1Id.teamName | uppercase}}</div>
       <div class="pt-3 d-flex justify-content-center ">
         <img [src]="getLogo(m.team2Id.teamLogo?m.team2Id.teamLogo:'')" alt="" class="rounded-circle" width="120px" height="120px" >
@@ -55,7 +55,7 @@
     
     
   </div>
-  <div class="py-2 main w-50 h-25 border shadow rounded">
+  <div class="py-2 main w-50 h-25 border shadow rounded p-5">
     <h1 class="fs-3 text-center" >{{team1Score == team2Score ?'Verify winner':'Winner'}}</h1>
     <hr>
     <div class="d-flex justify-content-around">
@@ -71,10 +71,11 @@
       
     </div>
   </div>
-  <div class="d-flex justify-content-between p-2 w-75">
+  <div class="d-flex justify-content-between w-75">
     <button mat-dialog-close mat-raised-button color="warn">Close</button>
     <button mat-raised-button color="primary" (click)="updateTournament(m._id)">submit</button>
   </div>
   </div>
+ 
 <!-- </div> -->
 </ng-container>

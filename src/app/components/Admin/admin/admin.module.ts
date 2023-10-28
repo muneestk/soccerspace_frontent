@@ -21,6 +21,8 @@ import { TournamentListComponent } from '../tournament-list/tournament-list.comp
 import { AdminSidebarnavComponent } from '../admin-sidebarnav/admin-sidebarnav.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -50,6 +52,9 @@ import {MatSelectModule} from '@angular/material/select';
     NgxSkeletonLoaderModule,
     CanvasJSAngularChartsModule,
     MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    
 
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

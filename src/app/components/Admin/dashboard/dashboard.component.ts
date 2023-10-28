@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
+import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit,OnDestroy {
 
   chartOptions = {
 	  title: {
-		  text: "Monthly Sales Data"
+		  text: "Weekly Tournament registered Data"
 	  },
     responsive: true,
     maintainAspectRatio: false,
@@ -18,28 +21,53 @@ export class DashboardComponent {
 	  exportEnabled: true,
 	  axisY: {
 		includeZero: true,
-		valueFormatString: "$#,##0k"
+		valueFormatString: "₹#,##00"
 	  },
 	  data: [{
 		type: "area", //change type to bar, line, area, pie, etc
-		yValueFormatString: "$#,##0k",
+		yValueFormatString: "₹#,##00",
 		color: "#01b8aa",
 		dataPoints: [
-			{ label: "Jan", y: 172 },
-			{ label: "Feb", y: 189 },
-			{ label: "Mar", y: 201 },
-			{ label: "Apr", y: 240 },
-			{ label: "May", y: 166 },
-			{ label: "Jun", y: 196 },
-			{ label: "Jul", y: 218 },
-			{ label: "Aug", y: 167 },
-			{ label: "Sep", y: 175 },
-			{ label: "Oct", y: 152 },
-			{ label: "Nov", y: 156 },
-			{ label: "Dec", y: 164 }
+			
 		]
 	  }]
 	}
 
+	constructor(private _adminService:AdminService,private _toastr : ToastrService){}
+
+	private subscription : Subscription = new Subscription();
+	loadData : any[] = []
+
+	ngOnInit(): void {
+		this.getDashboard()
+	}
+
+
+	getDashboard(){
+		this.subscription.add(
+
+			this._adminService.loadDashboard().subscribe({
+				next:(res) => {
+					this.loadData = res
+					console.log(res);
+					this.chartOptions.data[0].dataPoints = res.map((item: any) => ({
+						label: item.week, 
+						y: item.totalFee,
+					  }));
+				},
+				error:(err) => {
+					if(err){
+						this._toastr.error(err.error.message)
+					}
+				},
+				complete:() => {
+					console.log('compleeted');
+				}
+			})
+		)
+	}
   
+	ngOnDestroy(): void {
+		this.subscription.unsubscribe()
+	}
 }

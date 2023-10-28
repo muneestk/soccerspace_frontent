@@ -11,6 +11,7 @@ import {
 import { ApprouvalsComponent } from '../approuvals/approuvals.component';
 import { AdminSidebarnavComponent } from '../admin-sidebarnav/admin-sidebarnav.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import { TournamentListComponent } from '../tournament-list/tournament-list.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,11 @@ const routes: Routes = [
       {
         path: 'charts',
         component: DashboardComponent,
+        canActivate: [AdminGuardLog],
+      },
+      {
+        path: 'tournamentList',
+        component: TournamentListComponent,
         canActivate: [AdminGuardLog],
       },
     ],
