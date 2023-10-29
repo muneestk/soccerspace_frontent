@@ -167,7 +167,7 @@
                           <h3 class="fs-3 text-dark m-0">No Slots left</h3>
                         </ng-template>
                       </div>
-                      <div
+                      <div *ngIf="t.slots - t.Teams.length > 0"
                         [routerLink]="['/registerTournament', t._id]"
                         class="d-flex justify-content-end"
                       >

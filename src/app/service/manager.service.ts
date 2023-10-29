@@ -63,8 +63,8 @@ export class ManagerService {
     return this.http.get(`${this.apiUrl}/registeredTeams?id=${id}`);
   }
 
-  getFixture(id: string , round:number ): Observable<any> {
-    return this.http.get(`${this.apiUrl}/getFixture?id=${id}&round=${round}`);
+  getFixture(id: string ): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getFixture?id=${id}`);
   }
   
   updateScore(form:any):Observable<any>{
@@ -73,6 +73,10 @@ export class ManagerService {
 
   updateRound(form:any):Observable<any>{
     return this.http.post(`${this.apiUrl}/updateRound`,form,httpOptions)
+  } 
+
+  managerGoogleSignin(user:any) : Observable<any>{
+    return this.http.post(`${this.apiUrl}/googleLogin`,user,httpOptions)
   }
 
 }

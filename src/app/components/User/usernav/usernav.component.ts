@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
 })
 export class UsernavComponent implements OnInit {
 
-  constructor(private router : Router){}
+  constructor(
+    private _router : Router,
+    ){}
 
   authenticated : boolean = false
 
@@ -22,6 +24,7 @@ export class UsernavComponent implements OnInit {
 
   logout():void{
     localStorage.removeItem('userSecret')
-    this.router.navigate(['/login'])
+    window.location.reload()
+    this._router.navigate(['/login'])
   }
 }

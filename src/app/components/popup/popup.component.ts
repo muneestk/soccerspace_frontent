@@ -60,9 +60,7 @@ export class PopupComponent implements OnInit,OnDestroy
     }
 
     if(this.inputData.title == 'Update Score'){
-      console.log(this.inputData,'onniu');
       this.updateScore=true
-      console.log(this.updateScore,'iksjnfhu');
       this.matchData = this.inputData.match
       this.tournamentId = this.inputData.tournamentId
       this.team1Score=this.matchData.team1Score

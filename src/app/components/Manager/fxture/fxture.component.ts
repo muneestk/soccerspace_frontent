@@ -43,9 +43,8 @@ export class FxtureComponent implements OnInit, OnDestroy {
 
   loadTournament(id: string,round:number): void {
   this.subscription.add(
-    this._managerService.getFixture(id,round).subscribe(
+    this._managerService.getFixture(id).subscribe(
      (res) => {
-      console.log(res,'hhh');
       this.firstRound = res.fixtureData.find((tournament: { matchRound: number }) => tournament.matchRound === round);
       this.secondRound = res.fixtureData.find((tournament: { matchRound: number }) => tournament.matchRound === round-1);
       this.thirdRound = res.fixtureData.find((tournament: { matchRound: number }) => tournament.matchRound === round - 2);
@@ -64,7 +63,6 @@ export class FxtureComponent implements OnInit, OnDestroy {
   //update team score
 
   updateScore(match:any ,tournamentId:string){
-    console.log(match,tournamentId);
     const tournamentDate = new Date(this.firstRound.tournamentId.tournamentDate);
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0); 

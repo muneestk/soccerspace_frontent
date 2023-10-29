@@ -15,29 +15,30 @@
                 <li class="nav-item">
                     <a class="nav-link " [routerLink]="['/myTournaments']" tabindex="-1" aria-disabled="true">My tournaments</a>
                 </li>        
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <li class="nav-item dropdown" *ngIf="!authenticated">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Account
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" *ngIf="!authenticated">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
                         <li><a class="dropdown-item" routerLink="/login">Login</a></li>
                         <li><a class="dropdown-item" routerLink="/register">Register</a></li>
 
                     </ul>
+                   
+                </li>
+                <li class="nav-item dropdown" *ngIf="authenticated">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Account
+                    </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown" *ngIf="authenticated">
                         <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
                         <li><a class="dropdown-item" routerLink="/profile">My Account</a></li>
 
                     </ul>
+                   
                 </li>
             </ul>
-            <!-- Search form (if needed) -->
-            <!--
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-            -->
+           
         </div>
     </div>
 </nav>

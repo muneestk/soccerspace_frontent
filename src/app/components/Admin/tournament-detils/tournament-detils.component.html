@@ -1,0 +1,99 @@
+<div class="container mt-5">
+    <div class="row justify-content-center px-5 gy-5">
+    
+    <div class="card col-md-12 mt-90" *ngIf="tournamentDetail$ | async as t">
+      <div class="card-content">
+        <div class="card-body p-0">
+          <div class="profile">
+            <img [src]="getLogo(t.logoImage ? t.logoImage : '')" />
+            <span
+              class="text-muted p-2 fs-5 d-flex align-items-center"
+              >{{ t.teamName | uppercase }}</span
+            >
+          </div>
+          <div class="text-center p-2 fs-2 mb-5">
+            {{ t.tournamentName | uppercase }}
+          </div>
+          <div class="row h-100 justify-content-around">
+            <div class="col-md-3 h-100 p-5">
+              <img
+                [src]="getPoster(t.posterImage ? t.posterImage : '')"
+                class="rounded-lg w-100 h-100 border-rounded"
+                alt=""
+              />
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <div>
+                <h3 class="f-w-600">
+                  <span class="text-muted">Location:</span>
+                  {{ t.location }}
+                </h3>
+                <h3 class="f-w-600">
+                  <span class="text-muted">Contact Number:</span>
+                  {{ t.mobileNo }}
+                </h3>
+                <h3 class="f-w-600">
+                  <span class="text-muted">Register Fee:</span>
+                  {{ t.registerFee }}
+                </h3>
+                <h3 class="f-w-600">
+                  <span class="text-muted">Winner Prize Money:</span>
+                  {{ t.winnersPriceMoney }}
+                </h3>
+                <h3 class="f-w-600">
+                  <span class="text-muted"
+                    >Runners Up Prize Money:</span
+                  >
+                  {{ t.runnersPriceMoney }}
+                </h3>
+                <h3 class="f-w-600">
+                  <span class="text-muted">Tournament Date:</span>
+                  {{ t.tournamentDate | date : "dd-MMMM-yyyy" }}
+                </h3>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <h3 class="f-w-600">
+                <span class="text-muted">Max Slots:</span> {{ t.slots }}
+              </h3>
+              <h3 class="f-w-600">
+                <span class="text-muted">Max Limit:</span> {{ t.limit }}
+              </h3>
+              <h3 class="f-w-600">
+                <span class="text-muted">Max Players:</span>
+                {{ t.players }}
+              </h3>
+              <h3 class="f-w-600">
+                <span class="text-muted">touranamentStatus:</span>
+                {{ t.status }}
+              </h3>
+             
+              <div
+                class="p-2 rounded"
+                style="background-color: #ffffff"
+              >
+                <ng-container
+                  *ngIf="t.slots - t.Teams.length > 0; else zeroSlots"
+                >
+                  <h3 class="fs-3 text-dark m-0">
+                    <span class="badge bg-dark me-2">{{
+                      t.slots - t.Teams.length
+                    }}</span>
+                    Slots left
+                  </h3>
+                </ng-container>
+                <ng-template #zeroSlots>
+                  <h3 class="fs-3 text-dark m-0">No Slots left</h3>
+                </ng-template>
+                <h3 class="f-w-600 fs-3 text-success mt-5">
+                    <span class="text-muted">Total Payment:</span>
+                    {{ t.registerFee * t.Teams.length }}
+                  </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -58,7 +58,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatSelectModule,
     MatPaginatorModule,
     GoogleSigninButtonModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   providers:[
     ManagerService

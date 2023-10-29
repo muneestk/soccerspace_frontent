@@ -16,7 +16,7 @@ export class ManagerNavComponent {
 
   logout():void{
       localStorage.removeItem('managerSecret')
-      this.toast.success('logout success')
+      window.location.reload()
       this.router.navigate(['/manager'])
   }
 }

@@ -35,6 +35,7 @@ import { MatSliderModule} from '@angular/material/slider';
 import {MatListModule} from '@angular/material/list';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgxLoadingModule } from 'ngx-loading';
+import { FixtureUserComponent } from '../fixture-user/fixture-user.component';
 
 
 
@@ -53,7 +54,8 @@ import { NgxLoadingModule } from 'ngx-loading';
     MytournamentsComponent,
     MyTournamentSingleDetailsComponent,
     MyTournamentRgisterdTeamsComponent,
-    ExploreSideNavComponent
+    ExploreSideNavComponent,
+    FixtureUserComponent
 
 
   ],
@@ -80,9 +82,8 @@ import { NgxLoadingModule } from 'ngx-loading';
     MatListModule,
     MatSliderModule,
     MatAutocompleteModule,
-    NgxLoadingModule
+    NgxLoadingModule.forRoot({}),
 
-    // BrowserAnimationsModule
 
   ],
   

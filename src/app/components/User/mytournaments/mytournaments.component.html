@@ -60,6 +60,17 @@
             </ng-container>
 
               <!-- Fruit Column -->
+              <ng-container matColumnDef="Fixture">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Fixtures</th>
+                <td mat-cell *matCellDef="let row" class="w-50">
+                    <ng-container *ngIf="row.Teams.length === row.slots; else comingSoon">
+                        <button mat-raised-button color="" [routerLink]="['/fixture',row._id]">Fixture</button>
+                    </ng-container>
+                    <ng-template #comingSoon><span  class="text-succes" >coming soon</span></ng-template>
+                </td>
+            </ng-container>
+
+              <!-- Fruit Column -->
               <ng-container matColumnDef="details">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Reistered teams </th>
                   <td mat-cell *matCellDef="let row" class="w-50">

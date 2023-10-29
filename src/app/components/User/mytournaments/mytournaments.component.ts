@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./mytournaments.component.css']
 })
 export class MytournamentsComponent implements AfterViewInit, OnInit, OnDestroy {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'Actions', 'details'];
+  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit','Fixture', 'Actions', 'details'];
   dataSource: MatTableDataSource<any>;
 
   selectedValue:string | undefined

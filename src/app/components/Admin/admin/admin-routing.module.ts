@@ -12,6 +12,7 @@ import { ApprouvalsComponent } from '../approuvals/approuvals.component';
 import { AdminSidebarnavComponent } from '../admin-sidebarnav/admin-sidebarnav.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { TournamentListComponent } from '../tournament-list/tournament-list.component';
+import { TournamentDetilsComponent } from '../tournament-detils/tournament-detils.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,11 @@ const routes: Routes = [
       {
         path: 'tournamentList',
         component: TournamentListComponent,
+        canActivate: [AdminGuardLog],
+      },
+      {
+        path: 'tournamentDetails/:id',
+        component: TournamentDetilsComponent,
         canActivate: [AdminGuardLog],
       },
     ],

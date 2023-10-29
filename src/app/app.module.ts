@@ -41,6 +41,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ButtonModule } from 'primeng/button';
 import { MatSliderModule } from '@angular/material/slider';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 
 
@@ -48,6 +49,7 @@ import { MatSliderModule } from '@angular/material/slider';
   declarations: [
     AppComponent,
     PopupComponent,
+    LoadingSpinnerComponent,
    
     
   ],
@@ -77,10 +79,6 @@ import { MatSliderModule } from '@angular/material/slider';
     ButtonModule,
     MatSliderModule,
     NgxLoadingModule.forRoot({}),
-
-    // GoogleSigninButtonModule,
-    // MatFormFieldModule,
-    // MatStepperModule,
     StoreModule.forRoot({
       allUsers : UserListReducer,
       allManagers : ManagerListReducer ,

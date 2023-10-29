@@ -1,18 +1,7 @@
 <app-usernav></app-usernav>
 <div >
-  <!-- <div class="loading-container">
-    <ngx-loading
-      [show]="loading"
-      [config]="{
-        animationType: ngxLoadingAnimationTypes.rotatingPlane,
-        backdropBorderRadius: '3px'
-      }"
-      [template]="loadingTemplate"
-    ></ngx-loading>
-  </div>
-   -->
-
-
+  
+  
 <!-- banners start -->
 <div  id="carouselExampleCaptions" class="carousel slide carousel-fade p-3 rounded-3" data-bs-ride="carousel"
   style="border-radius:20px;">
@@ -59,9 +48,9 @@
 </div>
 <!-- banners end -->
 <!-- tournaments list start -->
-<div class="border-3 mt-5 p-3 rounded-3 trnmnt container" >
+<div class="border-3 mt-5 p-3 rounded-3 trnmnt container" *ngIf="approveTournament.length>0">
   <h1 style="font-weight: 500;">Tournament List</h1>
-  <div class="row" *ngIf="approveTournament.length>0">
+  <div class="row" >
     <div class="col-md-3 col-sm-6  rounded shadow mb-3" *ngFor="let t of approveTournament">
       <div class="card card-block" [routerLink]="['/singleTourDetails',t._id]">
         <img [src]="getPosterImage(t.posterImage?t.posterImage:'')" alt="Photo of sunset">

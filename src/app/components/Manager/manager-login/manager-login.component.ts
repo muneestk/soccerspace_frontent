@@ -1,23 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ManagerService } from 'src/app/service/manager.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-manager-login',
   templateUrl: './manager-login.component.html',
   styleUrls: ['./manager-login.component.css'],
 })
-export class ManagerLoginComponent implements OnInit {
+export class ManagerLoginComponent implements OnInit,OnDestroy {
 
   loginForm!: FormGroup;
   invalid: boolean = false;
+  user !: SocialUser;
+  private _Subscription:Subscription = new Subscription()
 
   constructor(
-    private managerservice: ManagerService,
-    private toaster: ToastrService,
-    private router: Router
+    private _managerservice: ManagerService,
+    private _toastr: ToastrService,
+    private _router: Router,
+    private _socialAuthService : SocialAuthService,
+
+
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +37,26 @@ export class ManagerLoginComponent implements OnInit {
         Validators.maxLength(10),
       ]),
     });
+
+    
+
+    this._Subscription.add( 
+    this._socialAuthService.authState.subscribe((user) => {
+      console.log(user,'manager');
+        this._managerservice.managerGoogleSignin(user).subscribe((res) =>{
+          localStorage.setItem('managerSecret', res.toString());
+          this._router.navigate(['/manager/home']);
+        },(err) =>{
+            if(err.error.message){
+            this._toastr.error(err.error.message);
+           }else{
+            this._toastr.error("internal server error");
+           }
+        })
+      }
+      )
+      
+     ); 
   }
 
   get email(): FormControl {
@@ -46,19 +73,26 @@ export class ManagerLoginComponent implements OnInit {
     if (!this.loginForm.valid) {
       this.invalid = true;
     } else {
-      this.managerservice.managerLogin(manager).subscribe(
-        (res) => {
-          localStorage.setItem('managerSecret', res.toString());
-          this.router.navigate(['/manager/home']);
-        },
-        (err) => {
-          if (err.error.message) {
-            this.toaster.error(err.error.message);
-          } else {
-            this.toaster.error('something went wrong');
+      this._Subscription.add(
+
+        this._managerservice.managerLogin(manager).subscribe(
+          (res) => {
+            localStorage.setItem('managerSecret', res.toString());
+            this._router.navigate(['/manager/home']);
+          },
+          (err) => {
+            if (err.error.message) {
+              this._toastr.error(err.error.message);
+            } else {
+              this._toastr.error('something went wrong');
+            }
           }
-        }
-      );
+        )
+      )
     }
+  }
+
+  ngOnDestroy(): void {
+    this._Subscription.unsubscribe()
   }
 }
