@@ -1,4 +1,6 @@
-<form [formGroup]="formData" (ngSubmit)="Saveuser()" *ngIf="!updateScore">
+<ng-container *ngIf="!(updateGoalScrorer || updateScore)"
+>
+<form [formGroup]="formData" (ngSubmit)="Saveuser()">
   <h1 mat-dialog-title>{{ inputData.title }}</h1>
   <div mat-dialog-content>
     <mat-form-field *ngIf="!rejectTournament">
@@ -21,6 +23,7 @@
     <button mat-raised-button color="primary" >{{ rejectTournament ? 'Reject' : 'Save' }}</button>
   </div>
 </form>
+</ng-container>
 <ng-container *ngIf="updateScore">
   <!-- <div class="main"> -->
   <div class="d-flex justify-content-center">
@@ -32,25 +35,38 @@
       <div class="pt-3 d-flex justify-content-center ">
         <img [src]="getLogo(m.team1Id.teamLogo?m.team1Id.teamLogo:'')" class="rounded-circle" alt="" width="120px" height="120px" >
       </div>
+      <div class="pb-2 d-flex flex-column justify-content-center">
+        <div *ngFor="let s of m.team1GoalScorers">
+          <p class="material-icons me-2 text-success" style="vertical-align: middle;" *ngFor="let item of getArray(s.count)">sports_soccer</p> <span>{{ s.scorerName }}</span> 
+        </div>
+          
+      </div>
       <div class="p-1 h-25 d-flex  align-items-center justify-content-center">
-        <span class="btn material-icons text-muted" (click)="decrement('team1')" style="font-size: 30px; line-height: 0; vertical-align: middle;">remove_circle</span>
+        <!-- <span class="btn material-icons text-muted" (click)="decrement('team1')" style="font-size: 30px; line-height: 0; vertical-align: middle;">remove_circle</span> -->
     <div style="font-size: 60px;">{{ team1Score }}</div>
-        <span class="btn material-icons text-muted" (click)="increment('team1')" style="font-size: 30px; ">add_circle</span>
+        <span class="btn material-icons text-muted" *ngIf="!viewScore" (click)="increment('team1',m.team1Id._id)" style="font-size: 30px; ">add_circle</span>
 </div>
     </div>
     <div class=" col-2 h-50  ">
       <img src="assets/Tournaments/vs.png" alt="vs" width="150px" height="150px" >
 
     </div>
-    <div class=" col-4 h-50 d-flex flex-column justify-content-around border shadow rounded p-2">
-      <div class="pt-5 text-center fs-1 text-muted">{{m.team1Id.teamName | uppercase}}</div>
+    <div class=" col-4 h-50 d-flex flex-column border shadow rounded p-2">
+      <div class="pt-5 text-center fs-3 text-muted">{{m.team1Id.teamName | uppercase}}</div>
       <div class="pt-3 d-flex justify-content-center ">
-        <img [src]="getLogo(m.team2Id.teamLogo?m.team2Id.teamLogo:'')" alt="" class="rounded-circle" width="120px" height="120px" >
+        <img [src]="getLogo(m.team2Id.teamLogo?m.team2Id.teamLogo:'')" alt="" class="rounded-circle" width="100px" height="100px" >
+      </div>
+      <div class="pb-2 d-flex flex-column justify-content-center">
+        <div *ngFor="let s of m.team2GoalScorers">
+          <p class="material-icons me-2 text-success" style="vertical-align: middle;" *ngFor="let item of getArray(s.count)">sports_soccer</p> <span>{{ s.scorerName }}</span> 
+        </div>
+          
       </div>
       <div class="p-1 h-25 d-flex align-items-center justify-content-center">
-            <span class="btn material-icons text-muted" (click)="decrement('team2')" style="font-size: 30px; line-height: 0; vertical-align: middle;">remove_circle</span>
+            <!-- <span class="btn material-icons text-muted" (click)="decrement('team2')" style="font-size: 30px; line-height: 0; vertical-align: middle;">remove_circle</span> -->
         <div style="font-size: 60px;">{{ team2Score }}</div>
-            <span class="btn material-icons text-muted" (click)="increment('team2')" style="font-size: 30px; ">add_circle</span>
+          
+            <span class="btn material-icons text-muted" *ngIf="!viewScore" (click)="increment('team2',m.team2Id._id)" style="font-size: 30px; ">add_circle</span>
     </div>
     
     
@@ -71,11 +87,29 @@
       
     </div>
   </div>
-  <div class="d-flex justify-content-between w-75">
-    <button mat-dialog-close mat-raised-button color="warn">Close</button>
+  <div class="d-flex justify-content-between w-75" *ngIf="!viewScore">
+    <button mat-dialog-close mat-raised-button  color="warn">Close</button>
     <button mat-raised-button color="primary" (click)="updateTournament(m._id)">submit</button>
   </div>
   </div>
  
 <!-- </div> -->
 </ng-container>
+<ng-container *ngIf="updateGoalScrorer" >
+  <form [formGroup]="scoreForm" (ngSubmit)="Savescore()">
+    <h1 mat-dialog-title>{{ inputData.title }}</h1>
+    <div mat-dialog-content>
+      <mat-form-field *ngIf="!rejectTournament">
+        <mat-label>Goal Scorer Name</mat-label>
+        <input matInput formControlName="scorername">
+        <mat-error *ngIf="formData.get('scorername')?.errors?.['required'] || nameInvalid">
+          Goal scorer name is required
+        </mat-error>
+      </mat-form-field>    
+      </div>
+    <div mat-dialog-actions class="d-flex justify-content-center" fxLayout="row" fxLayoutAlign="center center">
+      <button mat-dialog-close mat-raised-button color="warn">Close</button>
+      <button mat-raised-button color="primary" >update Score</button>
+    </div>
+  </form>
+  </ng-container>

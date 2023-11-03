@@ -84,8 +84,8 @@
           </mat-autocomplete>
 
           <div class="row justify-content-center px-5 gy-5">
-            <div *ngIf="!allTournaments">
-              <h1>no any tournament</h1>
+            <div *ngIf="allTournaments.length == 0" class="d-flex justify-content-center align-items-center" style="min-height: 50vh;">
+              <h1 class="fs-1">No any tournament</h1>
             </div>
             <div class="card col-md-12 mt-90" *ngFor="let t of allTournaments">
               <div class="card-content">

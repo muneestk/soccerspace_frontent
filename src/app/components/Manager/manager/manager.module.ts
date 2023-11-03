@@ -25,6 +25,7 @@ import { RegisteredTeamsComponent } from '../registered-teams/registered-teams.c
 import { ManagerService } from 'src/app/service/manager.service';
 import { FxtureComponent } from '../fxture/fxture.component';
 import { MatButtonModule } from '@angular/material/button';
+import { ScorecardComponent } from '../scorecard/scorecard.component';
 
 
 
@@ -43,7 +44,9 @@ import { MatButtonModule } from '@angular/material/button';
     SingleTournamentListComponent,
     ForgotPasswordManagerComponent,
     RegisteredTeamsComponent,
-    FxtureComponent
+    FxtureComponent,
+    ScorecardComponent,
+
 
   ],
   imports: [

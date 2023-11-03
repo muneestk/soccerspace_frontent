@@ -1,6 +1,6 @@
 import { Component,Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
@@ -22,6 +22,9 @@ export class PopupComponent implements OnInit,OnDestroy
   tournamentName : string = ''
   tournamentId : string = ''
   invalid : boolean = false
+  viewScore : boolean = false
+  teamId !: string
+  teamscore :any[]=[]
 
   private _subscription:Subscription = new Subscription()
 
@@ -31,6 +34,13 @@ export class PopupComponent implements OnInit,OnDestroy
     reason: this._builder.control('',[Validators.required,Validators.minLength(5)]),
   });
 
+ 
+  scoreForm = this._builder.group({
+    scorername: this._builder.control('', [Validators.required]),
+    teamId: this._builder.control(''),
+  });
+
+
   constructor(
     private _ref: MatDialogRef<PopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -38,7 +48,9 @@ export class PopupComponent implements OnInit,OnDestroy
     private _managerService: ManagerService,
     private _toastr: ToastrService,
     private _userService: UserService,
-    private _adminService : AdminService
+    private _adminService : AdminService,
+    private _dialogue:MatDialog
+
   ) {}
 
   ngOnInit(): void {
@@ -66,6 +78,20 @@ export class PopupComponent implements OnInit,OnDestroy
       this.team1Score=this.matchData.team1Score
       this.team2Score=this.matchData.team2Score
     }
+
+    if(this.inputData.title == 'View Score'){
+      this.updateScore=true
+      this.matchData = this.inputData.match
+      console.log(this.matchData,'mkk');
+      this.viewScore = true
+      this.team1Score=this.matchData.team1Score
+      this.team2Score=this.matchData.team2Score
+    }
+
+    if(this.inputData.title == 'Update Goal scorer'){
+      this.updateGoalScrorer=true
+      this.teamId = this.inputData.teamId
+    }
   }
 
   setManagerPopupdata() {
@@ -82,6 +108,10 @@ export class PopupComponent implements OnInit,OnDestroy
       })
     )
 
+  }
+
+  getArray(length: number): any[] {
+    return new Array(length);
   }
 
   setUserPopupdata() {
@@ -115,7 +145,7 @@ export class PopupComponent implements OnInit,OnDestroy
         }
         this._subscription.add(
 
-          this._adminService.rejectTournamnet(data).subscribe((res) => {
+          this._adminService.rejectTournamnet(data).subscribe(() => {
             this._ref.close({ updatedData: form });
           },
           (err) => {
@@ -179,10 +209,10 @@ export class PopupComponent implements OnInit,OnDestroy
   matchData : any
   team1Score!:number
   team2Score!:number
-  team1winner:boolean =false
-  team2winner:boolean =false
-
-  
+  team1winner:boolean = false
+  team2winner:boolean = false
+  updateGoalScrorer : boolean = false
+  nameInvalid : boolean = false
 
   getLogo(logo:string):string{
     return `${environment.User_API_Key}/files/${logo}`
@@ -199,8 +229,22 @@ export class PopupComponent implements OnInit,OnDestroy
      
   }
 
-  increment(team:string){
-   team == 'team2'?this.team2Score++:this.team1Score++ 
+  increment(team:string,teamId:string){
+    const dilaog = this._dialogue.open(PopupComponent,{
+      width : '30%',
+      height : '250px',
+      data:{
+        title: 'Update Goal scorer',
+        teamId
+      }
+    })
+    dilaog.afterClosed().subscribe((result) => {
+      if (result && result.updatedData) {
+        this.teamscore.push(result.updatedData)
+        this._toastr.success('Score name updated successfully');
+        team == 'team2'?this.team2Score++:this.team1Score++ 
+      }
+    });
   }
 
 
@@ -232,7 +276,7 @@ export class PopupComponent implements OnInit,OnDestroy
 
     this._subscription.add(
 
-      this._managerService.updateScore(form).subscribe(
+      this._managerService.updateScore(form,this.teamscore).subscribe(
         (res) => {
           this._ref.close({ updatedData: form });
         },
@@ -253,4 +297,16 @@ export class PopupComponent implements OnInit,OnDestroy
   }
 
 
+  
+  Savescore() {
+    if (this.scoreForm.valid) {
+      this.nameInvalid = false;
+      let form = this.scoreForm.getRawValue();
+      form.teamId=this.teamId
+      this._ref.close({ updatedData: form});
+    } else {
+      this.nameInvalid = true;
+    }
+  }
+  
 }

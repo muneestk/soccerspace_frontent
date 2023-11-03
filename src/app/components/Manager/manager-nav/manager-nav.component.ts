@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manager-nav',
@@ -11,7 +10,6 @@ export class ManagerNavComponent {
    
   constructor(
     private router:Router,
-    private toast : ToastrService
     ){}
 
   logout():void{

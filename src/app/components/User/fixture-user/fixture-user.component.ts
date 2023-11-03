@@ -22,8 +22,10 @@ export class FixtureUserComponent implements OnInit,OnDestroy{
 
 
   fixture !: any
+  teamScorer !: any[]
   userId !:string
 
+  // private subscriptio
 
   ngOnInit(): void {
     let id = this._activateRoute.snapshot.paramMap.get('id')
@@ -44,7 +46,8 @@ export class FixtureUserComponent implements OnInit,OnDestroy{
       this._managerService.getFixture(id).subscribe({
         next:(res) => {
           this.fixture = res.fixtureData
-          console.log(this.fixture,"fixture");
+          this.teamScorer = res.topScorerList
+          console.log(this.teamScorer,"fixture");
         }
       })
     )
@@ -52,6 +55,10 @@ export class FixtureUserComponent implements OnInit,OnDestroy{
 
   getLogo(logo:string):string{
     return `${environment.User_API_Key}/files/${logo}`
+  }
+
+  getArray(length: number): any[] {
+    return new Array(length);
   }
 
   ngOnDestroy(): void {

@@ -86,7 +86,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
    
     }),
      EffectsModule.forRoot([appEffects]),
-     MatSidenavModule
+     MatSidenavModule,
 
   ],
   providers: [

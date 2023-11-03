@@ -55,10 +55,7 @@ export class ManagerService {
     return this.http.patch(`${this.apiUrl}/forgotPassword`,form)
   }
   
-  findManger():Observable<any>{
-    return this.http.get(`${this.apiUrl}/findManger`)
-  }
-  
+
   registeredTeams(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/registeredTeams?id=${id}`);
   }
@@ -67,8 +64,8 @@ export class ManagerService {
     return this.http.get(`${this.apiUrl}/getFixture?id=${id}`);
   }
   
-  updateScore(form:any):Observable<any>{
-    return this.http.patch(`${this.apiUrl}/updateScore`,form,httpOptions)
+  updateScore(form:any,team:any):Observable<any>{
+    return this.http.patch(`${this.apiUrl}/updateScore`,{form,team},httpOptions)
   }
 
   updateRound(form:any):Observable<any>{
@@ -77,6 +74,11 @@ export class ManagerService {
 
   managerGoogleSignin(user:any) : Observable<any>{
     return this.http.post(`${this.apiUrl}/googleLogin`,user,httpOptions)
+  }
+
+
+  getGoalScorers(id:string) : Observable<any>{
+    return this.http.get(`${this.apiUrl}/getGoalScorers/${id}`)
   }
 
 }

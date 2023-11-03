@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { ManagerService } from 'src/app/service/manager.service';
 import { environment } from 'src/environments/environment.development';
 import { PopupComponent } from '../../popup/popup.component';
+import { Ifixture } from '../../modal/model';
 
 
 @Component({
@@ -24,11 +25,11 @@ export class FxtureComponent implements OnInit, OnDestroy {
   ) {}
 
   private subscription : Subscription = new Subscription()
-  firstRound:any
-  secondRound:any
-  thirdRound:any
-  fourthRound:any
-  fifthRound:any
+  firstRound!:Ifixture
+  secondRound!:Ifixture
+  thirdRound!:Ifixture
+  fourthRound!:Ifixture
+  fifthRound!:Ifixture
   round!:number
   button:boolean = false
 
@@ -45,6 +46,7 @@ export class FxtureComponent implements OnInit, OnDestroy {
   this.subscription.add(
     this._managerService.getFixture(id).subscribe(
      (res) => {
+      console.log(res,'fix');
       this.firstRound = res.fixtureData.find((tournament: { matchRound: number }) => tournament.matchRound === round);
       this.secondRound = res.fixtureData.find((tournament: { matchRound: number }) => tournament.matchRound === round-1);
       this.thirdRound = res.fixtureData.find((tournament: { matchRound: number }) => tournament.matchRound === round - 2);
@@ -68,9 +70,8 @@ export class FxtureComponent implements OnInit, OnDestroy {
     currentDate.setHours(0, 0, 0, 0); 
         
     if (
-      currentDate.getFullYear() !== tournamentDate.getFullYear() ||
-      currentDate.getMonth() !== tournamentDate.getMonth() ||
-      currentDate.getDate() !== tournamentDate.getDate()
+      // currentDate.getMonth() > tournamentDate.getMonth() ||
+      currentDate.getDate() > tournamentDate.getDate()
     ) {
       this._toastr.warning(
         "Only you can update that tournament date because of your exclusive access"
@@ -94,6 +95,23 @@ export class FxtureComponent implements OnInit, OnDestroy {
       });
 
     }
+  }    
+
+
+  //view team score
+
+  ViewScore(match:any ){
+        
+      this._dialogue.open(PopupComponent,{
+        width : '60%',
+        height : '550px',
+        data:{
+          title: 'View Score',
+          match,
+        }
+      })
+
+    
   }    
 
   shouldRenderSection(round:number): boolean {

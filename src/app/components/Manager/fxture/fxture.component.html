@@ -3,9 +3,11 @@
   <div class=" ">
     <div>
         <div class=" text-center head fs-1">{{ firstRound.tournamentId.tournamentName }}</div>
-        <div class="d-flex justify-content-end">
-
+        <div class="d-flex  justify-content-end ">
           <button mat-raised-button  class="w-50 text-end bg-success text-white" *ngIf="!button" (click)="updateRound(firstRound.tournamentId._id)" >Update Round</button>
+        </div>
+        <div class="d-flex  justify-content-end  pt-3">
+          <button mat-raised-button  class="w-50 text-end bg-dark text-white" [routerLink]="['/manager/scoreCard',firstRound.tournamentId._id]">Score Card</button>
         </div>
 
       </div>
@@ -29,6 +31,7 @@
             <div style="position: relative;">
               <img src="assets/Tournaments/vs.png" alt="" width="50px">
               <span *ngIf="item.matchStatus != 'completed'" (click)="updateScore(item,firstRound.tournamentId._id)" class="btn material-icons" style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%);font-size: 40px;">edit_note</span>
+              <span *ngIf="item.matchStatus == 'completed'" (click)="ViewScore(item)" class="btn material-icons" style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%);font-size: 40px;">list</span>
             </div>
       
             <div>
@@ -84,6 +87,8 @@
             <div style="position: relative;">
               <img src="assets/Tournaments/vs.png" alt="" width="50px">
               <span *ngIf="j.matchStatus != 'completed'" (click)="updateScore(j,firstRound.tournamentId._id)" class="btn material-icons" style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%);font-size: 40px;">edit_note</span>
+              <span *ngIf="j.matchStatus == 'completed'" (click)="ViewScore(j)" class="btn material-icons" style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%);font-size: 40px;">list</span>
+
             </div>
       
             <div>
@@ -140,6 +145,7 @@
       
             <div style="position: relative;">
               <img src="assets/Tournaments/vs.png" alt="" width="50px">
+              <span *ngIf="j.matchStatus == 'completed'" (click)="ViewScore(j)" class="btn material-icons" style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%);font-size: 40px;">list</span>
               <span *ngIf="j.matchStatus != 'completed'" (click)="updateScore(j,thirdRound.tournamentId._id)" class="btn material-icons" style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%);font-size: 40px;">edit_note</span>
             </div>
       
@@ -195,6 +201,7 @@
       
             <div style="position: relative;">
               <img src="assets/Tournaments/vs.png" alt="" width="50px">
+              <span *ngIf="j.matchStatus == 'completed'" (click)="ViewScore(j)" class="btn material-icons" style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%);font-size: 40px;">list</span>
               <span *ngIf="j.matchStatus != 'completed'" (click)="updateScore(j,firstRound.tournamentId._id)" class="btn material-icons" style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%);font-size: 40px;">edit_note</span>
             </div>
       
@@ -250,6 +257,7 @@
       
             <div style="position: relative;">
               <img src="assets/Tournaments/vs.png" alt="" width="50px">
+              <span *ngIf="j.matchStatus == 'completed'" (click)="ViewScore(j)" class="btn material-icons" style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%);font-size: 40px;">list</span>
               <span *ngIf="j.matchStatus != 'completed'" (click)="updateScore(j,firstRound.tournamentId._id)" class="btn material-icons" style="position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%);font-size: 40px;">edit_note</span>
             </div>
       

@@ -36,6 +36,7 @@ import {MatListModule} from '@angular/material/list';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgxLoadingModule } from 'ngx-loading';
 import { FixtureUserComponent } from '../fixture-user/fixture-user.component';
+import {CdkAccordionModule} from '@angular/cdk/accordion';
 
 
 
@@ -83,6 +84,8 @@ import { FixtureUserComponent } from '../fixture-user/fixture-user.component';
     MatSliderModule,
     MatAutocompleteModule,
     NgxLoadingModule.forRoot({}),
+    CdkAccordionModule
+    
 
 
   ],

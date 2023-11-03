@@ -1,48 +1,115 @@
+
 <app-usernav></app-usernav>
-    <div class="container h-100 p-3" style="min-height: 100vh;">
+    <div class="row w-100 " style="min-height: 100vh;">
+        
         <h1 class="fs-1 fw-bolder text-center mt-5"> {{ fixture[0].tournamentId.tournamentName | uppercase }}</h1>
         <h1 class="fs-5 fw-bolder text-center mt-2"> {{ fixture[0].tournamentId.location }}</h1>
-        <div class="row d-flex justify-content-center gap-3 mb-5"  *ngFor="let item of fixture">
+        <div class="col-md-8 col-sm-12">
+        <div class="row d-flex justify-content-center gap-3 mb-5"  *ngFor="let item of fixture;let j=index">
             <h1 class="fs-1 fw-500 text-center mt-5">
              {{ item.matchRound === 1 ? 'Final' : (item.matchRound === 2 ? 'Semi Final' : (item.matchRound === 3 ? 'Quarter Final' : (item.matchRound === 4 ? 'Prequarter Final':(item.matchRound === 5 ? 'Round of 16':'')))) }}
             </h1>
-                        <div class="col-md-12  w-75  d-flex justify-content-center p-1 border shadow-lg border-dark" *ngFor="let i of item.matches" style="border-radius: 5px;">
-                <div class="w-100 row justify-content-around">
-                    <div class="col-2 d-flex justify-content-between align-items-center">
-                        <span *ngIf="i.team1Id.userId == userId">
-                            <span class="material-icons" style="font-size: 25px;">home</span>
-                          </span>
-                        <span *ngIf="i.team1Id._id == i.winner" class="badge rounded-pill bg-success " >
-                            <span class="material-icons" style="font-size: 20px;">military_tech</span>
-                          </span>
-                    </div>
-                    <div class="col-2 d-flex justify-content-center align-items-center fw-bolder " style="font-size: 100%">{{ i.team1Id.teamName | uppercase}}</div>
-                    <div class="col-1 d-flex justify-content-center align-items-center">
-                        <img [src]="getLogo(i.team1Id.teamLogo ? i.team1Id.teamLogo : '')" class="rounded-circle p-1 ms-3" width="60px" height="60px" alt="">
-                       
-                    </div>
-                    <div class="col-2  d-flex justify-content-center align-items-center fw-bolder p-1">
-                            <div class="  text-white text-center p-2  " style="border-radius: 5px;background-color: #37003c;font-size: 1rem;width: 10vw; height: 5vh;"> {{ i.team1Score}} - {{ i.team2Score}}</div>
-                    </div>
-                    <div class="col-1 d-flex justify-content-center align-items-center">
-                
-                        <img [src]="getLogo(i.team2Id.teamLogo ? i.team2Id.teamLogo : '')" class="rounded-circle p-1 ms-3 " width="60px" height="60px" alt="">
-                    </div>
-                     <div class="col-2 d-flex justify-content-center align-items-center fw-bolder  " style="font-size: 100%">
-                        
-                        {{ i.team1Id.teamName | uppercase}}</div>
-                    <div class="col-2 d-flex justify-content-between align-items-center">
-                        <span *ngIf="i.team2Id._id == i.winner" class="badge rounded-pill bg-success " >
-                            <span class="material-icons" style="font-size: 20px;">military_tech</span>
-                        </span>
-                        <span *ngIf="i.team1Id.userId == userId">
-                            <span class="material-icons" style="font-size: 25px;">home</span>
-                          </span>
-                       
+            <div class="col-md-12 w-75 d-flex justify-content-center p-1 border shadow-lg border-dark" *ngFor="let i of item.matches; let k=index" style="border-radius: 5px;">
+                <div class="accordion" id="accordionExample{{i.team1Id._id}}">
+                    <div class="accordion-item w-100 ">
+                        <h2 class="accordion-header w-100 d-flex justify-content-center align-items-center" id="heading{{ j }}{{ k }}">
+                                <div class="w-100 row justify-content-around">
+                                    <!-- <div class="col-1"></div> -->
+                                    <div class="col-1 d-flex justify-content-between align-items-center">
+                                        <!-- <span *ngIf="i.team1Id.userId == userId">
+                                            <span class="material-icons" style="font-size: 25px;">home</span>
+                                        </span> -->
+                                        <span *ngIf="i.team1Id._id == i.winner" class="badge rounded-pill bg-success">
+                                            <span class="material-icons" style="font-size: .8rem;">military_tech</span>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 d-flex justify-content-center align-items-center fw-bolder" style="font-size: 100%">{{ i.team1Id.teamName | uppercase}}</div>
+                                    <div class="col-1 d-flex justify-content-center align-items-center">
+                                        <img [src]="getLogo(i.team1Id.teamLogo ? i.team1Id.teamLogo : '')" class="rounded-circle p-1 ms-3" width="60px" height="60px" alt="">
+                                    </div>
+                                    <div class="col-2 d-flex justify-content-center align-items-center fw-bolder p-1">
+                                        <div class="text-white text-center p-2" style="border-radius: 5px;background-color: #37003c;font-size: 1rem;width: 10vw; height: 6vh;">{{ i.team1Score}} - {{ i.team2Score}}</div>
+                                    </div>
+                                    <div class="col-1 d-flex justify-content-center align-items-center">
+                                        <img [src]="getLogo(i.team2Id.teamLogo ? i.team2Id.teamLogo : '')" class="rounded-circle p-1 ms-3 " width="60px" height="60px" alt="">
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 flex justify-content-center align-items-center fw-bolder" style="font-size: 100%">
+                                        {{ i.team2Id.teamName | uppercase}}
+                                    </div>
+                                    <div class="col-1 d-flex justify-content-between align-items-center">
+                                        <span *ngIf="i.team2Id._id == i.winner" class="badge rounded-pill bg-success">
+                                            <span class="material-icons" style="font-size: .8rem;">military_tech</span>
+                                        </span>
+                                        <!-- <span *ngIf="i.team2Id.userId == userId">
+                                            <span class="material-icons" style="font-size: 25px;">home</span>
+                                        </span> -->
+                                        
+                                    </div>
+                                    <div class="col-1">
+                                        <a class="" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseOne' + j + k" aria-expanded="false" [attr.aria-controls]="'collapseOne' + j + k"></a>
+
+                                    </div>
+
+                                </div>
+                        </h2>
+                        <div [attr.aria-labelledby]="'heading' + j + k" class="accordion-collapse collapse" id="collapseOne{{ j }}{{ k }}">
+                            <div class="accordion-body row">
+                                <div class="w-50 d-flex justify-content-center">
+                                    <div class=" d-flex flex-column justify-content-end">
+                                        <div *ngFor="let s of i.team1GoalScorers">
+                                          <p class="material-icons me-2 text-success" style="vertical-align: middle;" *ngFor="let item of getArray(s.count)">sports_soccer</p> <span>{{ s.scorerName }}</span> 
+                                        </div>
+                                          
+                                      </div>
+                                </div>
+                                <div class="w-50 d-flex justify-content-center">
+                                    <div class=" d-flex flex-column justify-content-end">
+                                        <div *ngFor="let s of i.team2GoalScorers">
+                                          <p class="material-icons me-2 text-success" style="vertical-align: middle;" *ngFor="let item of getArray(s.count)">sports_soccer</p> <span>{{ s.scorerName }}</span> 
+                                        </div>
+                                          
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            
            
         </div>
+       
+        
+               
     </div>
+    <div class="col-md-3 col-sm-10 ">
+        <h1 class="fs-1 fw-500 text-center mt-5">Leader Board</h1>
+        <div class="mt-4 d-flex justify-content-center align-items-center">
+            <table class="table table-responsive border-bottom" >
+                <thead class="">
+                    <th class="text-center text-white " style="border-radius: 5px;background-color: #37003c;width: 10rem; padding: 5px;"><div>Position</div></th>
+                    <th class="text-center text-white" style="border-radius: 5px;background-color: #37003c;width: 50rem; padding: 5px;"><div class="p-2">Player</div></th>
+                    <th class="text-center text-white" style="border-radius: 5px;background-color: #37003c;width: 10rem; height: 30px; padding: 5px;"><div >Goals</div></th>
+                </thead>
+                <tbody class="gap-1">
+                    <tr *ngFor="let item of teamScorer.slice(0,10); let i=index" >
+                        <td class="text-center fs-5 pt-4" style="width: 10rem;">{{i+1}}</td>
+                        <td class="text-center fs-5" style="width: 50rem; padding: 5px;">
+                            <img class="rounded-circle" [src]="getLogo(item.teamDetails[0].teamLogo ? item.teamDetails[0].teamLogo  : '')" alt="logo Image" width="50px" height="50px" >
+                            {{item._id}}
+                        </td>
+                        <td class="text-center fs-5 pt-4" style="width: 10rem; height: 30px; padding: 5px;">{{ item.totalScore }}</td>
+                    </tr>
+                    
+                </tbody>
+                
+            </table>
+        </div>
+
+    </div>
+
+
+    </div>
+   
+    
 <app-footer></app-footer>

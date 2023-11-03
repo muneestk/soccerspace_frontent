@@ -22,7 +22,7 @@ export interface Managers {
 }
 
 export interface Tournaments {
-teamLogo: any;
+    teamLogo: any;
     _id: string;
     tournamentName: string;
     teamName: string;
@@ -48,12 +48,42 @@ teamLogo: any;
 
   export interface Iteams {
     _id : string,
-    name : string ,
-    email : string,
-    password : string,
-    is_verified : boolean,
-    otp : string,
-    is_blocked : boolean,
+    teamName : string ,
+    managerName : string,
+    teamLocation : string,
+    teamLogo : string,
+    mobNo : number,
+    altMobNo : number,
+    userId : Users,
+    tournamentId : Tournaments,
+    paymentMethod : string,
+    paymentStatus : string,
     __v : number
 }
+  
+
+
+export interface Ifixture {
+    _id: string;
+    tournamentId: Tournaments;
+    managerId: string;
+    matchRound: number;
+    matches: Imatch[];
+  }
+  
+  export interface Imatch {
+    team1Id: Iteams;
+    team2Id: Iteams;
+    winner: string | null;
+    team1Score: number;
+    team1GoalScorers: IgoalScorer[];
+    team2Score: number;
+    team2GoalScorers: IgoalScorer[];
+    matchStatus: string;
+  }
+  
+  export interface IgoalScorer {
+    scorerName: string;
+    count: number;
+  }
   

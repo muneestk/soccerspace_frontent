@@ -31,7 +31,7 @@ export class TournamentDetilsComponent implements OnInit {
       this.tournamentDetail$ = this._store.pipe(
         select(TournamentsData),
         map(tournaments => tournaments.find(t => t._id === id))
-      );
+      )
     }
     
   }

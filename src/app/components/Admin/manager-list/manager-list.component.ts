@@ -31,7 +31,7 @@ export class ManagerListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this._store.dispatch(retrieveManagers());
+    this._store.dispatch(retrieveManagers()); 
 
     this.managerList$ = this._store.pipe(select(managerData));
   }
