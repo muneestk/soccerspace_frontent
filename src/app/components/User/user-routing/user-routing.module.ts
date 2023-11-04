@@ -37,6 +37,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgxLoadingModule } from 'ngx-loading';
 import { FixtureUserComponent } from '../fixture-user/fixture-user.component';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
+import { ChatUserComponent } from '../chat-user/chat-user.component';
+import { ContactComponent } from '../chat-user/contact/contact.component';
 
 
 
@@ -56,7 +58,9 @@ import {CdkAccordionModule} from '@angular/cdk/accordion';
     MyTournamentSingleDetailsComponent,
     MyTournamentRgisterdTeamsComponent,
     ExploreSideNavComponent,
-    FixtureUserComponent
+    FixtureUserComponent,
+    ChatUserComponent,
+    ContactComponent,
 
 
   ],

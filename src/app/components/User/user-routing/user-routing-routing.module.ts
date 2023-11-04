@@ -14,6 +14,7 @@ import { MyTournamentSingleDetailsComponent } from '../my-tournament-single-deta
 import { MyTournamentRgisterdTeamsComponent } from '../my-tournament-rgisterd-teams/my-tournament-rgisterd-teams.component';
 import { ExploreSideNavComponent } from '../explore-side-nav/explore-side-nav.component';
 import { FixtureUserComponent } from '../fixture-user/fixture-user.component';
+import { ChatUserComponent } from '../chat-user/chat-user.component';
 
 const routes: Routes = [
   { path: '', component: UserHomeComponent, canActivate : [UserGuardOut] },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'myTournamentsTeams/:id', component: MyTournamentRgisterdTeamsComponent, canActivate : [UserGuardOut,UserGuardcon] },
   { path: 'explore', component: ExploreSideNavComponent, canActivate : [UserGuardOut,UserGuardcon] },
   { path: 'fixture/:id', component: FixtureUserComponent , canActivate : [UserGuardOut,UserGuardcon] },
+  { path: 'chat', component: ChatUserComponent , canActivate : [UserGuardOut,UserGuardcon] },
   
 ];
 

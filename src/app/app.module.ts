@@ -12,7 +12,6 @@ import { ManagerService } from './service/manager.service';
 import {
   SocialLoginModule,
   SocialAuthServiceConfig,
-  GoogleSigninButtonModule,
 } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { CommonInterceptorInterceptor } from './common-interceptor.interceptor';
@@ -45,11 +44,14 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     PopupComponent,
     LoadingSpinnerComponent,
+    
    
     
   ],
@@ -77,7 +79,6 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     MatPaginatorModule,
     MatSelectModule,
     ButtonModule,
-    MatSliderModule,
     NgxLoadingModule.forRoot({}),
     StoreModule.forRoot({
       allUsers : UserListReducer,

@@ -13,6 +13,7 @@ import { ForgotPasswordComponent } from '../../User/forgot-password/forgot-passw
 import { RegisteredTeamsComponent } from '../registered-teams/registered-teams.component';
 import { FxtureComponent } from '../fxture/fxture.component';
 import { ScorecardComponent } from '../scorecard/scorecard.component';
+import { ChatManagerComponent } from '../chat-manager/chat-manager.component';
 
 const routes: Routes = [
   { path: '', component:ManagerLoginComponent ,canActivate:[ManagerGuardOut,ManagerGuardcon]},
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'registerdTeams/:id', component:RegisteredTeamsComponent ,canActivate:[ManagerGuardLog]},
   { path: 'fixture/:id/:slot', component:FxtureComponent ,canActivate:[ManagerGuardLog]},
   { path: 'scoreCard/:id', component:ScorecardComponent ,canActivate:[ManagerGuardLog]},
+  { path: 'chat', component:ChatManagerComponent ,canActivate:[ManagerGuardLog]},
   
 ];
 

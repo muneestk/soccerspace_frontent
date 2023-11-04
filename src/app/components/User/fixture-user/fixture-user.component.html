@@ -23,7 +23,7 @@
                                             <span class="material-icons" style="font-size: .8rem;">military_tech</span>
                                         </span>
                                     </div>
-                                    <div class="col-md-2 col-sm-4 d-flex justify-content-center align-items-center fw-bolder" style="font-size: 100%">{{ i.team1Id.teamName | uppercase}}</div>
+                                    <div class="col-2 d-flex justify-content-center align-items-center fw-bolder" style="font-size: 100%">{{ i.team1Id.teamName | uppercase}}</div>
                                     <div class="col-1 d-flex justify-content-center align-items-center">
                                         <img [src]="getLogo(i.team1Id.teamLogo ? i.team1Id.teamLogo : '')" class="rounded-circle p-1 ms-3" width="60px" height="60px" alt="">
                                     </div>
@@ -33,7 +33,7 @@
                                     <div class="col-1 d-flex justify-content-center align-items-center">
                                         <img [src]="getLogo(i.team2Id.teamLogo ? i.team2Id.teamLogo : '')" class="rounded-circle p-1 ms-3 " width="60px" height="60px" alt="">
                                     </div>
-                                    <div class="col-md-2 col-sm-4 flex justify-content-center align-items-center fw-bolder" style="font-size: 100%">
+                                    <div class="col-2 d-flex justify-content-center align-items-center fw-bolder" style="font-size: 100%">
                                         {{ i.team2Id.teamName | uppercase}}
                                     </div>
                                     <div class="col-1 d-flex justify-content-between align-items-center">
@@ -46,7 +46,7 @@
                                         
                                     </div>
                                     <div class="col-1">
-                                        <a class="" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseOne' + j + k" aria-expanded="false" [attr.aria-controls]="'collapseOne' + j + k"></a>
+                                        <a class="accordion-button " type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseOne' + j + k" aria-expanded="false" [attr.aria-controls]="'collapseOne' + j + k"></a>
 
                                     </div>
 

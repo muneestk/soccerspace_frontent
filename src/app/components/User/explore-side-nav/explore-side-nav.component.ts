@@ -124,23 +124,6 @@ goToPage(page: number): void {
 }
 
 
-// //filter the players
-
-// selectionPlayers :string = ""
-
-// selectionPlayersChange(option:string){
-//   this.currentPage = 1
-//   this.subscription.add(
-//     this._userService.filterPlayers(option,this.currentPage,this.pageLimit).subscribe(
-//       (res) => {
-//         this.allTournaments = res.tournaments;
-//         this.totalPages = res.totalPages;
-//         this.totalPagesArray = Array(this.totalPages).fill(0).map((x, i) => i + 1);
-//       }
-//     )
-//   )
-// }
-
 // Filter and search interconnection
 selectionPlayers: string = "";
 selectionCategory: string = "";
@@ -176,15 +159,19 @@ private fetchFilteredTournaments() {
   );
 }
 
+
 sliderValues: number[] = [500, 5000];
 startValue: number = 500;
 endValue: number = 5000;
 
 priceFilter() {
+  console.log('Slider Values: ', this.sliderValues);
   this.startValue = this.sliderValues[0];
   this.endValue = this.sliderValues[1];
-  this.fetchFilteredTournaments()
+  console.log('Start Value: ', this.startValue);
+  console.log('End Value: ', this.endValue);
 }
+
 
 
 

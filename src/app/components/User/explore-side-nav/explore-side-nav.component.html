@@ -22,18 +22,19 @@
             <mat-option value="under 16">Under 16</mat-option>
           </mat-select>
 
-          <mat-toolbar class="mt-2">Price Filter</mat-toolbar>
           <div class="slider-container p-3">
             <div class="slider-values">
-
               <div class="slider-value">{{ startValue | currency:'INR':'symbol':'1.2-2' }}</div>
               <div class="slider-value">{{ endValue | currency:'INR':'symbol':'1.2-2' }}</div>
             </div>
-            <mat-slider style="width: 100%" min="200" max="5000" (input)="priceFilter()" [(ngModel)]="sliderValues">
-              <input [(ngModel)]="sliderValues[0]" matSliderStartThumb />
-              <input [(ngModel)]="sliderValues[1]" matSliderEndThumb />
+            <mat-slider style="width: 100%" min="200" max="5000" (change)="priceFilter()" [(ngModel)]="sliderValues">
+              <input  [(ngModel)]="startValue" matSliderStartThumb />
+              <input  [(ngModel)]="endValue" matSliderEndThumb />
             </mat-slider>
+          
           </div>
+          
+          
           
 
           <mat-toolbar>Players</mat-toolbar>
@@ -167,11 +168,14 @@
                           <h3 class="fs-3 text-dark m-0">No Slots left</h3>
                         </ng-template>
                       </div>
-                      <div *ngIf="t.slots - t.Teams.length > 0"
-                        [routerLink]="['/registerTournament', t._id]"
+                      
+                      <div *ngIf="t.slots - t.Teams.length > 0"                       
                         class="d-flex justify-content-end"
                       >
-                        <button mat-fab extended color="primary" class="mt-5">
+                      <button mat-fab extended color="primary" class="mt-5 btn1 d-flex justify-content-center">
+                        <mat-icon>chat</mat-icon>
+                      </button>
+                        <button  [routerLink]="['/registerTournament', t._id]" mat-fab extended color="primary" class="mt-5">
                           <mat-icon>file_download_done</mat-icon>
                           Register Now
                         </button>

@@ -26,6 +26,8 @@ import { ManagerService } from 'src/app/service/manager.service';
 import { FxtureComponent } from '../fxture/fxture.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ScorecardComponent } from '../scorecard/scorecard.component';
+import { ChatManagerComponent } from '../chat-manager/chat-manager.component';
+import { ContactManagerComponent } from '../chat-manager/contact-manager/contact-manager.component';
 
 
 
@@ -46,7 +48,8 @@ import { ScorecardComponent } from '../scorecard/scorecard.component';
     RegisteredTeamsComponent,
     FxtureComponent,
     ScorecardComponent,
-
+    ChatManagerComponent,
+    ContactManagerComponent,
 
   ],
   imports: [
