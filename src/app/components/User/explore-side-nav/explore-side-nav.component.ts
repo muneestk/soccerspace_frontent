@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { UserService } from 'src/app/service/user.service';
 import { environment } from 'src/environments/environment.development';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-explore-side-nav',
@@ -25,7 +26,7 @@ export class ExploreSideNavComponent implements OnInit, OnDestroy {
   totalPages: number = 0;
   totalPagesArray !: number[];
 
-  constructor(private _userService: UserService, private breakpointObserver: BreakpointObserver) {}
+  constructor(private _userService: UserService, private breakpointObserver: BreakpointObserver,private _router:Router) {}
 
   ngOnInit(): void {
     this.subscription.add(
@@ -173,6 +174,19 @@ priceFilter() {
 }
 
 
+chatConnect(managerId:string){
+  this.subscription.add(
+    this._userService.chatConnect(managerId).subscribe({
+      next:()=>{
+        this._router.navigate(['/chat'])
+      },
+      error:(err) =>{
+        console.log('something went wrong');
+      }
+    })
+
+  )
+}
 
 
 

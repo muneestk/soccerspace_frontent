@@ -22,14 +22,18 @@ export class ContactComponent implements OnInit,OnDestroy{
   private _subscription : Subscription = new Subscription()
 
   ngOnInit(): void {
-    this._subscription.add(
+  }
 
-    )
+
+  
+
+  fullchat(id:string,name:string){
+    this._chatcomponent.fullchat(id,name)
   }
 
 
   ngOnDestroy(): void {
-    
+    this._subscription.unsubscribe()
   }
 
 }

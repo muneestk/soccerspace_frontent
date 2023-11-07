@@ -95,5 +95,21 @@ export class UserService {
       return this.http.get(`${this.apiUrl}/filterPlayers?value=${players}&currentPage=${currentPage}&limit=${limit}&catogory=${catogory}&startValue=${startValue}&endValue=${endValue}`)
     }
 
+    chatConnect(managerId:string) : Observable<any>{
+      return this.http.post(`${this.apiUrl}/chatConnect`,{managerId})
+    }
+
+
+    getChatLIst() : Observable<any>{
+      return this.http.get(`${this.apiUrl}/getChatLIst`)
+    }
+
+    getFullChat(id:string) : Observable<any>{
+      return this.http.get(`${this.apiUrl}/getFullChat?id=${id}`)
+    }
+
+    sentmessage(form:any): Observable<any>{
+      return this.http.post(`${this.apiUrl}/sentMessage`,form)
+    }
 
 }

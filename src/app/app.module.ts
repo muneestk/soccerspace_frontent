@@ -34,6 +34,7 @@ import {CloudinaryModule} from '@cloudinary/ng';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxLoadingModule } from "ngx-loading";
+import { SocketIoModule } from 'ngx-socket-io';
 
 
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
@@ -41,6 +42,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ButtonModule } from 'primeng/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { environment } from 'src/environments/environment.development';
 
 
 
@@ -88,7 +90,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     }),
      EffectsModule.forRoot([appEffects]),
      MatSidenavModule,
-
+     SocketIoModule.forRoot({url:environment.User_API_Key})
   ],
   providers: [
     {

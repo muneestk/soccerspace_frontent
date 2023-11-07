@@ -81,4 +81,13 @@ export class ManagerService {
     return this.http.get(`${this.apiUrl}/getGoalScorers/${id}`)
   }
 
+
+  getChatLIst() : Observable<any>{
+    return this.http.get(`${this.apiUrl}/getChatLIst`)
+  }
+
+  getFullChat(id:string) : Observable<any>{
+    return this.http.get(`${this.apiUrl}/getFullChat?id=${id}`)
+  }
+
 }

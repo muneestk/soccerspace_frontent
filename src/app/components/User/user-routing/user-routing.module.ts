@@ -39,6 +39,8 @@ import { FixtureUserComponent } from '../fixture-user/fixture-user.component';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import { ChatUserComponent } from '../chat-user/chat-user.component';
 import { ContactComponent } from '../chat-user/contact/contact.component';
+import { SocketIoModule } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment.development';
 
 
 
@@ -88,7 +90,8 @@ import { ContactComponent } from '../chat-user/contact/contact.component';
     MatSliderModule,
     MatAutocompleteModule,
     NgxLoadingModule.forRoot({}),
-    CdkAccordionModule
+    CdkAccordionModule,
+    SocketIoModule.forRoot({url:environment.User_API_Key})
     
 
 

@@ -172,7 +172,7 @@
                       <div *ngIf="t.slots - t.Teams.length > 0"                       
                         class="d-flex justify-content-end"
                       >
-                      <button mat-fab extended color="primary" class="mt-5 btn1 d-flex justify-content-center">
+                      <button mat-fab extended color="primary" class="mt-5 btn1 d-flex justify-content-center" (click)="chatConnect(t.managerId)">
                         <mat-icon>chat</mat-icon>
                       </button>
                         <button  [routerLink]="['/registerTournament', t._id]" mat-fab extended color="primary" class="mt-5">
