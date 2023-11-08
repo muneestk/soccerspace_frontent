@@ -90,4 +90,7 @@ export class ManagerService {
     return this.http.get(`${this.apiUrl}/getFullChat?id=${id}`)
   }
 
+  sentmessage(form:any): Observable<any>{
+    return this.http.post(`${this.apiUrl}/sentMessage`,form)
+  }
 }

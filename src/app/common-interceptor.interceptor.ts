@@ -28,7 +28,6 @@ export class CommonInterceptorInterceptor implements HttpInterceptor {
       const newRequest = request.clone({
         headers : request.headers.set('Authorization','Bearer '+managerToken)
       })
-      console.log(newRequest);
       return next.handle(newRequest)
     }
 

@@ -1,5 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, Input } from '@angular/core';
 import { ChatManagerComponent } from '../chat-manager.component';
 
 @Component({
@@ -7,26 +6,19 @@ import { ChatManagerComponent } from '../chat-manager.component';
   templateUrl: './contact-manager.component.html',
   styleUrls: ['./contact-manager.component.css']
 })
-export class ContactManagerComponent implements OnInit,OnDestroy{
+export class ContactManagerComponent{
 
-  private _subscription :Subscription = new Subscription()
 
   @Input() data:any
 
   constructor(
     private _chatComponent : ChatManagerComponent
   ){}
-  
-  ngOnInit(): void {
-    
-  }
 
   fullchat(id:string,name:string){
     this._chatComponent.fullchat(id,name)
   }
 
-  ngOnDestroy(): void {
-    
-  }
+
 
 }

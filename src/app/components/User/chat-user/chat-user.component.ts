@@ -1,27 +1,41 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { UserService } from 'src/app/service/user.service';
 import { Managers } from '../../modal/model';
 import { ToastrService } from 'ngx-toastr';
+import { DefaultEventsMap } from '@socket.io/component-emitter';
 
 @Component({
   selector: 'app-chat-user',
   templateUrl: './chat-user.component.html',
   styleUrls: ['./chat-user.component.css']
 })
-export class ChatUserComponent implements OnInit, OnDestroy {
+export class ChatUserComponent implements OnInit, OnDestroy,AfterViewChecked  {
+
+  @ViewChild('scrollMe') private myScrollContainer !: ElementRef 
+  
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+    } catch (err) { }
+  }
 
   private _subscription: Subscription = new Subscription();
-  private _socket !: Socket ; 
+  private _socket !: Socket<DefaultEventsMap, DefaultEventsMap> 
   ManagerList$ !: Managers[] ;
   managerId !: string ;
-  userId !: string ;
+  userId : string = '' ;
   managerName !: string ;
-  connectionId !: string ;
+  connectionId : string = '';
   messages !: any[] ;
-  chatShow : boolean = true ;  
-  message !: string
+  chatShow : boolean = false ;  
+  message : string = ''
 
 
   constructor(
@@ -31,7 +45,15 @@ export class ChatUserComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getChatList()
-    // this._socket = io('http://localhost:3000'); 
+    this._socket = io('http://localhost:3000'); 
+
+    this._socket.on('messageReceived',(newMessage:any)=>{
+      console.log(newMessage,'in user');
+      if(this.userId == newMessage.from){
+        this.messages.push(newMessage )
+      }
+    })    
+
   }
 
   getChatList(){
@@ -46,12 +68,12 @@ export class ChatUserComponent implements OnInit, OnDestroy {
   }
 
   fullchat(id:string,name:string){
-    alert('hi')
     this.managerId = id
     this.managerName = name
-    console.log(this.managerName,'h');
+    this.chatShow = true
     this._userService.getFullChat(id).subscribe({
       next:(res) =>{
+        
         this._socket.emit('join',res.cid)
         this.messages = res.messages
         this.connectionId = res.cid
@@ -66,7 +88,7 @@ export class ChatUserComponent implements OnInit, OnDestroy {
   }
 
   submit(){
-    if(!this.message){
+    if(this.message === ""){
       this._toastr.error('please type something')
     }else{
       const data = {
@@ -75,7 +97,7 @@ export class ChatUserComponent implements OnInit, OnDestroy {
         to:this.managerId,
         message:this.message
       }
-      this._userservice.sentmessage(data)
+      this._userService.sentmessage(data)
       .subscribe((res)=>{
         this.message = ''
         this.messages.push(res);
@@ -84,5 +106,5 @@ export class ChatUserComponent implements OnInit, OnDestroy {
     }
     }
 
-  }
+  
 }
