@@ -16,10 +16,8 @@ import {NgConfirmModule} from 'ng-confirm-box';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ApprouvalsComponent } from '../approuvals/approuvals.component';
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TournamentListComponent } from '../tournament-list/tournament-list.component';
 import { AdminSidebarnavComponent } from '../admin-sidebarnav/admin-sidebarnav.component';
-import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import {MatSelectModule} from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -50,8 +48,6 @@ import { TournamentDetilsComponent } from '../tournament-detils/tournament-detil
     NgConfirmModule,
     MatTableModule,
     MatPaginatorModule,
-    NgxSkeletonLoaderModule,
-    CanvasJSAngularChartsModule,
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,

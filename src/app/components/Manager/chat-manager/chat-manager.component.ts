@@ -71,6 +71,20 @@ export class ChatManagerComponent implements OnInit,OnDestroy {
     )
   }
 
+  fullchat(id:string,name:string){
+    this.userId = id
+    this.userName = name
+    this.chatShow = true
+    this._managerService.getFullChat(id).subscribe({
+      next:(res) =>{
+        this._socket.emit('join',res.cid)
+        this.messages = res.messages
+        this.connectionId = res.cid
+        this.managerId = res.managerId      
+      }
+    })
+  }
+
   submit(){
     if(this.message === ""){
       this._toastr.error('please type something')
@@ -99,21 +113,7 @@ export class ChatManagerComponent implements OnInit,OnDestroy {
 
 
 
-  fullchat(id:string,name:string){
-    this.userId = id
-    this.userName = name
-    this.chatShow = true
-    this._managerService.getFullChat(id).subscribe({
-      next:(res) =>{
-        this._socket.emit('join',res.cid)
-        this.messages = res.messages
-        this.connectionId = res.cid
-        this.managerId = res.managerId
-
-        
-      }
-    })
-  }
+ 
 
 
 

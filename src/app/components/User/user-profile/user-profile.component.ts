@@ -3,7 +3,6 @@ import { PopupComponent } from '../../popup/popup.component';
 import { UserService } from 'src/app/service/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
-import {Cloudinary, CloudinaryImage} from '@cloudinary/url-gen';
 
 
 @Component({
@@ -15,7 +14,6 @@ export class UserProfileComponent implements OnInit{
 
   name !: string ;
   email !: string ;
-  img!: CloudinaryImage;
 
 
 
@@ -42,15 +40,7 @@ export class UserProfileComponent implements OnInit{
        }
      );
 
-     // Create a Cloudinary instance, setting some Cloud and URL configuration parameters.
-    const cld = new Cloudinary({
-      cloud: {
-        cloudName: 'user_profile'
-      }
-    });
-
-    // cld.image returns a CloudinaryImage with the configuration set.
-    this.img = cld.image('sample');
+    
 
 
    }

@@ -6,7 +6,6 @@ import { TournamentsData } from '../../state/app.selecter';
 import { TournamentList } from '../../state/app.state';
 import { retrieveTournaments } from '../../state/app.action';
 import { ActivatedRoute } from '@angular/router';
-import * as _ from 'lodash';
 import { environment } from 'src/environments/environment.development';
 
 @Component({

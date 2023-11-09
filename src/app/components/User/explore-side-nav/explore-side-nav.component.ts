@@ -166,11 +166,9 @@ startValue: number = 500;
 endValue: number = 5000;
 
 priceFilter() {
-  console.log('Slider Values: ', this.sliderValues);
   this.startValue = this.sliderValues[0];
   this.endValue = this.sliderValues[1];
-  console.log('Start Value: ', this.startValue);
-  console.log('End Value: ', this.endValue);
+  this.fetchFilteredTournaments()
 }
 
 

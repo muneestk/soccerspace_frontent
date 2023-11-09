@@ -30,16 +30,12 @@ import { MatTableModule } from '@angular/material/table';
 import { PopupComponent } from './components/popup/popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
-import {CloudinaryModule} from '@cloudinary/ng';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { NgxLoadingModule } from "ngx-loading";
 import { SocketIoModule } from 'ngx-socket-io';
 
 
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { ButtonModule } from 'primeng/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { environment } from 'src/environments/environment.development';
@@ -58,8 +54,7 @@ import { environment } from 'src/environments/environment.development';
     
   ],
   imports: [
-    NgxSkeletonLoaderModule,
-    CloudinaryModule,
+    // CloudinaryModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule, 
@@ -68,20 +63,19 @@ import { environment } from 'src/environments/environment.development';
     FormsModule,
     ReactiveFormsModule,
     SocialLoginModule,
-    MatIconModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatDividerModule,
-    MatMenuModule,
-    MatListModule,
-    MatDialogModule,
-    MatButtonModule,
-    NgConfirmModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSelectModule,
-    ButtonModule,
-    NgxLoadingModule.forRoot({}),
+    // MatIconModule,
+    // MatInputModule,
+    // MatToolbarModule,
+    // MatDividerModule,
+    // MatMenuModule,
+    // MatListModule,
+    // MatDialogModule,
+    // MatButtonModule,
+    // NgConfirmModule,
+    // MatTableModule,
+    // MatPaginatorModule,
+    // MatSelectModule,
+    // ButtonModule,
     StoreModule.forRoot({
       allUsers : UserListReducer,
       allManagers : ManagerListReducer ,
