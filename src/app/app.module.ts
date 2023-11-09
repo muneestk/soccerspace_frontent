@@ -95,7 +95,7 @@ import { environment } from 'src/environments/environment.development';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '80902647843-4966kmts5ceeckm6h4rqdkn6bmctef58.apps.googleusercontent.com'
+              environment.NEXT_PUBLIC_Google_API_Key
             )
           }
         ]
