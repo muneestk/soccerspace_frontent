@@ -35,7 +35,7 @@ export class RegisteredTeamsComponent implements OnInit {
   }
 
   logoImage(logoImage:string):string{
-    return `${environment.User_API_Key}/files/${logoImage}`
+    return `${environment.NEXT_PUBLIC_User_API_Key}/files/${logoImage}`
   }
 
 }

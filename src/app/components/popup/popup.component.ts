@@ -215,7 +215,7 @@ export class PopupComponent implements OnInit,OnDestroy
   nameInvalid : boolean = false
 
   getLogo(logo:string):string{
-    return `${environment.User_API_Key}/files/${logo}`
+    return `${environment.NEXT_PUBLIC_User_API_Key}/files/${logo}`
   }
 
   decrement(team:string){

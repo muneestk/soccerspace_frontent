@@ -42,7 +42,7 @@ export class MyTournamentRgisterdTeamsComponent implements OnInit,OnDestroy{
   }
 
   getLogo(logo:string):string{
-    return `${environment.User_API_Key}/files/${logo}`
+    return `${environment.NEXT_PUBLIC_User_API_Key}/files/${logo}`
   }
 
   ngOnDestroy(): void {

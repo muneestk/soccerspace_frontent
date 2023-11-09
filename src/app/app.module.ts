@@ -84,7 +84,7 @@ import { environment } from 'src/environments/environment.development';
     }),
      EffectsModule.forRoot([appEffects]),
      MatSidenavModule,
-     SocketIoModule.forRoot({url:environment.User_API_Key})
+     SocketIoModule.forRoot({url:environment.NEXT_PUBLIC_User_API_Key})
   ],
   providers: [
     {

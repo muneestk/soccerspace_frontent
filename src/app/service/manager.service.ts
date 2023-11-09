@@ -15,7 +15,7 @@ export class ManagerService {
 
   constructor(private http : HttpClient) { }
 
-  apiUrl:string = environment.Manager_API_Key ;
+  apiUrl:string = environment.NEXT_PUBLIC_Manager_API_Key ;
 
   managerSignup(manager:any):Observable<any>{
     return this.http.post(`${this.apiUrl}/register`,manager,httpOptions)

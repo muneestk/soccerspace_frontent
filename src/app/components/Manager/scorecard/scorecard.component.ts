@@ -43,7 +43,7 @@ export class ScorecardComponent implements OnInit,AfterViewInit{
   }
 
   getImage(image:string):string{
-    return `${environment.User_API_Key}/files/${image}`
+    return `${environment.NEXT_PUBLIC_User_API_Key}/files/${image}`
   }
   
   @ViewChild(MatPaginator) paginator !: MatPaginator;

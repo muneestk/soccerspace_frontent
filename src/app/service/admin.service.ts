@@ -17,7 +17,7 @@ export class AdminService {
 
   constructor(private http : HttpClient) { }
 
-  apiUrl : string = environment.API_Key  ;
+  apiUrl : string = environment.NEXT_PUBLIC_API_Key  ;
 
   adminLogin(form:any):Observable<any>{
     return this.http.post(`${this.apiUrl}/login`,form,httpOptions)

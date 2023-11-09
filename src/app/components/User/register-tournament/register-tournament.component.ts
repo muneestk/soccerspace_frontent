@@ -80,11 +80,11 @@ export class RegisterTournamentComponent implements OnInit {
   }
 
   getLogoUrl(logoimage: string): string {
-    return `${environment.User_API_Key}/files/${logoimage}`;
+    return `${environment.NEXT_PUBLIC_User_API_Key}/files/${logoimage}`;
   }
 
   getPosterImage(posterImage: string): string {
-    return `${environment.User_API_Key}/files/${posterImage}`;
+    return `${environment.NEXT_PUBLIC_User_API_Key}/files/${posterImage}`;
   }
 
   register() {

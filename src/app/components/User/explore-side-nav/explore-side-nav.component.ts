@@ -40,11 +40,11 @@ export class ExploreSideNavComponent implements OnInit, OnDestroy {
   }
 
   getLogo(logo: string): string {
-    return `${environment.User_API_Key}/files/${logo}`;
+    return `${environment.NEXT_PUBLIC_User_API_Key}/files/${logo}`;
   }
 
   getPoster(poster: string): string {
-    return `${environment.User_API_Key}/files/${poster}`;
+    return `${environment.NEXT_PUBLIC_User_API_Key}/files/${poster}`;
   }
 
   ngOnDestroy(): void {

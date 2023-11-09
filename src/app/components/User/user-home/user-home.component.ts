@@ -48,7 +48,7 @@ export class UserHomeComponent implements OnInit {
   }
   
   getPosterImage(posterImage:string):string{
-    return `${environment.User_API_Key}/files/${posterImage}` 
+    return `${environment.NEXT_PUBLIC_User_API_Key}/files/${posterImage}` 
   }
 
 }

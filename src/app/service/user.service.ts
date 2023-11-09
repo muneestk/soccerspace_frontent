@@ -18,7 +18,7 @@ export class UserService {
     private http:HttpClient,
     ) { }
 
-    apiUrl : string = environment.User_API_Key  ;
+    apiUrl : string = environment.NEXT_PUBLIC_User_API_Key  ;
 
     userRegister(user:any) : Observable<any>{
       return this.http.post(`${this.apiUrl}/register`,user,httpOptions)
