@@ -28,8 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ScorecardComponent } from '../scorecard/scorecard.component';
 import { ChatManagerComponent } from '../chat-manager/chat-manager.component';
 import { ContactManagerComponent } from '../chat-manager/contact-manager/contact-manager.component';
-import { SocketIoModule } from 'ngx-socket-io';
-import { environment } from 'src/environments/environment.development';
+
 
 
 
@@ -57,7 +56,7 @@ import { environment } from 'src/environments/environment.development';
   imports: [
     CommonModule,
     ManagerRoutingModule,
-    MatIconModule,
+  MatIconModule,
     FormsModule,
     ReactiveFormsModule,
     MatSidenavModule,
@@ -67,7 +66,6 @@ import { environment } from 'src/environments/environment.development';
     MatPaginatorModule,
     GoogleSigninButtonModule,
     MatButtonModule,
-    SocketIoModule.forRoot({url:'http://localhost:3000'})
     
   ],
   providers:[

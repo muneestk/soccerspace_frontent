@@ -4,6 +4,7 @@ import { Socket ,io } from 'socket.io-client';
 import { ManagerService } from 'src/app/service/manager.service';
 import { Users } from '../../modal/model';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-chat-manager',
@@ -22,7 +23,6 @@ export class ChatManagerComponent implements OnInit,OnDestroy {
   messages !: any[] ;
   chatShow : boolean = false ;  
   message : string = '';
-   
 
   @ViewChild('scrollMe') private myScrollContainer !: ElementRef 
   
@@ -46,11 +46,10 @@ export class ChatManagerComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.getChatList()
-    this._socket = io('http://localhost:3000'); 
+    this._socket = io(environment.NEXT_PUBLIC_User_API_Key); 
 
-    this._socket.on('messageReceived',(newMessage:any)=>{
-      console.log(newMessage,'in manager');
-      if(this.userId == newMessage.from){
+    this._socket.on('messageRecieved',(newMessage:any)=>{
+      if(this.managerId == newMessage.reciever){
         this.messages.push(newMessage )
       }
     })    
@@ -74,14 +73,13 @@ export class ChatManagerComponent implements OnInit,OnDestroy {
     this.userName = name
     this.chatShow = true
     this._subscription.add(
-      this._managerService.getFullChat(id).subscribe({
-        next:(res) =>{
+      this._managerService.getFullChat(id).subscribe((res) =>{
           this._socket.emit('join',res.cid)
           this.messages = res.messages
           this.connectionId = res.cid
           this.managerId = res.managerId      
         }
-      })
+      )
     )
   }
 
@@ -108,12 +106,10 @@ export class ChatManagerComponent implements OnInit,OnDestroy {
     }
 
 
-
- 
-
-
-
   ngOnDestroy(): void {
     this._subscription.unsubscribe()
+    this._socket.disconnect()
+    this._socket.emit('disconnect',{cid:this.connectionId})  
+
   }
 }

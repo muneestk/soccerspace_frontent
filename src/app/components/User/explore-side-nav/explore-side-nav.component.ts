@@ -5,6 +5,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { UserService } from 'src/app/service/user.service';
 import { environment } from 'src/environments/environment.development';
 import { Router } from '@angular/router';
+import { Tournaments } from '../../modal/model';
 
 @Component({
   selector: 'app-explore-side-nav',
@@ -20,7 +21,7 @@ export class ExploreSideNavComponent implements OnInit, OnDestroy {
     shareReplay()
   );
 
-  allTournaments!: any[];
+  allTournaments!: Tournaments[];
   pageLimit: number = 3;
   currentPage: number = 1;
   totalPages: number = 0;

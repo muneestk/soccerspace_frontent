@@ -181,6 +181,11 @@
                           <mat-icon>file_download_done</mat-icon>
                           Register Now
                         </button>
+
+                        <button  *ngIf="t.slots - t.Teams.length == 0" [routerLink]="['/fixture',t._id]" mat-fab extended color="primary" class="mt-5">
+                          <mat-icon>sports_soccer</mat-icon>
+                          Fixture
+                        </button>
                       </div>
                     </div>
                   </div>

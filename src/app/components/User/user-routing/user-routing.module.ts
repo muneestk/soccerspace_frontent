@@ -22,7 +22,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MyTournamentSingleDetailsComponent } from '../my-tournament-single-details/my-tournament-single-details.component';
 import { MyTournamentRgisterdTeamsComponent } from '../my-tournament-rgisterd-teams/my-tournament-rgisterd-teams.component';
-
 import { MatSelectModule } from '@angular/material/select';
 import { ExploreSideNavComponent } from '../explore-side-nav/explore-side-nav.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -34,7 +33,6 @@ import { FixtureUserComponent } from '../fixture-user/fixture-user.component';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import { ChatUserComponent } from '../chat-user/chat-user.component';
 import { ContactComponent } from '../chat-user/contact/contact.component';
-import {SocketIoModule } from 'ngx-socket-io';
 
 
 @NgModule({
@@ -79,7 +77,6 @@ import {SocketIoModule } from 'ngx-socket-io';
     MatSliderModule,
     MatAutocompleteModule,
     CdkAccordionModule,
-    SocketIoModule.forRoot({url:"http://localhost:3000"})
     
 
 

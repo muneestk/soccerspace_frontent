@@ -94,9 +94,9 @@
                 <tbody class="gap-1">
                     <tr *ngFor="let item of teamScorer.slice(0,10); let i=index" >
                         <td class="text-center fs-5 pt-4" style="width: 10rem;">{{i+1}}</td>
-                        <td class="text-center fs-5" style="width: 50rem; padding: 5px;">
+                        <td class=" fs-5 " style="width: 50rem; padding: 5px;">
                             <img class="rounded-circle" [src]="getLogo(item.teamDetails[0].teamLogo ? item.teamDetails[0].teamLogo  : '')" alt="logo Image" width="50px" height="50px" >
-                            {{item._id}}
+                            <span class="ms-2">{{item._id}}</span>
                         </td>
                         <td class="text-center fs-5 pt-4" style="width: 10rem; height: 30px; padding: 5px;">{{ item.totalScore }}</td>
                     </tr>

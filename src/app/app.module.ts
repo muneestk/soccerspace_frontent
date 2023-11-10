@@ -32,11 +32,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { SocketIoModule } from 'ngx-socket-io';
-
-
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSliderModule } from '@angular/material/slider';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { environment } from 'src/environments/environment.development';
 
@@ -82,7 +78,6 @@ import { environment } from 'src/environments/environment.development';
     }),
     EffectsModule.forRoot([appEffects]),
      MatSidenavModule,
-     SocketIoModule.forRoot({url:"http://localhost:3000"})
   ],
   providers: [
     {

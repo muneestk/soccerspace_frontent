@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class ManagerLoginComponent implements OnInit,OnDestroy {
 
-  loginForm!: FormGroup;
+  loginForm !: FormGroup;
   invalid: boolean = false;
   user !: SocialUser;
   private _Subscription:Subscription = new Subscription()
