@@ -171,13 +171,13 @@
                         </ng-template>
                       </div>
                       
-                      <div *ngIf="t.slots - t.Teams.length > 0"                       
+                      <div                        
                         class="d-flex justify-content-end"
                       >
-                      <button mat-fab extended color="primary" class="mt-5 btn1 d-flex justify-content-center" (click)="chatConnect(t.managerId)">
+                      <button mat-fab extended color="primary" class="mt-5 btn1 d-flex justify-content-center me-3" (click)="chatConnect(t.managerId)">
                         <mat-icon>chat</mat-icon>
                       </button>
-                        <button  [routerLink]="['/registerTournament', t._id]" mat-fab extended color="primary" class="mt-5">
+                        <button  *ngIf="t.slots - t.Teams.length > 0" [routerLink]="['/registerTournament', t._id]" mat-fab extended color="primary" class="mt-5">
                           <mat-icon>file_download_done</mat-icon>
                           Register Now
                         </button>

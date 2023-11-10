@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { UserRoutingRoutingModule } from './user-routing-routing.module';
 import { LoginComponent } from '../login/login.component';
 import { SignupComponent } from '../signup/signup.component';
@@ -10,7 +9,6 @@ import { FooterComponent } from '../footer/footer.component';
 import { VerifyComponent } from '../verify/verify.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
-import { SigleTournamentDetailsComponent } from '../sigle-tournament-details/sigle-tournament-details.component';
 import { RegisterTournamentComponent } from '../register-tournament/register-tournament.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -37,7 +35,6 @@ import {CdkAccordionModule} from '@angular/cdk/accordion';
 import { ChatUserComponent } from '../chat-user/chat-user.component';
 import { ContactComponent } from '../chat-user/contact/contact.component';
 import {SocketIoModule } from 'ngx-socket-io';
-import { environment } from 'src/environments/environment.development';
 
 
 @NgModule({
@@ -49,7 +46,6 @@ import { environment } from 'src/environments/environment.development';
     FooterComponent,
     VerifyComponent,
     UserProfileComponent,
-    SigleTournamentDetailsComponent,
     RegisterTournamentComponent,
     ForgotPasswordComponent,
     MytournamentsComponent,

@@ -6,7 +6,6 @@ import { UserHomeComponent } from '../user-home/user-home.component';
 import { VerifyComponent } from '../verify/verify.component';
 import { UserGuardLog, UserGuardcon, UserGuardOut } from '../../guard/user-guard.guard';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
-import { SigleTournamentDetailsComponent } from '../sigle-tournament-details/sigle-tournament-details.component';
 import { RegisterTournamentComponent } from '../register-tournament/register-tournament.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { MytournamentsComponent } from '../mytournaments/mytournaments.component';
@@ -25,7 +24,6 @@ const routes: Routes = [
   { path: 'forgotpassword/:id/:token', component: ForgotPasswordComponent , canActivate : [UserGuardcon,UserGuardLog]},
   { path: 'login/:id/:token', component: LoginComponent, canActivate : [UserGuardcon,UserGuardLog] },
   { path: 'profile', component: UserProfileComponent, canActivate : [UserGuardOut,UserGuardcon] },
-  { path: 'singleTourDetails/:id', component: SigleTournamentDetailsComponent, canActivate : [UserGuardOut,UserGuardcon] },
   { path: 'registerTournament/:id', component: RegisterTournamentComponent, canActivate : [UserGuardOut,UserGuardcon] },
   { path: 'myTournaments', component: MytournamentsComponent, canActivate : [UserGuardOut,UserGuardcon] },
   { path: 'myTournamentsSingleDetails/:id', component: MyTournamentSingleDetailsComponent, canActivate : [UserGuardOut,UserGuardcon] },
