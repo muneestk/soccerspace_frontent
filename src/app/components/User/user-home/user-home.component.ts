@@ -45,7 +45,7 @@ export class UserHomeComponent implements OnInit {
   filterApproveTournaments(tournaments: Tournaments[]): Tournaments[] {
     const today = new Date().getTime();
     return tournaments.filter(
-      (tournament) => tournament.is_approuve === 'approved' && new Date(tournament.tournamentDate).getTime() >= today
+      (tournament) => tournament.is_approuve === 'approved' && new Date(tournament.tournamentDate).getTime() >= today && tournament.slots - tournament.Teams.length >0
     );
   }
   

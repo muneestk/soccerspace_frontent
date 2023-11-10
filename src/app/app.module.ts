@@ -35,6 +35,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { environment } from 'src/environments/environment.development';
+import { ChartModule } from 'primeng/chart';
 
 
 
@@ -78,6 +79,7 @@ import { environment } from 'src/environments/environment.development';
     }),
     EffectsModule.forRoot([appEffects]),
      MatSidenavModule,
+     ChartModule
   ],
   providers: [
     {

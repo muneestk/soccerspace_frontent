@@ -25,7 +25,6 @@ export class FixtureUserComponent implements OnInit,OnDestroy{
   teamScorer !: any[]
   userId !:string
 
-  // private subscriptio
 
   ngOnInit(): void {
     let id = this._activateRoute.snapshot.paramMap.get('id')
@@ -47,7 +46,6 @@ export class FixtureUserComponent implements OnInit,OnDestroy{
         next:(res) => {
           this.fixture = res.fixtureData
           this.teamScorer = res.topScorerList
-          console.log(this.teamScorer,"fixture");
         }
       })
     )

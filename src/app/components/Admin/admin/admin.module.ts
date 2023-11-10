@@ -22,7 +22,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TournamentDetilsComponent } from '../tournament-detils/tournament-detils.component';
-
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -51,7 +51,7 @@ import { TournamentDetilsComponent } from '../tournament-detils/tournament-detil
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    
+    ChartModule
 
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
