@@ -1,15 +1,13 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { TournamentList } from '../../state/app.state';
 import { Router } from '@angular/router';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, Subscription, map, tap } from 'rxjs';
 import { Tournaments } from '../../modal/model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { retrieveTournaments } from '../../state/app.action';
 import { TournamentsData } from '../../state/app.selecter';
-import { MatSort } from '@angular/material/sort';
-import { ManagerService } from 'src/app/service/manager.service';
 import { jwtDecode } from 'jwt-decode';
 
 
@@ -19,13 +17,14 @@ import { jwtDecode } from 'jwt-decode';
   templateUrl: './tournament-list.component.html',
   styleUrls: ['./tournament-list.component.css']
 })
-export class TournamentListComponent implements OnInit,AfterViewInit{
+export class TournamentListComponent implements OnInit,AfterViewInit,OnDestroy{
 
   constructor(
     private _store:Store<TournamentList>,
     private _router : Router,
   ){}
 
+  private _subscrition:Subscription = new Subscription()
   tournamentList$ !: Observable<Tournaments[]>
   displayedColumns: string[] = ['No.', 'Tournament Name', 'Date', 'Status','Reason','Details'];
   dataSource = new MatTableDataSource<Tournaments>(); 
@@ -47,9 +46,11 @@ export class TournamentListComponent implements OnInit,AfterViewInit{
 
   ngAfterViewInit(): void {
       this.dataSource.paginator = this.paginator;
-      this.tournamentList$.subscribe((data: Tournaments[]) => {
-        this.dataSource.data = data;
-      });
+      this._subscrition.add(
+          this.tournamentList$.subscribe((data: Tournaments[]) => {
+          this.dataSource.data = data;
+        })
+      )
   }
     
 
@@ -58,7 +59,9 @@ export class TournamentListComponent implements OnInit,AfterViewInit{
     this._router.navigate(['/manager/singleTournament',id])
   }
 
-
+  ngOnDestroy(): void {
+    this._subscrition.unsubscribe()
+  }
 
 
 

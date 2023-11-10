@@ -62,6 +62,6 @@ export class FixtureUserComponent implements OnInit,OnDestroy{
   }
 
   ngOnDestroy(): void {
-    
+    this._subscription.unsubscribe()
   }
 }

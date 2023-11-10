@@ -83,7 +83,7 @@ import { environment } from 'src/environments/environment.development';
     MatSliderModule,
     MatAutocompleteModule,
     CdkAccordionModule,
-    SocketIoModule.forRoot({url:environment.NEXT_PUBLIC_User_API_Key})
+    SocketIoModule.forRoot({url:"http://localhost:3000"})
     
 
 

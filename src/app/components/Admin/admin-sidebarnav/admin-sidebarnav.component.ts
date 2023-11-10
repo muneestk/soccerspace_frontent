@@ -1,6 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
@@ -13,9 +13,11 @@ import { TournamentsData } from '../../state/app.selecter';
   templateUrl: './admin-sidebarnav.component.html',
   styleUrls: ['./admin-sidebarnav.component.css']
 })
-export class AdminSidebarnavComponent implements OnInit {
+export class AdminSidebarnavComponent implements OnInit,OnDestroy {
   private _breakpointObserver = inject(BreakpointObserver);
   private _router = inject(Router);
+  private _subscription : Subscription = new Subscription()
+
 
   isHandset$: Observable<boolean> = this._breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -33,14 +35,13 @@ export class AdminSidebarnavComponent implements OnInit {
 
     ngOnInit(): void {
       this._store.dispatch(retrieveTournaments())
-
-
+      this._subscription.add(
       this._store.pipe(select(TournamentsData),
       map(m => m.filter(item => item.is_approuve === 'waiting').length)
     ).subscribe(approvalLength => {
       this.approvalLength = approvalLength;
-    });
-    
+    })
+ )
       
     }
 
@@ -49,6 +50,10 @@ export class AdminSidebarnavComponent implements OnInit {
     logout():void{
       localStorage.removeItem('adminSecret')
       this._router.navigate(['/admin'])
+    }
+
+    ngOnDestroy(): void {
+      this._subscription.unsubscribe()
     }
 
 }

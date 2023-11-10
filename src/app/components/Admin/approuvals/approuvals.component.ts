@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TournamentList } from '../../state/app.state';
 import { Store, select } from '@ngrx/store';
 import { AdminService } from 'src/app/service/admin.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgConfirmService } from 'ng-confirm-box';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Tournaments } from '../../modal/model';
 import { retrieveTournaments } from '../../state/app.action';
 import { TournamentsData } from '../../state/app.selecter';
@@ -17,7 +17,7 @@ import { PopupComponent } from '../../popup/popup.component';
   templateUrl: './approuvals.component.html',
   styleUrls: ['./approuvals.component.css']
 })
-export class ApprouvalsComponent implements OnInit {
+export class ApprouvalsComponent implements OnInit,OnDestroy {
 
 
   constructor(
@@ -28,6 +28,8 @@ export class ApprouvalsComponent implements OnInit {
     private _matDialog : MatDialog
   ){}
 
+  private _subscription : Subscription = new Subscription()
+
   tournamentsList$ !: Observable<Tournaments[]>;
   filteredTournaments: Tournaments[] = [];
   isLoading:boolean = true;
@@ -37,10 +39,10 @@ export class ApprouvalsComponent implements OnInit {
     this._store.dispatch(retrieveTournaments())
     this.tournamentsList$ = this._store.pipe(select(TournamentsData));
 
-    this.tournamentsList$.subscribe(tournaments => {
+    this._subscription = this.tournamentsList$.subscribe(tournaments => {
       this.filteredTournaments = this.filterWaitingTournaments(tournaments);
-    }); 
-     
+    });
+    
   }
 
   getLogoUrl(logoimage:string){
@@ -59,7 +61,8 @@ export class ApprouvalsComponent implements OnInit {
     
     this._cofirmService.showConfirm(`Are you sure want to approve this ${tournamentName} `,
     ()=>{
-      this._adminService.ApproveAction(id).subscribe((res) =>{
+      this._subscription.add(
+        this._adminService.ApproveAction(id).subscribe((res) =>{
           this._toastr.success("succesfull approved tournament")
           this.ngOnInit()
       },(err) => {
@@ -70,6 +73,8 @@ export class ApprouvalsComponent implements OnInit {
         }
       })
 
+      )
+     
     },() => {
       
     })
@@ -96,4 +101,7 @@ export class ApprouvalsComponent implements OnInit {
     })
   }
 
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe()
+  }
 }

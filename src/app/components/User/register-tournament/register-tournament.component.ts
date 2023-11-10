@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { TournamentList } from '../../state/app.state';
-import { Observable, map } from 'rxjs';
+import { Observable, Subscription, map } from 'rxjs';
 import { Tournaments } from '../../modal/model';
 import { retrieveTournaments } from '../../state/app.action';
 import { TournamentsData } from '../../state/app.selecter';
@@ -18,7 +18,7 @@ declare var Razorpay: any;
   templateUrl: './register-tournament.component.html',
   styleUrls: ['./register-tournament.component.css']
 })
-export class RegisterTournamentComponent implements OnInit {
+export class RegisterTournamentComponent implements OnInit,OnDestroy {
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -39,6 +39,7 @@ export class RegisterTournamentComponent implements OnInit {
   invalidLogo2 : boolean = false;
   TeamRegister !: FormGroup
   secondTeamRegister !: FormGroup
+  private _subscription : Subscription =new Subscription()
   
 
   ngOnInit(): void {
@@ -119,59 +120,67 @@ export class RegisterTournamentComponent implements OnInit {
     formdata.append("logoImage",this.logoSelectedFile,this.logoSelectedFile.name)
 
     const fee = regFee * 100
-    
-    this._userService.registerTournament(formdata).subscribe(
-      (res) => {
-        this._toastr.warning("verify your payment")
-        const RazorpayOptions = {
-          description: 'Sample Razorpay demo',
-          currency: 'INR',
-          amount: fee,
-          name: 'Soccer Space',
-          key: 'rzp_test_vHIaDnAR7StDlQ',
-          handler: (response:any)=>{
-            this.verifypayment(response,res._id)
-          },
-          image:'https://st3.depositphotos.com/13194036/37187/i/450/depositphotos_371873384-stock-photo-legs-professional-soccer-player-blue.jpg',
-          prefill: {
+    this._subscription.add(
+      this._userService.registerTournament(formdata).subscribe(
+        (res) => {
+          this._toastr.warning("verify your payment")
+          const RazorpayOptions = {
+            description: 'Sample Razorpay demo',
+            currency: 'INR',
+            amount: fee,
             name: 'Soccer Space',
-            email: 'muneestk5017@gmail.com',
-            phone: '6282798759'
-          },
-          theme: {
-            color: '#000000'
-          },
-          modal:{
-            ondismiss:()=>{
-              console.log('dismissed');
+            key: 'rzp_test_vHIaDnAR7StDlQ',
+            handler: (response:any)=>{
+              this.verifypayment(response,res._id)
+            },
+            image:'https://st3.depositphotos.com/13194036/37187/i/450/depositphotos_371873384-stock-photo-legs-professional-soccer-player-blue.jpg',
+            prefill: {
+              name: 'Soccer Space',
+              email: 'muneestk5017@gmail.com',
+              phone: '6282798759'
+            },
+            theme: {
+              color: '#000000'
+            },
+            modal:{
+              ondismiss:()=>{
+                console.log('dismissed');
+              }
             }
           }
+          const successCallback = (paymentid: any)=>{
+            console.log(paymentid);
+          }
+  
+          const failureCallback = (e:any)=>{
+            console.log(e);
+          }
+  
+          Razorpay.open(RazorpayOptions,successCallback,failureCallback)
+        },(err) => {
+          this._toastr.error(err.error.message)
         }
-        const successCallback = (paymentid: any)=>{
-          console.log(paymentid);
-        }
-
-        const failureCallback = (e:any)=>{
-          console.log(e);
-        }
-
-        Razorpay.open(RazorpayOptions,successCallback,failureCallback)
-      },(err) => {
-        this._toastr.error(err.error.message)
-      }
+      )
     )
+    
 
     
   }
 
   verifypayment(response: any,teamId:any) {
-    this._userService.verifypayment(response,this.id,teamId)
-    .subscribe((res)=>{
-      this._toastr.success("Payment success");
-      this._router.navigate(['/myTournaments']);
-    },(err)=>{
-      this._toastr.error(err.error.message)
-    })
+ this._subscription.add(
+   this._userService.verifypayment(response,this.id,teamId)
+   .subscribe((res)=>{
+     this._toastr.success("Payment success");
+     this._router.navigate(['/myTournaments']);
+   },(err)=>{
+     this._toastr.error(err.error.message)
+   })
+ )
+  }
+
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe()
   }
 
   

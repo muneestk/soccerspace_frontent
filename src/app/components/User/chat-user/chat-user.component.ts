@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { UserService } from 'src/app/service/user.service';
@@ -40,17 +40,19 @@ export class ChatUserComponent implements OnInit, OnDestroy,AfterViewChecked  {
 
   constructor(
     private _userService: UserService,
-    private _toastr : ToastrService
+    private _toastr : ToastrService,
+    private _changeDetector: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.getChatList()
-    this._socket = io('http://localhost:3000'); 
+    this._socket = io('ws://localhost:3000'); 
 
     this._socket.on('messageReceived',(newMessage:any)=>{
       console.log(newMessage,'in user');
       if(this.userId == newMessage.from){
         this.messages.push(newMessage )
+        this._changeDetector.detectChanges();
       }
     })    
 
@@ -83,9 +85,6 @@ export class ChatUserComponent implements OnInit, OnDestroy,AfterViewChecked  {
     })
   }
 
-  ngOnDestroy(): void {
-    this._subscription.unsubscribe(); 
-  }
 
   submit(){
     if(this.message === ""){
@@ -107,4 +106,7 @@ export class ChatUserComponent implements OnInit, OnDestroy,AfterViewChecked  {
     }
 
   
+    ngOnDestroy(): void {
+      this._subscription.unsubscribe(); 
+    }
 }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { UserService } from 'src/app/service/user.service';
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css']
 })
-export class ForgotPasswordComponent implements OnInit{
+export class ForgotPasswordComponent implements OnInit,OnDestroy{
 
   constructor(
    private _userService : UserService,
@@ -17,6 +18,8 @@ export class ForgotPasswordComponent implements OnInit{
    private _route : ActivatedRoute,
    private _router : Router
   ){}
+
+  private _subscription:Subscription = new Subscription()
 
   sendMailForm !: FormGroup ;
   passwordSubmitForm !: FormGroup ;
@@ -58,15 +61,16 @@ export class ForgotPasswordComponent implements OnInit{
 
   forgotSubmit():void{
     const user = this.sendMailForm.getRawValue()
-
-    this._userService.forgotPasswordSendMail(user).subscribe(
-      (res) =>{
-        this._toastr.warning("Check your email for verification")
-        this.ngOnInit()
-      },
-      (err) => {
-        this._toastr.error("something went wrong")
-      }
+    this._subscription.add(
+      this._userService.forgotPasswordSendMail(user).subscribe(
+        (res) =>{
+          this._toastr.warning("Check your email for verification")
+          this.ngOnInit()
+        },
+        (err) => {
+          this._toastr.error("something went wrong")
+        }
+      )
     )
   }
 
@@ -81,18 +85,24 @@ export class ForgotPasswordComponent implements OnInit{
         this.samePassword = false
         form.id = this.id
         form.token = this.token
-        this._userService.forgotPassword(form).subscribe(
-          (res) => {
-            this._router.navigate(['/login'])
-            this._toastr.success(res.message)
-          },
-          (err) => {
-            this._toastr.error(err.error.message)
-          }
-        )        
+        this._subscription.add(
+          this._userService.forgotPassword(form).subscribe(
+            (res) => {
+              this._router.navigate(['/login'])
+              this._toastr.success(res.message)
+            },
+            (err) => {
+              this._toastr.error(err.error.message)
+            }
+          )        
+        )
 
       }
     }
   }
 
+
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe()
+  }
 }

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PopupComponent } from '../../popup/popup.component';
 import { UserService } from 'src/app/service/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -10,11 +11,11 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements OnInit{
+export class UserProfileComponent implements OnInit,OnDestroy{
 
   name !: string ;
   email !: string ;
-
+  private _subscription : Subscription = new Subscription()
 
 
   constructor(
@@ -47,7 +48,7 @@ export class UserProfileComponent implements OnInit{
 
   editProfile():void{
     const dialogRef = this.matDialog.open(PopupComponent,{
-      width : '40%',
+      width : '350px',
       height : '350px',
       data:{
         title: 'User Edit'
@@ -66,8 +67,7 @@ export class UserProfileComponent implements OnInit{
   
   }
 
-  
-
-
-  
+ ngOnDestroy(): void {
+   this._subscription.unsubscribe()
+ }
 }

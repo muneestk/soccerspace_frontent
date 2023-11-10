@@ -42,7 +42,6 @@ export class ManagerLoginComponent implements OnInit,OnDestroy {
 
     this._Subscription.add( 
     this._socialAuthService.authState.subscribe((user) => {
-      console.log(user,'manager');
         this._managerservice.managerGoogleSignin(user).subscribe((res) =>{
           localStorage.setItem('managerSecret', res.toString());
           this._router.navigate(['/manager/home']);

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -10,10 +11,11 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './admin-login.component.html',
   styleUrls: ['./admin-login.component.css']
 })
-export class AdminLoginComponent implements OnInit{
+export class AdminLoginComponent implements OnInit,OnDestroy{
 
   loginForm !: FormGroup
   invalid : boolean = false
+  private _subscription : Subscription = new Subscription()
 
 
   constructor(
@@ -55,28 +57,29 @@ export class AdminLoginComponent implements OnInit{
     if(!this.loginForm.valid){
       this.invalid = true;
     }else{
-      this._adminService.adminLogin(form)
-      .subscribe((res) =>{
-           localStorage.setItem('adminSecret',res.toString())
-           this._router.navigate(['/admin/dashboard/charts'])
-      },
-      (err) => {
-        if(err.error.message){
-          this._toastr.error(err.error.message)
-        }else{
-          this._toastr.error("something went wrong")
-        }
-      })
+      this._subscription.add(
+         this._adminService.adminLogin(form)
+            .subscribe((res) =>{
+                localStorage.setItem('adminSecret',res.toString())
+                this._router.navigate(['/admin/dashboard/charts'])
+            },
+            (err) => {
+              if(err.error.message){
+                this._toastr.error(err.error.message)
+              }else{
+                this._toastr.error("something went wrong")
+              }
+            })
+        
+      )
 
     }
 
-    
-
- 
-
-
-
   }
+
+ngOnDestroy(): void {
+  this._subscription.unsubscribe()
+}
   
 
 }

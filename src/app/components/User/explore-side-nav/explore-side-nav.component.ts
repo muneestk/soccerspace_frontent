@@ -83,7 +83,6 @@ export class ExploreSideNavComponent implements OnInit, OnDestroy {
 
 prevPage(): void {
   if (this.currentPage > 1) {
-      console.log("Previous page:", this.currentPage - 1);
     this.subscription.add(
       this._userService.tournamentsData( this.currentPage - 1, this.pageLimit).subscribe((res) => {
         this.allTournaments = res.tournaments;
@@ -97,7 +96,6 @@ prevPage(): void {
 
 nextPage(): void {
   if (this.currentPage < this.totalPages) {
-    console.log("Next page:", this.currentPage + 1);
     this.subscription.add(
       this._userService.tournamentsData( this.currentPage + 1, this.pageLimit).subscribe((res) => {
         this.allTournaments = res.tournaments;
@@ -112,7 +110,6 @@ nextPage(): void {
 
 goToPage(page: number): void {
   if (page !== this.currentPage && page >= 1 && page <= this.totalPages) {
-    console.log("Selected page:", page);
     this.subscription.add(
       this._userService.tournamentsData( page, this.pageLimit).subscribe((res) => {
         this.allTournaments = res.tournaments;

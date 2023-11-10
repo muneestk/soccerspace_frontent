@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {  FormGroup ,FormControl,Validators } from '@angular/forms';
 import {  Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/service/user.service';
 
 
@@ -10,11 +11,12 @@ import { UserService } from 'src/app/service/user.service';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit,OnDestroy{
   
   registerForm !: FormGroup ;
   invalid : boolean = false ;
   isLoggedin?: boolean;
+  private _subscription : Subscription = new Subscription()
 
   constructor(
     private _router : Router,
@@ -44,16 +46,8 @@ export class SignupComponent implements OnInit {
     ])
 
    })
-
-   
-
-
-
-
   
   }
-
-
 
   get name(): FormControl{
     return this.registerForm.get('name') as FormControl ;
@@ -79,21 +73,27 @@ export class SignupComponent implements OnInit {
     if(!this.registerForm.valid){
       this.invalid=true;  
     }else{
-      this._userService.userRegister(user)
-      .subscribe((result) => {
-        this._router.navigate(['/verify']);
-        this._tostr.success("successfully registered,verify your email to continue login")
-      },
-      (err) => {
-       if(err.error.message){
-        this._tostr.error(err.error.message);
-       }else{
-        this._tostr.error("something went wrong");
-       }
-      }
+      this._subscription.add(
+        this._userService.userRegister(user)
+        .subscribe((result) => {
+          this._router.navigate(['/verify']);
+          this._tostr.success("successfully registered,verify your email to continue login")
+        },
+        (err) => {
+         if(err.error.message){
+          this._tostr.error(err.error.message);
+         }else{
+          this._tostr.error("something went wrong");
+         }
+        }
+        )
       )
       
     }
+  }
+
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe()
   }
 
 }

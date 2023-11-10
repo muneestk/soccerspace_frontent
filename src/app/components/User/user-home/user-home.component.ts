@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable, map } from 'rxjs';
 import { Tournaments } from '../../modal/model';
 import { Store, select } from '@ngrx/store';
 import { TournamentList } from '../../state/app.state';
@@ -14,19 +14,16 @@ import { environment } from 'src/environments/environment.development';
 })
 export class UserHomeComponent implements OnInit {
 
-  @Input() loading = false
 
 
   tournamentList$ !: Observable<Tournaments[]>
+  livetournamentList$ !: Observable<Tournaments[]>
   approveTournament !: Tournaments[]
   tournamentDetail !: Tournaments
-  ngxLoadingAnimationTypes: any;
 
   constructor(
     private _store : Store<TournamentList>,
   ){}
-
-
 
   ngOnInit(): void {
     this._store.dispatch(retrieveTournaments());
@@ -36,14 +33,19 @@ export class UserHomeComponent implements OnInit {
   
     this.tournamentList$.subscribe((tournaments) => {
       this.approveTournament = this.filterApproveTournaments(tournaments).slice(0, 4);
-      console.log(this.approveTournament); // Move the logging here to ensure it has the data
     });
+
+    this.livetournamentList$ = this._store.pipe(
+      select(TournamentsData),
+      map(tournament => tournament.filter(x => x.slots === x.Teams.length))
+    );
+    
   }
   
   filterApproveTournaments(tournaments: Tournaments[]): Tournaments[] {
     const today = new Date().getTime();
     return tournaments.filter(
-      (tournament) => tournament.is_approuve === 'approved' && new Date(tournament.tournamentDate).getTime() <= today
+      (tournament) => tournament.is_approuve === 'approved' && new Date(tournament.tournamentDate).getTime() >= today
     );
   }
   

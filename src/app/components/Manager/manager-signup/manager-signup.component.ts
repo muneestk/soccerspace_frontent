@@ -1,7 +1,8 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnDestroy,OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { ManagerService } from 'src/app/service/manager.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { ManagerService } from 'src/app/service/manager.service';
 
 
 
-export class ManagerSignupComponent implements OnInit {
+export class ManagerSignupComponent implements OnInit,OnDestroy {
   constructor(
     private managerService : ManagerService,
     private router : Router,
@@ -22,7 +23,8 @@ export class ManagerSignupComponent implements OnInit {
   
   managerRegisterForm !:FormGroup ;
   invalid : boolean = false ;
-
+  private _subscription : Subscription = new Subscription()
+  
   
 
    ngOnInit(): void {
@@ -67,19 +69,26 @@ export class ManagerSignupComponent implements OnInit {
       if(!this.managerRegisterForm.valid){
        this.invalid = true
       }else{
-        this.managerService.managerSignup(manager).
-        subscribe((result) => {
-               this.router.navigate(['/manager/manangerverify',(result as {_id:String})._id])
-               this.toastr.success("successfully registered , verify your email")
-        },
-        (err) => {
-          if(err.error.message){
-            this.toastr.error(err.error.message)
-          }else{
-            this.toastr.error("something went wrong")
-          }
-        })
+        this._subscription.add(
+          this.managerService.managerSignup(manager).
+          subscribe((result) => {
+                 this.router.navigate(['/manager/manangerverify',(result as {_id:String})._id])
+                 this.toastr.success("successfully registered , verify your email")
+          },
+          (err) => {
+            if(err.error.message){
+              this.toastr.error(err.error.message)
+            }else{
+              this.toastr.error("something went wrong")
+            }
+          })
+        )
+        
      }
+  }
+
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe()
   }
 
 

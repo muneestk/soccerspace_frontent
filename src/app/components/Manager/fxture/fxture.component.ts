@@ -46,7 +46,6 @@ export class FxtureComponent implements OnInit, OnDestroy {
   this.subscription.add(
     this._managerService.getFixture(id).subscribe(
      (res) => {
-      console.log(res,'fix');
       this.firstRound = res.fixtureData.find((tournament: { matchRound: number }) => tournament.matchRound === round);
       this.secondRound = res.fixtureData.find((tournament: { matchRound: number }) => tournament.matchRound === round-1);
       this.thirdRound = res.fixtureData.find((tournament: { matchRound: number }) => tournament.matchRound === round - 2);
@@ -118,9 +117,6 @@ export class FxtureComponent implements OnInit, OnDestroy {
     return this.firstRound.matches.length / round >= 1
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe()
-  }
 
   updateRound(tournamentId: string) {
     
@@ -173,6 +169,11 @@ export class FxtureComponent implements OnInit, OnDestroy {
     }
   }
 
+
+  
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
+  }
 
   
 }
