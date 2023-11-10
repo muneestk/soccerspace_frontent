@@ -48,7 +48,7 @@ export class UserProfileComponent implements OnInit,OnDestroy{
 
   editProfile():void{
     const dialogRef = this.matDialog.open(PopupComponent,{
-      width : '350px',
+      width : '500px',
       height : '350px',
       data:{
         title: 'User Edit'

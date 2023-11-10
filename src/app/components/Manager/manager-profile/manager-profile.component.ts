@@ -38,7 +38,7 @@ export class ManagerProfileComponent implements OnInit {
   editProfile():void{
 
     const dialogRef = this.matDialog.open(PopupComponent,{
-      width : '400px',
+      width : '500px',
       height : '350px',
       data:{
         title: 'Manager Edit'
