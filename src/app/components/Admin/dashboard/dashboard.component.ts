@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -8,35 +7,56 @@ import { AdminService } from 'src/app/service/admin.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit,OnDestroy{
   data: any;
-
+  private _subscription:Subscription = new Subscription()
   options: any;
 
+  constructor(private _adminService:AdminService){}
+
   ngOnInit() {
-      const documentStyle = getComputedStyle(document.documentElement);
-      const textColor = documentStyle.getPropertyValue('--text-color');
-
-      this.data = {
-          labels: ['A', 'B', 'C'],
-          datasets: [
+    this._subscription.add(
+      this._adminService.loadDashboard().subscribe({
+        next: (res) => {
+          const documentStyle = getComputedStyle(document.documentElement);
+          const textColor = documentStyle.getPropertyValue('--text-color');
+  
+          const colors = [
+            documentStyle.getPropertyValue('--blue-500'),
+            documentStyle.getPropertyValue('--yellow-500'),
+            documentStyle.getPropertyValue('--green-500'),
+            documentStyle.getPropertyValue('--red-500'),
+            documentStyle.getPropertyValue('--purple-500')
+          ];
+  
+          this.data = {
+            labels: res.map((item: { _id: any }) => item._id),
+            datasets: [
               {
-                  data: [540, 325, 702],
-                  backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
-                  hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
+                data: res.map((item: { count: any }, index: number) => item.count),
+                backgroundColor: colors,
+                hoverBackgroundColor: colors.map(color => `${color}80`), 
               }
-          ]
-      };
-
-      this.options = {
-          plugins: {
+            ]
+          };
+  
+          this.options = {
+            plugins: {
               legend: {
-                  labels: {
-                      usePointStyle: true,
-                      color: textColor
-                  }
+                labels: {
+                  usePointStyle: true,
+                  color: textColor
+                }
               }
-          }
-      };
+            }
+          };
+        }
+      })
+    );
+  }
+  
+
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe()
   }
 }

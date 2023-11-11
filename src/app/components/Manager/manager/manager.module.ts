@@ -28,6 +28,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ScorecardComponent } from '../scorecard/scorecard.component';
 import { ChatManagerComponent } from '../chat-manager/chat-manager.component';
 import { ContactManagerComponent } from '../chat-manager/contact-manager/contact-manager.component';
+import { CustomPipePipe } from 'src/app/custom-pipe.pipe';
 
 
 
@@ -51,7 +52,7 @@ import { ContactManagerComponent } from '../chat-manager/contact-manager/contact
     ScorecardComponent,
     ChatManagerComponent,
     ContactManagerComponent,
-
+    CustomPipePipe
   ],
   imports: [
     CommonModule,
@@ -66,6 +67,7 @@ import { ContactManagerComponent } from '../chat-manager/contact-manager/contact
     MatPaginatorModule,
     GoogleSigninButtonModule,
     MatButtonModule,
+    
     
   ],
   providers:[

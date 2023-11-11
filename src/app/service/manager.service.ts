@@ -82,8 +82,8 @@ export class ManagerService {
   }
 
 
-  getChatLIst() : Observable<any>{
-    return this.http.get(`${this.apiUrl}/getChatLIst`)
+  getChatLIst(search?:string) : Observable<any>{
+    return this.http.get(`${this.apiUrl}/getChatLIst?search=${search}`)
   }
 
   getFullChat(id:string) : Observable<any>{

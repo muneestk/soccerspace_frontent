@@ -56,9 +56,9 @@ export class ChatManagerComponent implements OnInit,OnDestroy {
 
   }
 
-  getChatList(){
+  getChatList(search?:string){
     this._subscription.add(
-      this._managerService.getChatLIst().subscribe({
+      this._managerService.getChatLIst(search).subscribe({
         next:(res)=>{
           this.usetList$ = res.managerContact
           this.managerId= res.managerId          
@@ -105,11 +105,17 @@ export class ChatManagerComponent implements OnInit,OnDestroy {
     }
     }
 
+    searchQuery!:string
+    onSearch(){
+     if(this.searchQuery.length>0){
+      this.getChatList(this.searchQuery)
+     }
+    }
+
 
   ngOnDestroy(): void {
     this._subscription.unsubscribe()
     this._socket.disconnect()
-    this._socket.emit('disconnect',{cid:this.connectionId})  
 
   }
 }
