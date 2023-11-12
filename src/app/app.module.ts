@@ -36,6 +36,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { environment } from 'src/environments/environment.development';
 import { ChartModule } from 'primeng/chart';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 
 
@@ -46,6 +47,7 @@ import { ChartModule } from 'primeng/chart';
     AppComponent,
     PopupComponent,
     LoadingSpinnerComponent,
+    ErrorPageComponent,
     
    
     
