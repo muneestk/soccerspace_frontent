@@ -4,6 +4,7 @@ import {  Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/service/user.service';
+import { TrimValidator } from '../../customValidator/vallidations';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class SignupComponent implements OnInit,OnDestroy{
     name : new FormControl("",[
       Validators.required,
       Validators.minLength(3),
-      Validators.pattern("[a-zA-Z].*")
+      Validators.pattern("[a-zA-Z].*"),
+      TrimValidator.trim()
     ]),
 
     email: new FormControl("",[

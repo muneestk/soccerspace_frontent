@@ -104,7 +104,8 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
     {provide : HTTP_INTERCEPTORS , useClass : CommonInterceptorInterceptor,multi:true}
   ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
   
 })
 export class AppModule { }

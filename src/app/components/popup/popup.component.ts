@@ -7,6 +7,7 @@ import { AdminService } from 'src/app/service/admin.service';
 import { ManagerService } from 'src/app/service/manager.service';
 import { UserService } from 'src/app/service/user.service';
 import { environment } from 'src/environments/environment.development';
+import { TrimValidator } from '../customValidator/vallidations';
 
 @Component({
   selector: 'app-popup',
@@ -29,7 +30,7 @@ export class PopupComponent implements OnInit,OnDestroy
   private _subscription:Subscription = new Subscription()
 
   formData = this._builder.group({
-    name: this._builder.control(''),
+    name: this._builder.control('',[Validators.required,TrimValidator.trim()]),
     email: this._builder.control(''),
     reason: this._builder.control('',[Validators.required,Validators.minLength(5)]),
   });

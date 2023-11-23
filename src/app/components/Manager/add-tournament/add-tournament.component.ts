@@ -58,7 +58,7 @@ export class AddTournamentComponent implements OnInit,OnDestroy {
       ]), 
        slots: new FormControl("8", [Validators.required]),
       limit: new FormControl("open", [Validators.required]),
-      players: new FormControl("Levens", [Validators.required]),
+      players: new FormControl("Elevens", [Validators.required]),
       tournamentDate: new FormControl("", [
         Validators.required,
         this.validateDate(5, 30)
